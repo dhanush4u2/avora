@@ -45,7 +45,7 @@ const HeroSection = () => {
 
   useEffect(() => {
     if (!isHovering) return;
-    const interval = setInterval(spawnParticles, 200);
+    const interval = setInterval(spawnParticles, 150);
     spawnParticles();
     return () => clearInterval(interval);
   }, [isHovering, spawnParticles]);
