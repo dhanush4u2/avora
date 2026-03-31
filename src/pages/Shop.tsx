@@ -134,6 +134,7 @@ const Shop = () => {
 
               {/* Add to cart */}
               <motion.button
+                onClick={handleAddToCart}
                 whileHover={{ scale: 1.02, backgroundColor: "hsl(36 50% 94% / 0.1)" }}
                 whileTap={{ scale: 0.98 }}
                 className="mt-8 w-full py-4 border border-cream/40 font-body text-sm tracking-widest text-cream hover:border-cream transition-all duration-500"
