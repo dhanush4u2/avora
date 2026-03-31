@@ -1,9 +1,11 @@
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, type Easing } from "framer-motion";
 import { useRef } from "react";
 import { Link } from "react-router-dom";
 import { ChevronLeft } from "lucide-react";
 import foundersPortrait from "@/assets/founders-portrait.jpg";
 import foundersMatcha from "@/assets/founders-matcha.jpg";
+
+const ease: Easing = [0.25, 0.1, 0.25, 1];
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
