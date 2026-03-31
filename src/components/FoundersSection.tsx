@@ -1,54 +1,46 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Link } from "react-router-dom";
-import brewingImg from "@/assets/brewing.jpg";
+import foundersHero from "@/assets/founders-hero.png";
 
 const FoundersSection = () => {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="founders" className="py-24 md:py-36 bg-primary" ref={ref}>
-      <div className="container mx-auto px-6 flex flex-col md:flex-row items-center gap-10 md:gap-16">
+    <section id="founders" className="bg-primary" ref={ref}>
+      <div className="flex flex-col md:flex-row min-h-[80vh]">
+        {/* Left image — takes up roughly 55% */}
         <motion.div
-          initial={{ opacity: 0, x: -50 }}
+          initial={{ opacity: 0, x: -40 }}
           animate={inView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.9 }}
-          className="w-full md:w-1/2 overflow-hidden rounded-lg"
+          className="w-full md:w-[55%] overflow-hidden"
         >
-          <motion.img
-            src={brewingImg}
-            alt="Avora founders"
+          <img
+            src={foundersHero}
+            alt="Avora founder with matcha"
             loading="lazy"
-            width={600}
-            height={800}
-            whileHover={{ scale: 1.03 }}
-            transition={{ duration: 0.7 }}
-            className="w-full aspect-[3/4] object-cover"
+            width={900}
+            height={1100}
+            className="w-full h-full object-cover"
           />
         </motion.div>
 
-        <div className="w-full md:w-1/2 flex flex-col items-center md:items-start gap-8">
-          <motion.h2
-            initial={{ opacity: 0, y: 40 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8 }}
-            className="font-display text-4xl md:text-6xl text-cream font-light text-center md:text-left"
-          >
-            Founders' Note
-          </motion.h2>
-
+        {/* Right text */}
+        <div className="w-full md:w-[45%] flex flex-col items-center justify-center px-10 md:px-16 py-16 md:py-0">
           <Link to="/founders">
-            <motion.span
-              initial={{ opacity: 0, y: 20 }}
+            <motion.h2
+              initial={{ opacity: 0, y: 40 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.97 }}
-              className="inline-block font-body text-sm tracking-widest text-cream border border-cream/40 px-10 py-4 hover:bg-cream/10 transition-all duration-500"
+              transition={{ duration: 0.8, delay: 0.2 }}
+              whileHover={{ opacity: 0.8 }}
+              className="font-display text-5xl md:text-7xl text-cream font-light leading-tight underline underline-offset-8 decoration-1 cursor-pointer"
             >
-              Read our story
-            </motion.span>
+              Founder's
+              <br />
+              Note
+            </motion.h2>
           </Link>
         </div>
       </div>
