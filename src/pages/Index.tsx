@@ -3,7 +3,6 @@ import AboutSection from "@/components/AboutSection";
 import ShopSection from "@/components/ShopSection";
 import FoundersSection from "@/components/FoundersSection";
 import FaqSection from "@/components/FaqSection";
-import Footer from "@/components/Footer";
 import StackedCard from "@/components/StackedCard";
 
 const Index = () => {
@@ -22,9 +21,6 @@ const Index = () => {
       <StackedCard index={3}>
         <FaqSection />
       </StackedCard>
-      <div className="relative" style={{ zIndex: 50 }}>
-        <Footer />
-      </div>
     </div>
   );
 };
