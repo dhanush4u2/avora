@@ -10,52 +10,54 @@ const ShopSection = () => {
 
   return (
     <section id="shop" className="bg-primary" ref={ref}>
-      {/* Shop CTA above images */}
-      <div className="relative z-10 flex justify-center -mb-8 pt-12">
-        <Link to="/shop">
-          <motion.span
-            initial={{ opacity: 0, y: 20 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6 }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.97 }}
-            className="inline-block font-body text-sm tracking-widest text-primary bg-cream px-12 py-4 shadow-lg hover:bg-cream/90 transition-all duration-500"
-          >
-            Shop Now
-          </motion.span>
-        </Link>
-      </div>
+      <div className="relative">
+        {/* First image */}
+        <div className="relative group overflow-hidden">
+          <motion.img
+            src={productDisplay}
+            alt="Avora matcha products"
+            loading="lazy"
+            width={1920}
+            height={800}
+            initial={{ opacity: 0, scale: 1.05 }}
+            animate={inView ? { opacity: 1, scale: 1 } : {}}
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 1 }}
+            className="w-full h-[60vh] md:h-[70vh] object-cover"
+          />
+        </div>
 
-      {/* Full-width product image */}
-      <div className="relative group overflow-hidden">
-        <motion.img
-          src={productDisplay}
-          alt="Avora matcha products"
-          loading="lazy"
-          width={1920}
-          height={800}
-          initial={{ opacity: 0, scale: 1.05 }}
-          animate={inView ? { opacity: 1, scale: 1 } : {}}
-          whileHover={{ scale: 1.02 }}
-          transition={{ duration: 1 }}
-          className="w-full h-[60vh] md:h-[70vh] object-cover"
-        />
-      </div>
+        {/* Shop button overlapping between images */}
+        <div className="relative z-10 flex justify-center -mt-7 -mb-7">
+          <Link to="/shop">
+            <motion.span
+              initial={{ opacity: 0, y: 20 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.97 }}
+              className="inline-block font-body text-sm tracking-widest text-primary bg-cream px-12 py-4 shadow-lg hover:bg-cream/90 transition-all duration-500"
+            >
+              Shop Now
+            </motion.span>
+          </Link>
+        </div>
 
-      {/* Matcha latte banner */}
-      <div className="relative group overflow-hidden">
-        <motion.img
-          src={matchaLatte}
-          alt="Matcha preparation"
-          loading="lazy"
-          width={1920}
-          height={600}
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
-          whileHover={{ scale: 1.02 }}
-          transition={{ duration: 1, delay: 0.2 }}
-          className="w-full h-[50vh] md:h-[60vh] object-cover"
-        />
+        {/* Second image */}
+        <div className="relative group overflow-hidden">
+          <motion.img
+            src={matchaLatte}
+            alt="Matcha preparation"
+            loading="lazy"
+            width={1920}
+            height={600}
+            initial={{ opacity: 0 }}
+            animate={inView ? { opacity: 1 } : {}}
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 1, delay: 0.2 }}
+            className="w-full h-[50vh] md:h-[60vh] object-cover"
+          />
+        </div>
       </div>
     </section>
   );
