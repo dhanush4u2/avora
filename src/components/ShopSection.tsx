@@ -1,5 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import { Link } from "react-router-dom";
 import productDisplay from "@/assets/product-display.jpg";
 import matchaLatte from "@/assets/matcha-latte.jpg";
 
