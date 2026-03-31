@@ -4,6 +4,8 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { CartProvider } from "@/contexts/CartContext";
+import Navbar from "@/components/Navbar";
+import ScrollToTop from "@/components/ScrollToTop";
 import Index from "./pages/Index.tsx";
 import Shop from "./pages/Shop.tsx";
 import Checkout from "./pages/Checkout.tsx";
