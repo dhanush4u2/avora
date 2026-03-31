@@ -18,9 +18,9 @@ const Navbar = () => {
   }, []);
 
   const links = [
-    { label: "Home", href: "/", isRoute: true },
-    { label: "Shop", href: "/shop", isRoute: true },
-    { label: "Founders' Note", href: "/founders", isRoute: true },
+    { label: "Home", href: "/" },
+    { label: "Shop", href: "/shop" },
+    { label: "Founders' Note", href: "/founders" },
   ];
 
   return (
