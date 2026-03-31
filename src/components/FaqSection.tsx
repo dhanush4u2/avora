@@ -49,20 +49,20 @@ const FaqItem = ({ q, a, index }: { q: string; a: string; index: number }) => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.05 }}
-      className="border-b border-border"
+      className="border-b border-cream/15"
     >
       <button
         onClick={() => setOpen(!open)}
         className="w-full flex items-center justify-between py-6 text-left group"
       >
-        <span className="font-display text-lg md:text-xl text-primary group-hover:text-primary/80 transition-colors pr-4">
+        <span className="font-display text-lg md:text-xl text-cream group-hover:text-cream/80 transition-colors pr-4">
           {q}
         </span>
         <motion.span
           animate={{ rotate: open ? 180 : 0 }}
           transition={{ duration: 0.3 }}
         >
-          <ChevronDown className="w-5 h-5 text-primary/60 flex-shrink-0" />
+          <ChevronDown className="w-5 h-5 text-cream/50 flex-shrink-0" />
         </motion.span>
       </button>
       <motion.div
@@ -71,7 +71,7 @@ const FaqItem = ({ q, a, index }: { q: string; a: string; index: number }) => {
         transition={{ duration: 0.3 }}
         className="overflow-hidden"
       >
-        <p className="font-body text-muted-foreground text-sm leading-relaxed pb-6">
+        <p className="font-body text-cream/60 text-sm leading-relaxed pb-6">
           {a}
         </p>
       </motion.div>
@@ -84,7 +84,7 @@ const FaqSection = () => {
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="faq" className="py-24 md:py-36 bg-card" ref={ref}>
+    <section id="faq" className="py-24 md:py-36 bg-primary" ref={ref}>
       <div className="container mx-auto px-6 max-w-3xl">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -92,10 +92,10 @@ const FaqSection = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="font-display text-4xl md:text-5xl text-primary font-light italic mb-3">
+          <h2 className="font-display text-4xl md:text-5xl text-cream font-semibold italic mb-3">
             Frequently asked questions
           </h2>
-          <p className="font-body text-muted-foreground text-sm">
+          <p className="font-display text-cream/50 text-sm italic">
             Based on our matcha and questions around it
           </p>
         </motion.div>

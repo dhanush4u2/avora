@@ -14,10 +14,8 @@ const Navbar = () => {
 
   const links = [
     { label: "Home", href: "#hero" },
-    { label: "About", href: "#about" },
     { label: "Shop", href: "#shop" },
-    { label: "Founder's note", href: "#founders" },
-    { label: "Faq", href: "#faq" },
+    { label: "About", href: "#about" },
   ];
 
   return (
@@ -27,22 +25,18 @@ const Navbar = () => {
       transition={{ duration: 0.6, ease: "easeOut" }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "bg-background/90 backdrop-blur-md shadow-sm"
+          ? "bg-primary/95 backdrop-blur-md shadow-sm"
           : "bg-transparent"
       }`}
     >
       <div className="container mx-auto flex items-center justify-between px-6 py-4">
-        <a href="#hero" className="font-display text-3xl font-semibold text-primary tracking-wide">
-          avora
-        </a>
-
-        {/* Desktop */}
+        {/* Left nav links */}
         <ul className="hidden md:flex items-center gap-8">
           {links.map((link) => (
             <li key={link.href}>
               <a
                 href={link.href}
-                className="font-body text-sm text-foreground/80 hover:text-primary transition-colors duration-300 relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[1.5px] after:bg-primary after:transition-all after:duration-300 hover:after:w-full"
+                className="font-body text-sm text-cream/80 hover:text-cream transition-colors duration-300"
               >
                 {link.label}
               </a>
@@ -50,10 +44,18 @@ const Navbar = () => {
           ))}
         </ul>
 
+        {/* Center logo */}
+        <a href="#hero" className="font-display text-3xl font-semibold text-cream tracking-wide absolute left-1/2 -translate-x-1/2">
+          avora
+        </a>
+
+        {/* Right side placeholder */}
+        <div className="hidden md:block w-24" />
+
         {/* Mobile toggle */}
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="md:hidden text-primary"
+          className="md:hidden text-cream"
           aria-label="Toggle menu"
         >
           {mobileOpen ? <X size={24} /> : <Menu size={24} />}
@@ -67,7 +69,7 @@ const Navbar = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-background/95 backdrop-blur-md overflow-hidden"
+            className="md:hidden bg-primary/95 backdrop-blur-md overflow-hidden"
           >
             <ul className="flex flex-col items-center gap-6 py-8">
               {links.map((link) => (
@@ -75,7 +77,7 @@ const Navbar = () => {
                   <a
                     href={link.href}
                     onClick={() => setMobileOpen(false)}
-                    className="font-display text-xl text-primary"
+                    className="font-display text-xl text-cream"
                   >
                     {link.label}
                   </a>
