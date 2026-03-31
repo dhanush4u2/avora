@@ -24,20 +24,6 @@ const ShopSection = () => {
           transition={{ duration: 1 }}
           className="w-full h-[60vh] md:h-[70vh] object-cover"
         />
-        <div className="absolute inset-0 bg-primary/30 flex items-center justify-center">
-          <Link to="/shop">
-            <motion.span
-              initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              whileHover={{ scale: 1.08, borderColor: "rgba(234,222,200,0.8)" }}
-              whileTap={{ scale: 0.95 }}
-              className="inline-block font-body text-sm tracking-widest text-cream border border-cream/50 px-12 py-4 hover:bg-cream/10 transition-all duration-500"
-            >
-              Shop
-            </motion.span>
-          </Link>
-        </div>
       </div>
 
       {/* Matcha latte banner */}
