@@ -60,9 +60,9 @@ const Navbar = () => {
           </ul>
 
           {/* Center logo */}
-          <a href="#hero" className="font-display text-3xl font-semibold text-cream tracking-wide absolute left-1/2 -translate-x-1/2">
+          <Link to="/" className="font-display text-3xl font-semibold text-cream tracking-wide absolute left-1/2 -translate-x-1/2">
             avora
-          </a>
+          </Link>
 
           {/* Right side — cart */}
           <div className="flex items-center gap-4">
