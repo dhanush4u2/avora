@@ -7,6 +7,7 @@ const footerLinks = [
   { label: "Shop", href: "#shop" },
   { label: "Refund & returns", href: "/refund-policy", isRoute: true },
   { label: "Shipping policy", href: "/shipping-policy", isRoute: true },
+  { label: "Privacy policy", href: "/privacy-policy", isRoute: true },
 ];
 
 const Footer = () => {
