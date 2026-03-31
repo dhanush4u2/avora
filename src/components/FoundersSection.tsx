@@ -24,7 +24,7 @@ const FoundersSection = () => {
             height={800}
             whileHover={{ scale: 1.03 }}
             transition={{ duration: 0.7 }}
-            className="w-full h-[60vh] md:h-[70vh] object-cover"
+            className="w-full aspect-[9/16] object-cover"
           />
         </motion.div>
 
