@@ -10,19 +10,22 @@ const StackedCard = ({ children, index }: StackedCardProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start end", "start start"],
+    offset: ["start end", "start 0.15"],
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], [80, 0]);
-  const scale = useTransform(scrollYProgress, [0, 1], [0.95, 1]);
-  const opacity = useTransform(scrollYProgress, [0, 0.3], [0, 1]);
-  const borderRadius = useTransform(scrollYProgress, [0, 1], [24, 0]);
+  const scale = useTransform(scrollYProgress, [0, 1], [0.92, 1]);
+  const opacity = useTransform(scrollYProgress, [0, 0.4], [0, 1]);
+  const borderRadius = useTransform(scrollYProgress, [0, 1], [20, 0]);
 
   return (
-    <div ref={ref} className="relative" style={{ zIndex: index + 1 }}>
+    <div
+      ref={ref}
+      className="sticky top-0"
+      style={{ zIndex: index + 10 }}
+    >
       <motion.div
-        style={{ y, scale, opacity, borderRadius }}
-        className="relative bg-primary shadow-[0_-8px_30px_rgba(0,0,0,0.2)] overflow-hidden"
+        style={{ scale, opacity, borderRadius }}
+        className="relative bg-primary shadow-[0_-10px_40px_rgba(0,0,0,0.25)] overflow-hidden"
       >
         {children}
       </motion.div>
