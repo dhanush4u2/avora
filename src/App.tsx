@@ -9,6 +9,7 @@ import Founders from "./pages/Founders.tsx";
 import RefundPolicy from "./pages/RefundPolicy.tsx";
 import ShippingPolicy from "./pages/ShippingPolicy.tsx";
 import PrivacyPolicy from "./pages/PrivacyPolicy.tsx";
+import TermsOfService from "./pages/TermsOfService.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
