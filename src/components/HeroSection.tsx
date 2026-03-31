@@ -48,14 +48,15 @@ const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.8 }}
             className="mt-10"
           >
-            <motion.a
-              href="#shop"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.97 }}
-              className="inline-block font-body text-sm tracking-widest text-cream border border-cream/40 px-10 py-4 hover:bg-cream/10 transition-all duration-500"
-            >
-              Shop now
-            </motion.a>
+            <Link to="/shop">
+              <motion.span
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.97 }}
+                className="inline-block font-body text-sm tracking-widest text-cream border border-cream/40 px-10 py-4 hover:bg-cream/10 transition-all duration-500"
+              >
+                Shop now
+              </motion.span>
+            </Link>
           </motion.div>
 
           {/* Scroll indicator */}
