@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useRef, useState, useCallback, useEffect } from "react";
 import { Link } from "react-router-dom";
 import heroProduct from "@/assets/hero-product.jpg";
@@ -16,13 +16,6 @@ let particleId = 0;
 
 const HeroSection = () => {
   const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"],
-  });
-  const imgY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
-  const textOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-
   const [particles, setParticles] = useState<Particle[]>([]);
 
   const spawnParticles = useCallback(() => {
@@ -38,7 +31,6 @@ const HeroSection = () => {
   }, []);
 
   useEffect(() => {
-    // Auto-spawn particles continuously for the hero text
     const interval = setInterval(spawnParticles, 400);
     const timeout = setTimeout(spawnParticles, 800);
     return () => {
@@ -48,24 +40,18 @@ const HeroSection = () => {
   }, [spawnParticles]);
 
   return (
-    <section id="hero" className="bg-primary" ref={ref}>
-      <div className="relative min-h-screen flex items-center overflow-hidden">
-        <motion.div className="absolute inset-0" style={{ y: imgY }}>
-          <img
-            src={heroProduct}
-            alt="Avora matcha product"
-            width={1920}
-            height={1080}
-            className="w-full h-[120%] object-cover opacity-60"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-primary/40 via-primary/20 to-primary/80" />
-        </motion.div>
+    <section id="hero" className="relative min-h-screen overflow-hidden bg-primary" ref={ref}>
+      <img
+        src={heroProduct}
+        alt="Avora matcha product"
+        width={1920}
+        height={1080}
+        className="absolute inset-0 h-full w-full object-cover opacity-60"
+      />
+      <div className="absolute inset-0 bg-gradient-to-b from-primary/40 via-primary/20 to-primary/80" />
 
-        <motion.div
-          style={{ opacity: textOpacity }}
-          className="relative z-10 container mx-auto px-6 text-center"
-        >
-          {/* Matcha particles around hero text */}
+      <div className="relative z-10 flex min-h-screen items-center justify-center px-6 text-center">
+        <div className="container mx-auto relative">
           <div className="pointer-events-none absolute inset-0 z-0 overflow-visible">
             <AnimatePresence>
               {particles.map((p) => (
@@ -99,7 +85,7 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 60 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.3 }}
-            className="font-display text-5xl md:text-7xl lg:text-8xl font-light text-cream leading-tight tracking-wide relative z-10 group cursor-default"
+            className="font-display text-5xl md:text-7xl lg:text-8xl font-light text-cream leading-tight tracking-wide relative z-10 cursor-default"
             whileHover={{
               textShadow: "0 0 20px rgba(234,222,200,0.6), 0 0 40px rgba(234,222,200,0.3), 0 0 60px rgba(234,222,200,0.15)",
             }}
@@ -125,8 +111,7 @@ const HeroSection = () => {
               </motion.span>
             </Link>
           </motion.div>
-
-        </motion.div>
+        </div>
       </div>
     </section>
   );
