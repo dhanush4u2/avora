@@ -14,7 +14,7 @@ const Navbar = () => {
 
   const links = [
     { label: "Home", href: "#hero" },
-    { label: "Shop", href: "#shop" },
+    { label: "Shop", href: "/shop", isRoute: true },
     { label: "About", href: "#about" },
   ];
 
