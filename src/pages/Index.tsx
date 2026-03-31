@@ -20,6 +20,9 @@ const Index = () => {
         <FoundersSection />
       </StackedCard>
       <StackedCard index={3}>
+        <MatchaGuideSection />
+      </StackedCard>
+      <StackedCard index={4}>
         <FaqSection />
       </StackedCard>
     </div>
