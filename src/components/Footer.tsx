@@ -36,13 +36,24 @@ const Footer = () => {
           >
             {footerLinks.map((link) => (
               <li key={link.href}>
-                <motion.a
-                  href={link.href}
-                  whileHover={{ x: 6 }}
-                  className="font-body text-sm text-cream/60 hover:text-cream transition-colors duration-300"
-                >
-                  {link.label}
-                </motion.a>
+                {link.isRoute ? (
+                  <Link
+                    to={link.href}
+                    className="font-body text-sm text-cream/60 hover:text-cream transition-colors duration-300"
+                  >
+                    <motion.span whileHover={{ x: 6 }} className="inline-block">
+                      {link.label}
+                    </motion.span>
+                  </Link>
+                ) : (
+                  <motion.a
+                    href={link.href}
+                    whileHover={{ x: 6 }}
+                    className="font-body text-sm text-cream/60 hover:text-cream transition-colors duration-300"
+                  >
+                    {link.label}
+                  </motion.a>
+                )}
               </li>
             ))}
           </motion.ul>
