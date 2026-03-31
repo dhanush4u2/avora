@@ -35,12 +35,21 @@ const Navbar = () => {
         <ul className="hidden md:flex items-center gap-8">
           {links.map((link) => (
             <li key={link.href}>
-              <a
-                href={link.href}
-                className="font-body text-sm text-cream/80 hover:text-cream transition-colors duration-300"
-              >
-                {link.label}
-              </a>
+              {link.isRoute ? (
+                <Link
+                  to={link.href}
+                  className="font-body text-sm text-cream/80 hover:text-cream transition-colors duration-300"
+                >
+                  {link.label}
+                </Link>
+              ) : (
+                <a
+                  href={link.href}
+                  className="font-body text-sm text-cream/80 hover:text-cream transition-colors duration-300"
+                >
+                  {link.label}
+                </a>
+              )}
             </li>
           ))}
         </ul>
