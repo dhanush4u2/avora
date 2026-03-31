@@ -10,7 +10,23 @@ const ShopSection = () => {
 
   return (
     <section id="shop" className="bg-primary" ref={ref}>
-      {/* Full-width product image with shop CTA */}
+      {/* Shop CTA above images */}
+      <div className="relative z-10 flex justify-center -mb-8 pt-12">
+        <Link to="/shop">
+          <motion.span
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6 }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.97 }}
+            className="inline-block font-body text-sm tracking-widest text-primary bg-cream px-12 py-4 shadow-lg hover:bg-cream/90 transition-all duration-500"
+          >
+            Shop Now
+          </motion.span>
+        </Link>
+      </div>
+
+      {/* Full-width product image */}
       <div className="relative group overflow-hidden">
         <motion.img
           src={productDisplay}
