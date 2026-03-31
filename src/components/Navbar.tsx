@@ -97,23 +97,13 @@ const Navbar = () => {
               <ul className="flex flex-col items-center gap-6 py-8">
                 {links.map((link) => (
                   <li key={link.href}>
-                    {link.isRoute ? (
-                      <Link
-                        to={link.href}
-                        onClick={() => setMobileOpen(false)}
-                        className="font-display text-xl text-cream"
-                      >
-                        {link.label}
-                      </Link>
-                    ) : (
-                      <a
-                        href={link.href}
-                        onClick={() => setMobileOpen(false)}
-                        className="font-display text-xl text-cream"
-                      >
-                        {link.label}
-                      </a>
-                    )}
+                    <Link
+                      to={link.href}
+                      onClick={() => setMobileOpen(false)}
+                      className="font-display text-xl text-cream"
+                    >
+                      {link.label}
+                    </Link>
                   </li>
                 ))}
               </ul>
