@@ -30,17 +30,17 @@ const HeroSection = () => {
   const [isHovering, setIsHovering] = useState(false);
 
   const spawnParticles = useCallback(() => {
-    const newParticles: Particle[] = Array.from({ length: 6 }, () => ({
+    const newParticles: Particle[] = Array.from({ length: 8 }, () => ({
       id: particleId++,
       x: Math.random() * 100,
       y: -5,
-      size: Math.random() * 4 + 2,
-      duration: Math.random() * 2 + 2,
-      delay: Math.random() * 0.3,
-      drift: (Math.random() - 0.5) * 40,
-      opacity: Math.random() * 0.5 + 0.3,
+      size: Math.random() * 6 + 4,
+      duration: Math.random() * 1.5 + 1.5,
+      delay: Math.random() * 0.2,
+      drift: (Math.random() - 0.5) * 30,
+      opacity: Math.random() * 0.4 + 0.6,
     }));
-    setParticles((prev) => [...prev.slice(-60), ...newParticles]);
+    setParticles((prev) => [...prev.slice(-80), ...newParticles]);
   }, []);
 
   useEffect(() => {
