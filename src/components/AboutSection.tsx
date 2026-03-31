@@ -1,5 +1,5 @@
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { motion, useInView, useMotionValue, useTransform } from "framer-motion";
+import { useRef, useState } from "react";
 import regionImg from "@/assets/region.jpg";
 import gradeImg from "@/assets/grade.jpg";
 import tastingImg from "@/assets/tasting.jpg";
@@ -24,6 +24,49 @@ const features = [
     desc: "Every cup is crafted to nourish your body and calm your mind, bringing balance to your daily ritual.",
   },
 ];
+
+const FeatureCard = ({ f, i, inView }: { f: typeof features[0]; i: number; inView: boolean }) => {
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.7, delay: 0.3 + i * 0.15 }}
+      whileHover={{ y: -8 }}
+      onHoverStart={() => setHovered(true)}
+      onHoverEnd={() => setHovered(false)}
+      className="group cursor-pointer"
+    >
+      <div className="relative overflow-hidden rounded-lg mb-5">
+        <motion.img
+          src={f.image}
+          alt={f.title}
+          loading="lazy"
+          width={800}
+          height={600}
+          animate={{ scale: hovered ? 1.1 : 1 }}
+          transition={{ duration: 0.7 }}
+          className="w-full h-64 object-cover"
+        />
+        <motion.div
+          animate={{ opacity: hovered ? 0.05 : 0.2 }}
+          transition={{ duration: 0.5 }}
+          className="absolute inset-0 bg-primary"
+        />
+        <span className="absolute top-4 left-4 font-display text-sm text-cream/80">{f.num}</span>
+      </div>
+      <motion.h3
+        animate={{ x: hovered ? 8 : 0 }}
+        transition={{ duration: 0.3 }}
+        className="font-display text-2xl text-cream mb-2"
+      >
+        {f.title}
+      </motion.h3>
+      <p className="font-body text-sm text-cream/60 leading-relaxed">{f.desc}</p>
+    </motion.div>
+  );
+};
 
 const AboutSection = () => {
   const ref = useRef(null);
@@ -55,29 +98,7 @@ const AboutSection = () => {
         {/* Feature cards */}
         <div className="grid md:grid-cols-3 gap-8">
           {features.map((f, i) => (
-            <motion.div
-              key={f.num}
-              initial={{ opacity: 0, y: 50 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.7, delay: 0.3 + i * 0.15 }}
-              whileHover={{ y: -8 }}
-              className="group cursor-pointer"
-            >
-              <div className="relative overflow-hidden rounded-lg mb-5">
-                <motion.img
-                  src={f.image}
-                  alt={f.title}
-                  loading="lazy"
-                  width={800}
-                  height={600}
-                  className="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-primary/20 group-hover:bg-primary/10 transition-colors duration-500" />
-                <span className="absolute top-4 left-4 font-display text-sm text-cream/80">{f.num}</span>
-              </div>
-              <h3 className="font-display text-2xl text-cream mb-2">{f.title}</h3>
-              <p className="font-body text-sm text-cream/60 leading-relaxed">{f.desc}</p>
-            </motion.div>
+            <FeatureCard key={f.num} f={f} i={i} inView={inView} />
           ))}
         </div>
       </div>

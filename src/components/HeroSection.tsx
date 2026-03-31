@@ -1,23 +1,35 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import heroProduct from "@/assets/hero-product.jpg";
 
 const HeroSection = () => {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
+  });
+  const imgY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+  const textOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+
   return (
-    <section id="hero" className="bg-primary">
-      {/* Hero image */}
+    <section id="hero" className="bg-primary" ref={ref}>
+      {/* Hero image with parallax */}
       <div className="relative min-h-screen flex items-center overflow-hidden">
-        <div className="absolute inset-0">
+        <motion.div className="absolute inset-0" style={{ y: imgY }}>
           <img
             src={heroProduct}
             alt="Avora matcha product"
             width={1920}
             height={1080}
-            className="w-full h-full object-cover opacity-60"
+            className="w-full h-[120%] object-cover opacity-60"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-primary/40 via-primary/20 to-primary/80" />
-        </div>
+        </motion.div>
 
-        <div className="relative z-10 container mx-auto px-6 text-center">
+        <motion.div
+          style={{ opacity: textOpacity }}
+          className="relative z-10 container mx-auto px-6 text-center"
+        >
           <motion.h1
             initial={{ opacity: 0, y: 60 }}
             animate={{ opacity: 1, y: 0 }}
@@ -35,12 +47,14 @@ const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.8 }}
             className="mt-10"
           >
-            <a
+            <motion.a
               href="#shop"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.97 }}
               className="inline-block font-body text-sm tracking-widest text-cream border border-cream/40 px-10 py-4 hover:bg-cream/10 transition-all duration-500"
             >
               Shop now
-            </a>
+            </motion.a>
           </motion.div>
 
           {/* Scroll indicator */}
@@ -56,11 +70,11 @@ const HeroSection = () => {
               className="w-[1px] h-12 bg-cream/40"
             />
           </motion.div>
-        </div>
+        </motion.div>
       </div>
 
       {/* "Experience the eternal high" text banner */}
-      <div className="py-16 md:py-24 text-center">
+      <div className="py-16 md:py-24 text-center overflow-hidden">
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
