@@ -1,5 +1,6 @@
 import { motion, useScroll, useTransform, type Easing } from "framer-motion";
 import { useRef } from "react";
+import { Link } from "react-router-dom";
 import foundersPortrait from "@/assets/founders-portrait.jpg";
 import foundersMatcha from "@/assets/founders-matcha.jpg";
 
