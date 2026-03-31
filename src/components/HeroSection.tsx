@@ -99,7 +99,10 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 60 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.3 }}
-            className="font-display text-5xl md:text-7xl lg:text-8xl font-light text-cream leading-tight tracking-wide relative z-10"
+            className="font-display text-5xl md:text-7xl lg:text-8xl font-light text-cream leading-tight tracking-wide relative z-10 group cursor-default"
+            whileHover={{
+              textShadow: "0 0 20px rgba(234,222,200,0.6), 0 0 40px rgba(234,222,200,0.3), 0 0 60px rgba(234,222,200,0.15)",
+            }}
           >
             Experience the
             <br />
