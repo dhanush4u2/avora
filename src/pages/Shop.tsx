@@ -12,6 +12,15 @@ const images = [matchaTin, matchaDetail];
 const Shop = () => {
   const [quantity, setQuantity] = useState(1);
   const [selectedImage, setSelectedImage] = useState(0);
+  const { addItem } = useCart();
+
+  const handleAddToCart = () => {
+    addItem(
+      { id: "ceremonial-matcha", name: "Ceremonial Matcha", price: 899, image: matchaTin, weight: "30g" },
+      quantity
+    );
+    toast.success(`Added ${quantity} item${quantity > 1 ? "s" : ""} to cart`);
+  };
 
   return (
     <div className="min-h-screen bg-primary">
