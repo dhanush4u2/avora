@@ -30,22 +30,22 @@ const HeroSection = () => {
   const [isHovering, setIsHovering] = useState(false);
 
   const spawnParticles = useCallback(() => {
-    const newParticles: Particle[] = Array.from({ length: 6 }, () => ({
+    const newParticles: Particle[] = Array.from({ length: 8 }, () => ({
       id: particleId++,
       x: Math.random() * 100,
       y: -5,
-      size: Math.random() * 4 + 2,
-      duration: Math.random() * 2 + 2,
-      delay: Math.random() * 0.3,
-      drift: (Math.random() - 0.5) * 40,
-      opacity: Math.random() * 0.5 + 0.3,
+      size: Math.random() * 6 + 4,
+      duration: Math.random() * 1.5 + 1.5,
+      delay: Math.random() * 0.2,
+      drift: (Math.random() - 0.5) * 30,
+      opacity: Math.random() * 0.4 + 0.6,
     }));
-    setParticles((prev) => [...prev.slice(-60), ...newParticles]);
+    setParticles((prev) => [...prev.slice(-80), ...newParticles]);
   }, []);
 
   useEffect(() => {
     if (!isHovering) return;
-    const interval = setInterval(spawnParticles, 200);
+    const interval = setInterval(spawnParticles, 150);
     spawnParticles();
     return () => clearInterval(interval);
   }, [isHovering, spawnParticles]);
@@ -116,22 +116,22 @@ const HeroSection = () => {
       {/* "Experience the eternal high" text banner with matcha sprinkle */}
       <div
         ref={bannerRef}
-        className="relative py-16 md:py-24 text-center overflow-hidden cursor-default"
+        className="relative py-16 md:py-24 text-center overflow-visible cursor-default"
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
       >
         {/* Matcha particles */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="pointer-events-none absolute inset-0 z-20 overflow-visible">
           <AnimatePresence>
             {particles.map((p) => (
-              <motion.div
+              <motion.span
                 key={p.id}
-                initial={{ x: `${p.x}%`, y: "-5%", opacity: 0, scale: 0 }}
+                initial={{ x: `${p.x}%`, y: -8, opacity: 0, scale: 0.6 }}
                 animate={{
-                  y: "110%",
-                  x: `${p.x + p.drift}%`,
+                  y: 80,
+                  x: `calc(${p.x}% + ${p.drift}px)`,
                   opacity: [0, p.opacity, p.opacity, 0],
-                  scale: 1,
+                  scale: [0.6, 1, 0.8],
                   rotate: Math.random() * 360,
                 }}
                 exit={{ opacity: 0 }}
@@ -140,12 +140,11 @@ const HeroSection = () => {
                   delay: p.delay,
                   ease: [0.25, 0.1, 0.25, 1] as const,
                 }}
-                className="absolute rounded-full"
+                className="absolute top-0 block rounded-full shadow-[0_0_6px_rgba(132,204,22,0.45)]"
                 style={{
                   width: p.size,
                   height: p.size,
-                  backgroundColor: `hsl(100 ${35 + Math.random() * 20}% ${35 + Math.random() * 15}%)`,
-                  filter: "blur(0.5px)",
+                  backgroundColor: `hsl(100 ${35 + Math.random() * 20}% ${40 + Math.random() * 15}%)`,
                 }}
               />
             ))}
