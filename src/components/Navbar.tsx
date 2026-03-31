@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
@@ -14,7 +15,7 @@ const Navbar = () => {
 
   const links = [
     { label: "Home", href: "#hero" },
-    { label: "Shop", href: "#shop" },
+    { label: "Shop", href: "/shop", isRoute: true },
     { label: "About", href: "#about" },
   ];
 
@@ -34,12 +35,21 @@ const Navbar = () => {
         <ul className="hidden md:flex items-center gap-8">
           {links.map((link) => (
             <li key={link.href}>
-              <a
-                href={link.href}
-                className="font-body text-sm text-cream/80 hover:text-cream transition-colors duration-300"
-              >
-                {link.label}
-              </a>
+              {link.isRoute ? (
+                <Link
+                  to={link.href}
+                  className="font-body text-sm text-cream/80 hover:text-cream transition-colors duration-300"
+                >
+                  {link.label}
+                </Link>
+              ) : (
+                <a
+                  href={link.href}
+                  className="font-body text-sm text-cream/80 hover:text-cream transition-colors duration-300"
+                >
+                  {link.label}
+                </a>
+              )}
             </li>
           ))}
         </ul>
@@ -74,13 +84,23 @@ const Navbar = () => {
             <ul className="flex flex-col items-center gap-6 py-8">
               {links.map((link) => (
                 <li key={link.href}>
-                  <a
-                    href={link.href}
-                    onClick={() => setMobileOpen(false)}
-                    className="font-display text-xl text-cream"
-                  >
-                    {link.label}
-                  </a>
+                  {link.isRoute ? (
+                    <Link
+                      to={link.href}
+                      onClick={() => setMobileOpen(false)}
+                      className="font-display text-xl text-cream"
+                    >
+                      {link.label}
+                    </Link>
+                  ) : (
+                    <a
+                      href={link.href}
+                      onClick={() => setMobileOpen(false)}
+                      className="font-display text-xl text-cream"
+                    >
+                      {link.label}
+                    </a>
+                  )}
                 </li>
               ))}
             </ul>
