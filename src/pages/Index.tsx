@@ -2,6 +2,7 @@ import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
 import ShopSection from "@/components/ShopSection";
 import FoundersSection from "@/components/FoundersSection";
+import MatchaGuideSection from "@/components/MatchaGuideSection";
 import FaqSection from "@/components/FaqSection";
 import StackedCard from "@/components/StackedCard";
 
@@ -19,6 +20,9 @@ const Index = () => {
         <FoundersSection />
       </StackedCard>
       <StackedCard index={3}>
+        <MatchaGuideSection />
+      </StackedCard>
+      <StackedCard index={4}>
         <FaqSection />
       </StackedCard>
     </div>
