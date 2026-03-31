@@ -126,10 +126,9 @@ const HeroSection = () => {
             {particles.map((p) => (
               <motion.span
                 key={p.id}
-                initial={{ x: `${p.x}%`, y: -8, opacity: 0, scale: 0.6 }}
+                initial={{ opacity: 0, scale: 0.6, y: -8 }}
                 animate={{
                   y: 80,
-                  x: `calc(${p.x}% + ${p.drift}px)`,
                   opacity: [0, p.opacity, p.opacity, 0],
                   scale: [0.6, 1, 0.8],
                   rotate: Math.random() * 360,
@@ -140,8 +139,9 @@ const HeroSection = () => {
                   delay: p.delay,
                   ease: [0.25, 0.1, 0.25, 1] as const,
                 }}
-                className="absolute top-0 block rounded-full shadow-[0_0_6px_rgba(132,204,22,0.45)]"
+                className="absolute top-0 block rounded-full shadow-[0_0_8px_rgba(132,204,22,0.5)]"
                 style={{
+                  left: `${p.x}%`,
                   width: p.size,
                   height: p.size,
                   backgroundColor: `hsl(100 ${35 + Math.random() * 20}% ${40 + Math.random() * 15}%)`,
