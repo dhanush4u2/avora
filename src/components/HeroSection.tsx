@@ -1,16 +1,54 @@
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { motion, useScroll, useTransform, useMotionValue, useSpring, AnimatePresence } from "framer-motion";
+import { useRef, useState, useCallback, useEffect } from "react";
 import { Link } from "react-router-dom";
 import heroProduct from "@/assets/hero-product.jpg";
 
+interface Particle {
+  id: number;
+  x: number;
+  y: number;
+  size: number;
+  duration: number;
+  delay: number;
+  drift: number;
+  opacity: number;
+}
+
+let particleId = 0;
+
 const HeroSection = () => {
   const ref = useRef(null);
+  const bannerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
   });
   const imgY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
   const textOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+
+  const [particles, setParticles] = useState<Particle[]>([]);
+  const [isHovering, setIsHovering] = useState(false);
+
+  const spawnParticles = useCallback(() => {
+    const newParticles: Particle[] = Array.from({ length: 6 }, () => ({
+      id: particleId++,
+      x: Math.random() * 100,
+      y: -5,
+      size: Math.random() * 4 + 2,
+      duration: Math.random() * 2 + 2,
+      delay: Math.random() * 0.3,
+      drift: (Math.random() - 0.5) * 40,
+      opacity: Math.random() * 0.5 + 0.3,
+    }));
+    setParticles((prev) => [...prev.slice(-60), ...newParticles]);
+  }, []);
+
+  useEffect(() => {
+    if (!isHovering) return;
+    const interval = setInterval(spawnParticles, 200);
+    spawnParticles();
+    return () => clearInterval(interval);
+  }, [isHovering, spawnParticles]);
 
   return (
     <section id="hero" className="bg-primary" ref={ref}>
@@ -75,14 +113,51 @@ const HeroSection = () => {
         </motion.div>
       </div>
 
-      {/* "Experience the eternal high" text banner */}
-      <div className="py-16 md:py-24 text-center overflow-hidden">
+      {/* "Experience the eternal high" text banner with matcha sprinkle */}
+      <div
+        ref={bannerRef}
+        className="relative py-16 md:py-24 text-center overflow-hidden cursor-default"
+        onMouseEnter={() => setIsHovering(true)}
+        onMouseLeave={() => setIsHovering(false)}
+      >
+        {/* Matcha particles */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <AnimatePresence>
+            {particles.map((p) => (
+              <motion.div
+                key={p.id}
+                initial={{ x: `${p.x}%`, y: "-5%", opacity: 0, scale: 0 }}
+                animate={{
+                  y: "110%",
+                  x: `${p.x + p.drift}%`,
+                  opacity: [0, p.opacity, p.opacity, 0],
+                  scale: 1,
+                  rotate: Math.random() * 360,
+                }}
+                exit={{ opacity: 0 }}
+                transition={{
+                  duration: p.duration,
+                  delay: p.delay,
+                  ease: [0.25, 0.1, 0.25, 1] as const,
+                }}
+                className="absolute rounded-full"
+                style={{
+                  width: p.size,
+                  height: p.size,
+                  backgroundColor: `hsl(100 ${35 + Math.random() * 20}% ${35 + Math.random() * 15}%)`,
+                  filter: "blur(0.5px)",
+                }}
+              />
+            ))}
+          </AnimatePresence>
+        </div>
+
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="font-display text-4xl md:text-6xl lg:text-7xl text-cream font-light tracking-wide"
+          className="font-display text-4xl md:text-6xl lg:text-7xl text-cream font-light tracking-wide relative z-10"
         >
           Experience the eternal high
         </motion.h2>
