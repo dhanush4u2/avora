@@ -1,5 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import { Link } from "react-router-dom";
 import brewingImg from "@/assets/brewing.jpg";
 
 const FoundersSection = () => {
@@ -18,17 +19,18 @@ const FoundersSection = () => {
           Founders' note
         </motion.h2>
 
-        <motion.a
-          href="#"
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.97 }}
-          className="inline-block font-body text-sm tracking-widest text-cream border border-cream/40 px-10 py-4 hover:bg-cream/10 transition-all duration-500 mb-12"
-        >
-          Read our story
-        </motion.a>
+        <Link to="/founders">
+          <motion.span
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.97 }}
+            className="inline-block font-body text-sm tracking-widest text-cream border border-cream/40 px-10 py-4 hover:bg-cream/10 transition-all duration-500 mb-12"
+          >
+            Read our story
+          </motion.span>
+        </Link>
 
         <motion.div
           initial={{ opacity: 0, y: 50 }}
