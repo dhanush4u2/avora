@@ -18,9 +18,9 @@ const Navbar = () => {
   }, []);
 
   const links = [
-    { label: "Home", href: "#hero" },
-    { label: "Shop", href: "/shop", isRoute: true },
-    { label: "Founders' Note", href: "/founders", isRoute: true },
+    { label: "Home", href: "/" },
+    { label: "Shop", href: "/shop" },
+    { label: "Founders' Note", href: "/founders" },
   ];
 
   return (
@@ -40,29 +40,20 @@ const Navbar = () => {
           <ul className="hidden md:flex items-center gap-8">
             {links.map((link) => (
               <li key={link.href}>
-                {link.isRoute ? (
-                  <Link
-                    to={link.href}
-                    className="font-body text-sm text-cream/80 hover:text-cream transition-colors duration-300"
-                  >
-                    {link.label}
-                  </Link>
-                ) : (
-                  <a
-                    href={link.href}
-                    className="font-body text-sm text-cream/80 hover:text-cream transition-colors duration-300"
-                  >
-                    {link.label}
-                  </a>
-                )}
+                <Link
+                  to={link.href}
+                  className="font-body text-sm text-cream/80 hover:text-cream transition-colors duration-300"
+                >
+                  {link.label}
+                </Link>
               </li>
             ))}
           </ul>
 
           {/* Center logo */}
-          <a href="#hero" className="font-display text-3xl font-semibold text-cream tracking-wide absolute left-1/2 -translate-x-1/2">
+          <Link to="/" className="font-display text-3xl font-semibold text-cream tracking-wide absolute left-1/2 -translate-x-1/2">
             avora
-          </a>
+          </Link>
 
           {/* Right side — cart */}
           <div className="flex items-center gap-4">
@@ -106,23 +97,13 @@ const Navbar = () => {
               <ul className="flex flex-col items-center gap-6 py-8">
                 {links.map((link) => (
                   <li key={link.href}>
-                    {link.isRoute ? (
-                      <Link
-                        to={link.href}
-                        onClick={() => setMobileOpen(false)}
-                        className="font-display text-xl text-cream"
-                      >
-                        {link.label}
-                      </Link>
-                    ) : (
-                      <a
-                        href={link.href}
-                        onClick={() => setMobileOpen(false)}
-                        className="font-display text-xl text-cream"
-                      >
-                        {link.label}
-                      </a>
-                    )}
+                    <Link
+                      to={link.href}
+                      onClick={() => setMobileOpen(false)}
+                      className="font-display text-xl text-cream"
+                    >
+                      {link.label}
+                    </Link>
                   </li>
                 ))}
               </ul>
