@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform, useMotionValue, useSpring, AnimatePresence } from "framer-motion";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { useRef, useState, useCallback, useEffect } from "react";
 import { Link } from "react-router-dom";
 import heroProduct from "@/assets/hero-product.jpg";
@@ -6,11 +6,9 @@ import heroProduct from "@/assets/hero-product.jpg";
 interface Particle {
   id: number;
   x: number;
-  y: number;
   size: number;
   duration: number;
   delay: number;
-  drift: number;
   opacity: number;
 }
 
@@ -18,7 +16,6 @@ let particleId = 0;
 
 const HeroSection = () => {
   const ref = useRef(null);
-  const bannerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
@@ -27,32 +24,31 @@ const HeroSection = () => {
   const textOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
   const [particles, setParticles] = useState<Particle[]>([]);
-  const [isHovering, setIsHovering] = useState(false);
 
   const spawnParticles = useCallback(() => {
-    const newParticles: Particle[] = Array.from({ length: 8 }, () => ({
+    const newParticles: Particle[] = Array.from({ length: 5 }, () => ({
       id: particleId++,
-      x: Math.random() * 100,
-      y: -5,
-      size: Math.random() * 6 + 4,
-      duration: Math.random() * 1.5 + 1.5,
-      delay: Math.random() * 0.2,
-      drift: (Math.random() - 0.5) * 30,
-      opacity: Math.random() * 0.4 + 0.6,
+      x: 20 + Math.random() * 60,
+      size: Math.random() * 3 + 2,
+      duration: Math.random() * 2 + 2,
+      delay: Math.random() * 0.5,
+      opacity: Math.random() * 0.3 + 0.3,
     }));
-    setParticles((prev) => [...prev.slice(-80), ...newParticles]);
+    setParticles((prev) => [...prev.slice(-50), ...newParticles]);
   }, []);
 
   useEffect(() => {
-    if (!isHovering) return;
-    const interval = setInterval(spawnParticles, 150);
-    spawnParticles();
-    return () => clearInterval(interval);
-  }, [isHovering, spawnParticles]);
+    // Auto-spawn particles continuously for the hero text
+    const interval = setInterval(spawnParticles, 400);
+    const timeout = setTimeout(spawnParticles, 800);
+    return () => {
+      clearInterval(interval);
+      clearTimeout(timeout);
+    };
+  }, [spawnParticles]);
 
   return (
     <section id="hero" className="bg-primary" ref={ref}>
-      {/* Hero image with parallax */}
       <div className="relative min-h-screen flex items-center overflow-hidden">
         <motion.div className="absolute inset-0" style={{ y: imgY }}>
           <img
@@ -69,11 +65,41 @@ const HeroSection = () => {
           style={{ opacity: textOpacity }}
           className="relative z-10 container mx-auto px-6 text-center"
         >
+          {/* Matcha particles around hero text */}
+          <div className="pointer-events-none absolute inset-0 z-0 overflow-visible">
+            <AnimatePresence>
+              {particles.map((p) => (
+                <motion.span
+                  key={p.id}
+                  initial={{ opacity: 0, scale: 0.4, y: "30%" }}
+                  animate={{
+                    y: "70%",
+                    opacity: [0, p.opacity, p.opacity, 0],
+                    scale: [0.4, 1, 0.6],
+                  }}
+                  exit={{ opacity: 0 }}
+                  transition={{
+                    duration: p.duration,
+                    delay: p.delay,
+                    ease: [0.25, 0.1, 0.25, 1] as const,
+                  }}
+                  className="absolute block rounded-full shadow-[0_0_4px_rgba(132,204,22,0.4)]"
+                  style={{
+                    left: `${p.x}%`,
+                    width: p.size,
+                    height: p.size,
+                    backgroundColor: `hsl(100 ${35 + Math.random() * 20}% ${40 + Math.random() * 15}%)`,
+                  }}
+                />
+              ))}
+            </AnimatePresence>
+          </div>
+
           <motion.h1
             initial={{ opacity: 0, y: 60 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.3 }}
-            className="font-display text-5xl md:text-7xl lg:text-8xl font-light text-cream leading-tight tracking-wide"
+            className="font-display text-5xl md:text-7xl lg:text-8xl font-light text-cream leading-tight tracking-wide relative z-10"
           >
             Experience the
             <br />
@@ -84,7 +110,7 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
-            className="mt-10"
+            className="mt-10 relative z-10"
           >
             <Link to="/shop">
               <motion.span
@@ -111,55 +137,6 @@ const HeroSection = () => {
             />
           </motion.div>
         </motion.div>
-      </div>
-
-      {/* "Experience the eternal high" text banner with matcha sprinkle */}
-      <div
-        ref={bannerRef}
-        className="relative py-16 md:py-24 text-center overflow-visible cursor-default"
-        onMouseEnter={() => setIsHovering(true)}
-        onMouseLeave={() => setIsHovering(false)}
-      >
-        {/* Matcha particles */}
-        <div className="pointer-events-none absolute inset-0 z-20 overflow-visible">
-          <AnimatePresence>
-            {particles.map((p) => (
-              <motion.span
-                key={p.id}
-                initial={{ opacity: 0, scale: 0.6, y: -8 }}
-                animate={{
-                  y: 80,
-                  opacity: [0, p.opacity, p.opacity, 0],
-                  scale: [0.6, 1, 0.8],
-                  rotate: Math.random() * 360,
-                }}
-                exit={{ opacity: 0 }}
-                transition={{
-                  duration: p.duration,
-                  delay: p.delay,
-                  ease: [0.25, 0.1, 0.25, 1] as const,
-                }}
-                className="absolute top-0 block rounded-full shadow-[0_0_8px_rgba(132,204,22,0.5)]"
-                style={{
-                  left: `${p.x}%`,
-                  width: p.size,
-                  height: p.size,
-                  backgroundColor: `hsl(100 ${35 + Math.random() * 20}% ${40 + Math.random() * 15}%)`,
-                }}
-              />
-            ))}
-          </AnimatePresence>
-        </div>
-
-        <motion.h2
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="font-display text-4xl md:text-6xl lg:text-7xl text-cream font-light tracking-wide relative z-10"
-        >
-          Experience the eternal high
-        </motion.h2>
       </div>
     </section>
   );
