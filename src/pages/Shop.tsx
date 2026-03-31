@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Minus, Plus, ChevronLeft } from "lucide-react";
+import { Minus, Plus } from "lucide-react";
 import matchaTin from "@/assets/matcha-tin.jpg";
 import matchaDetail from "@/assets/matcha-detail.jpg";
 import { useCart } from "@/contexts/CartContext";
@@ -24,19 +24,6 @@ const Shop = () => {
 
   return (
     <div className="min-h-screen bg-primary">
-      {/* Top bar */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-primary/95 backdrop-blur-md border-b border-cream/10">
-        <div className="container mx-auto flex items-center justify-between px-6 py-4">
-          <Link to="/" className="flex items-center gap-2 font-body text-sm text-cream/70 hover:text-cream transition-colors">
-            <ChevronLeft size={16} />
-            Back
-          </Link>
-          <Link to="/" className="font-display text-3xl font-semibold text-cream tracking-wide absolute left-1/2 -translate-x-1/2">
-            avora
-          </Link>
-          <div className="w-16" />
-        </div>
-      </nav>
 
       {/* Product section */}
       <div className="pt-28 pb-20">

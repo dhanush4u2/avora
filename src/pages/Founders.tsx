@@ -1,7 +1,6 @@
 import { motion, useScroll, useTransform, type Easing } from "framer-motion";
 import { useRef } from "react";
 import { Link } from "react-router-dom";
-import { ChevronLeft } from "lucide-react";
 import foundersPortrait from "@/assets/founders-portrait.jpg";
 import foundersMatcha from "@/assets/founders-matcha.jpg";
 
@@ -26,25 +25,6 @@ const Founders = () => {
 
   return (
     <div className="min-h-screen bg-primary">
-      {/* Nav */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-primary/95 backdrop-blur-md border-b border-cream/10">
-        <div className="container mx-auto flex items-center justify-between px-6 py-4">
-          <Link
-            to="/"
-            className="flex items-center gap-2 font-body text-sm text-cream/70 hover:text-cream transition-colors"
-          >
-            <ChevronLeft size={16} />
-            Back
-          </Link>
-          <Link
-            to="/"
-            className="font-display text-3xl font-semibold text-cream tracking-wide absolute left-1/2 -translate-x-1/2"
-          >
-            avora
-          </Link>
-          <div className="w-16" />
-        </div>
-      </nav>
 
       {/* Hero image */}
       <div ref={heroRef} className="relative h-[70vh] overflow-hidden">

@@ -1,4 +1,3 @@
-import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
 import ShopSection from "@/components/ShopSection";
@@ -10,7 +9,6 @@ import StackedCard from "@/components/StackedCard";
 const Index = () => {
   return (
     <div className="min-h-screen bg-primary">
-      <Navbar />
       <HeroSection />
       <StackedCard index={0}>
         <AboutSection />
