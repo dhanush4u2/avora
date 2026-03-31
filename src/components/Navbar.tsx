@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ShoppingBag } from "lucide-react";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -59,8 +59,12 @@ const Navbar = () => {
           avora
         </a>
 
-        {/* Right side placeholder */}
-        <div className="hidden md:block w-24" />
+        {/* Right side — cart */}
+        <div className="hidden md:flex items-center">
+          <Link to="/shop" className="relative text-cream/80 hover:text-cream transition-colors duration-300">
+            <ShoppingBag size={20} />
+          </Link>
+        </div>
 
         {/* Mobile toggle */}
         <button
