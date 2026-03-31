@@ -1,9 +1,11 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const footerLinks = [
   { label: "Homepage", href: "#hero" },
   { label: "Founders' note", href: "#founders" },
   { label: "Shop", href: "#shop" },
+  { label: "Refund & returns", href: "/refund-policy", isRoute: true },
 ];
 
 const Footer = () => {
