@@ -10,11 +10,11 @@ const StackedCard = ({ children, index }: StackedCardProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start end", "start 0.15"],
+    offset: ["start end", "start 0.3"],
   });
 
-  const scale = useTransform(scrollYProgress, [0, 1], [0.92, 1]);
-  const opacity = useTransform(scrollYProgress, [0, 0.4], [0, 1]);
+  const scale = useTransform(scrollYProgress, [0, 1], [0.95, 1]);
+  const opacity = useTransform(scrollYProgress, [0, 0.3], [0, 1]);
   const borderRadius = useTransform(scrollYProgress, [0, 1], [20, 0]);
 
   return (
