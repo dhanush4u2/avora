@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { Minus, Plus, ChevronLeft } from "lucide-react";
 import matchaTin from "@/assets/matcha-tin.jpg";
 import matchaDetail from "@/assets/matcha-detail.jpg";
+import { useCart } from "@/contexts/CartContext";
+import { toast } from "sonner";
 
 const images = [matchaTin, matchaDetail];
 
