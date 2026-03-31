@@ -54,7 +54,7 @@ const FeatureCard = ({ f, i, inView }: { f: typeof features[0]; i: number; inVie
           transition={{ duration: 0.5 }}
           className="absolute inset-0 bg-primary"
         />
-        <span className="absolute top-4 left-4 font-display text-sm text-cream/80">{f.num}</span>
+        
       </div>
       <motion.h3
         animate={{ x: hovered ? 8 : 0 }}

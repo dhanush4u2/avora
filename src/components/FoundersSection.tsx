@@ -16,7 +16,7 @@ const FoundersSection = () => {
           transition={{ duration: 0.8 }}
           className="font-display text-4xl md:text-6xl text-cream font-light text-center mb-8"
         >
-          Founders' note
+          Founders' Note
         </motion.h2>
 
         <Link to="/founders">

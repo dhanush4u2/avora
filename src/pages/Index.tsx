@@ -24,7 +24,9 @@ const Index = () => {
       <StackedCard index={3}>
         <FaqSection />
       </StackedCard>
-      <Footer />
+      <div className="relative" style={{ zIndex: 50 }}>
+        <Footer />
+      </div>
     </div>
   );
 };

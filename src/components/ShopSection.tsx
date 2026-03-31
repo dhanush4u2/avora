@@ -40,18 +40,6 @@ const ShopSection = () => {
           transition={{ duration: 1, delay: 0.2 }}
           className="w-full h-[50vh] md:h-[60vh] object-cover"
         />
-        <div className="absolute inset-0 bg-primary/40 flex items-center justify-center">
-          <motion.a
-            href="#founders"
-            initial={{ opacity: 0, y: 20 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.5 }}
-            whileHover={{ scale: 1.05, letterSpacing: "0.05em" }}
-            className="font-display text-3xl md:text-5xl text-cream font-light italic transition-all duration-500"
-          >
-            Founders' note
-          </motion.a>
-        </div>
       </div>
     </section>
   );

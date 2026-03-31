@@ -16,7 +16,7 @@ const Navbar = () => {
   const links = [
     { label: "Home", href: "#hero" },
     { label: "Shop", href: "/shop", isRoute: true },
-    { label: "Founders' note", href: "/founders", isRoute: true },
+    { label: "Founders' Note", href: "/founders", isRoute: true },
   ];
 
   return (
