@@ -4,12 +4,23 @@ import { Link } from "react-router-dom";
 import { Minus, Plus, ChevronLeft } from "lucide-react";
 import matchaTin from "@/assets/matcha-tin.jpg";
 import matchaDetail from "@/assets/matcha-detail.jpg";
+import { useCart } from "@/contexts/CartContext";
+import { toast } from "sonner";
 
 const images = [matchaTin, matchaDetail];
 
 const Shop = () => {
   const [quantity, setQuantity] = useState(1);
   const [selectedImage, setSelectedImage] = useState(0);
+  const { addItem } = useCart();
+
+  const handleAddToCart = () => {
+    addItem(
+      { id: "ceremonial-matcha", name: "Ceremonial Matcha", price: 899, image: matchaTin, weight: "30g" },
+      quantity
+    );
+    toast.success(`Added ${quantity} item${quantity > 1 ? "s" : ""} to cart`);
+  };
 
   return (
     <div className="min-h-screen bg-primary">
@@ -123,6 +134,7 @@ const Shop = () => {
 
               {/* Add to cart */}
               <motion.button
+                onClick={handleAddToCart}
                 whileHover={{ scale: 1.02, backgroundColor: "hsl(36 50% 94% / 0.1)" }}
                 whileTap={{ scale: 0.98 }}
                 className="mt-8 w-full py-4 border border-cream/40 font-body text-sm tracking-widest text-cream hover:border-cream transition-all duration-500"
@@ -130,13 +142,21 @@ const Shop = () => {
                 Add to cart
               </motion.button>
 
-              <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="mt-3 w-full py-4 bg-cream text-primary font-body text-sm tracking-widest font-medium transition-all duration-300"
-              >
-                Buy now
-              </motion.button>
+              <Link to="/checkout">
+                <motion.button
+                  onClick={() => {
+                    addItem(
+                      { id: "ceremonial-matcha", name: "Ceremonial Matcha", price: 899, image: matchaTin, weight: "30g" },
+                      quantity
+                    );
+                  }}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="w-full py-4 bg-cream text-primary font-body text-sm tracking-widest font-medium transition-all duration-300"
+                >
+                  Buy now
+                </motion.button>
+              </Link>
 
               {/* Storage note */}
               <div className="mt-10 border-t border-cream/10 pt-6">
