@@ -10,14 +10,18 @@ const FoundersSection = () => {
   return (
     <section id="founders" className="py-24 md:py-36 bg-primary" ref={ref}>
       <div className="container mx-auto px-6 flex flex-col items-center">
-        <motion.h2
-          initial={{ opacity: 0, y: 40 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="font-display text-4xl md:text-6xl text-cream font-light text-center mb-8"
-        >
-          Founders' note
-        </motion.h2>
+        <Link to="/founders">
+          <motion.span
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.97 }}
+            className="inline-block font-body text-sm tracking-widest text-cream border border-cream/40 px-10 py-4 hover:bg-cream/10 transition-all duration-500 mb-12"
+          >
+            Read our story
+          </motion.span>
+        </Link>
 
         <Link to="/founders">
           <motion.span
