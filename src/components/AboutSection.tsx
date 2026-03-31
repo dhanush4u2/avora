@@ -30,13 +30,13 @@ const AboutSection = () => {
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="about" className="py-24 md:py-36 bg-background">
+    <section id="about" className="py-24 md:py-36 bg-primary">
       <div className="container mx-auto px-6" ref={ref}>
         <motion.h2
           initial={{ opacity: 0, y: 40 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="font-display text-4xl md:text-6xl text-center text-primary font-light mb-8"
+          className="font-display text-4xl md:text-6xl text-center text-cream font-semibold mb-8"
         >
           Not your stereotypical matcha
         </motion.h2>
@@ -45,7 +45,7 @@ const AboutSection = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="max-w-3xl mx-auto text-center text-muted-foreground font-body text-base md:text-lg leading-relaxed mb-20"
+          className="max-w-3xl mx-auto text-center text-cream/70 font-body text-base md:text-lg leading-relaxed mb-20"
         >
           Humans love putting things in boxes. Coffee is for hustle. Tea is for calm. Matcha never fit either. Real matcha is a paradox — calming yet energizing, grounding yet sharpening. It doesn't spike. It doesn't crash. It stays with you.
           <br /><br />
@@ -75,8 +75,8 @@ const AboutSection = () => {
                 <div className="absolute inset-0 bg-primary/20 group-hover:bg-primary/10 transition-colors duration-500" />
                 <span className="absolute top-4 left-4 font-display text-sm text-cream/80">{f.num}</span>
               </div>
-              <h3 className="font-display text-2xl text-primary mb-2">{f.title}</h3>
-              <p className="font-body text-sm text-muted-foreground leading-relaxed">{f.desc}</p>
+              <h3 className="font-display text-2xl text-cream mb-2">{f.title}</h3>
+              <p className="font-body text-sm text-cream/60 leading-relaxed">{f.desc}</p>
             </motion.div>
           ))}
         </div>
