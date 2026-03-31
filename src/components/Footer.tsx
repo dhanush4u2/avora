@@ -6,6 +6,7 @@ const footerLinks = [
   { label: "Founders' note", href: "#founders" },
   { label: "Shop", href: "#shop" },
   { label: "Refund & returns", href: "/refund-policy", isRoute: true },
+  { label: "Shipping policy", href: "/shipping-policy", isRoute: true },
 ];
 
 const Footer = () => {
