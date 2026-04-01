@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import avoraLogo from "@/assets/avora-logo.png";
 
 const navLinks = [
   { label: "Homepage", href: "#hero" },
