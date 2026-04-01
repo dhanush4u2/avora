@@ -53,7 +53,7 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <CustomCursor />
+        
         {showIntro && <IntroAnimation onComplete={handleIntroComplete} />}
         <Toaster />
         <Sonner />
