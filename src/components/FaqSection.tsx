@@ -33,7 +33,7 @@ const faqs = [
   },
   {
     q: "What does Avora matcha make you feel like?",
-    a: "Focused, steady, and quietly powerful. Think clean energy without the jitters, clarity without the crash, and a sense that you've got your day handled—even if your calendar disagrees.",
+    a: "Focused, steady, and quietly powerful. Think clean energy without the jitters, clarity without the crash, and a sense that you've got your day handled, even if your calendar disagrees.",
   },
   {
     q: "Is this a coffee replacement?",
