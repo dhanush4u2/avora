@@ -16,6 +16,7 @@ let particleId = 0;
 
 const TypewriterText = ({ text }: { text: string }) => {
   const [visibleCount, setVisibleCount] = useState(0);
+  const [showCursor, setShowCursor] = useState(true);
   const chars = text.split("");
   const typeSpeed = 80;
   const pauseDuration = 2500;
