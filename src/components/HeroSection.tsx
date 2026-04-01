@@ -77,7 +77,7 @@ const HeroSection = () => {
       </div>
 
       {/* Text area - below image */}
-      <div className="relative z-10 flex items-center justify-center px-6 pb-16 -mt-10 text-center">
+      <div className="relative z-10 flex items-center justify-center px-6 pb-16 -mt-20 text-center">
         <div className="container mx-auto relative">
           <motion.h1
             initial={{ opacity: 0, y: 60 }}
@@ -88,8 +88,7 @@ const HeroSection = () => {
               textShadow: "0 0 20px rgba(234,222,200,0.6), 0 0 40px rgba(234,222,200,0.3), 0 0 60px rgba(234,222,200,0.15)",
             }}
           >
-            Experience the
-            <br />
+            Experience the{" "}
             <TypewriterText text="eternal high" />
           </motion.h1>
 
