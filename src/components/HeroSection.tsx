@@ -1,18 +1,7 @@
-import { motion, AnimatePresence } from "framer-motion";
-import { useRef, useState, useCallback, useEffect } from "react";
+import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import heroProduct from "@/assets/hero-bg.jpg";
-
-interface Particle {
-  id: number;
-  x: number;
-  size: number;
-  duration: number;
-  delay: number;
-  opacity: number;
-}
-
-let particleId = 0;
 
 const TypewriterText = ({ text }: { text: string }) => {
   const [visibleCount, setVisibleCount] = useState(0);
@@ -72,33 +61,9 @@ const TypewriterText = ({ text }: { text: string }) => {
 };
 
 const HeroSection = () => {
-  const ref = useRef(null);
-  const [particles, setParticles] = useState<Particle[]>([]);
-
-  const spawnParticles = useCallback(() => {
-    const newParticles: Particle[] = Array.from({ length: 5 }, () => ({
-      id: particleId++,
-      x: 20 + Math.random() * 60,
-      size: Math.random() * 3 + 2,
-      duration: Math.random() * 2 + 2,
-      delay: Math.random() * 0.5,
-      opacity: Math.random() * 0.3 + 0.3,
-    }));
-    setParticles((prev) => [...prev.slice(-50), ...newParticles]);
-  }, []);
-
-  useEffect(() => {
-    const interval = setInterval(spawnParticles, 400);
-    const timeout = setTimeout(spawnParticles, 800);
-    return () => {
-      clearInterval(interval);
-      clearTimeout(timeout);
-    };
-  }, [spawnParticles]);
-
   return (
-    <section id="hero" className="relative min-h-screen flex flex-col overflow-hidden bg-primary" ref={ref}>
-      {/* Image area - takes up ~60% */}
+    <section id="hero" className="relative min-h-screen flex flex-col overflow-hidden bg-primary">
+      {/* Image area */}
       <div className="relative flex-1 min-h-[55vh]">
         <img
           src={heroProduct}
@@ -114,35 +79,6 @@ const HeroSection = () => {
       {/* Text area - below image */}
       <div className="relative z-10 flex items-center justify-center px-6 pb-16 -mt-20 text-center">
         <div className="container mx-auto relative">
-          <div className="pointer-events-none absolute inset-0 z-0 overflow-visible">
-            <AnimatePresence>
-              {particles.map((p) => (
-                <motion.span
-                  key={p.id}
-                  initial={{ opacity: 0, scale: 0.4, y: "30%" }}
-                  animate={{
-                    y: "70%",
-                    opacity: [0, p.opacity, p.opacity, 0],
-                    scale: [0.4, 1, 0.6],
-                  }}
-                  exit={{ opacity: 0 }}
-                  transition={{
-                    duration: p.duration,
-                    delay: p.delay,
-                    ease: [0.25, 0.1, 0.25, 1] as const,
-                  }}
-                  className="absolute block rounded-full shadow-[0_0_4px_rgba(132,204,22,0.4)]"
-                  style={{
-                    left: `${p.x}%`,
-                    width: p.size,
-                    height: p.size,
-                    backgroundColor: `hsl(100 ${35 + Math.random() * 20}% ${40 + Math.random() * 15}%)`,
-                  }}
-                />
-              ))}
-            </AnimatePresence>
-          </div>
-
           <motion.h1
             initial={{ opacity: 0, y: 60 }}
             animate={{ opacity: 1, y: 0 }}
