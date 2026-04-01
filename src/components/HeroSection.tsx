@@ -97,21 +97,23 @@ const HeroSection = () => {
   }, [spawnParticles]);
 
   return (
-    <>
-    <section id="hero" className="relative h-screen overflow-hidden bg-primary" ref={ref}>
-      <img
-        src={heroProduct}
-        alt="Avora matcha product"
-        width={1920}
-        height={1080}
-        className="absolute inset-0 h-full w-full object-cover"
-        style={{ objectPosition: "center 75%" }}
-      />
-      <div className="absolute inset-0 bg-gradient-to-b from-primary/20 via-transparent to-primary" />
-    </section>
+    <section id="hero" className="relative min-h-screen flex flex-col overflow-hidden bg-primary" ref={ref}>
+      {/* Image area - takes up ~60% */}
+      <div className="relative flex-1 min-h-[55vh]">
+        <img
+          src={heroProduct}
+          alt="Avora matcha product"
+          width={1920}
+          height={1080}
+          className="absolute inset-0 h-full w-full object-cover"
+          style={{ objectPosition: "center 70%" }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/20 via-transparent to-primary" />
+      </div>
 
-    <section className="bg-primary -mt-32 relative z-10 pt-8 pb-16 md:pb-20 text-center">
-      <div className="container mx-auto px-6 relative">
+      {/* Text area - below image */}
+      <div className="relative z-10 flex items-center justify-center px-6 pb-16 -mt-20 text-center">
+        <div className="container mx-auto relative">
           <div className="pointer-events-none absolute inset-0 z-0 overflow-visible">
             <AnimatePresence>
               {particles.map((p) => (
@@ -170,9 +172,9 @@ const HeroSection = () => {
               </motion.span>
             </Link>
           </motion.div>
+        </div>
       </div>
     </section>
-    </>
   );
 };
 
