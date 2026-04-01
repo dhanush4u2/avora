@@ -1,5 +1,6 @@
 import { motion, useMotionValue, useSpring } from "framer-motion";
 import { useEffect, useState } from "react";
+import cursorLeaf from "@/assets/cursor-leaf.png";
 
 const CustomCursor = () => {
   const cursorX = useMotionValue(-100);
@@ -10,7 +11,6 @@ const CustomCursor = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // Only show custom cursor on non-touch devices
     const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
     if (isTouchDevice) return;
 
@@ -50,9 +50,9 @@ const CustomCursor = () => {
 
   return (
     <>
-      {/* Dot */}
+      {/* Leaf cursor */}
       <motion.div
-        className="fixed top-0 left-0 z-[9999] pointer-events-none mix-blend-difference"
+        className="fixed top-0 left-0 z-[9999] pointer-events-none"
         style={{
           x: cursorX,
           y: cursorY,
@@ -60,11 +60,17 @@ const CustomCursor = () => {
           translateY: "-50%",
         }}
       >
-        <motion.div
-          animate={{ scale: isHovering ? 0 : 1 }}
-          transition={{ duration: 0.2 }}
-          className="w-2 h-2 rounded-full"
-          style={{ backgroundColor: "hsl(36 50% 94%)" }}
+        <motion.img
+          src={cursorLeaf}
+          alt=""
+          animate={{
+            width: isHovering ? 36 : 24,
+            height: isHovering ? 36 : 24,
+            rotate: isHovering ? 15 : 0,
+          }}
+          transition={{ duration: 0.3, ease: "easeOut" }}
+          className="select-none"
+          draggable={false}
         />
       </motion.div>
 
