@@ -51,7 +51,7 @@ const HeroSection = () => {
       />
       <div className="absolute inset-0 bg-gradient-to-b from-primary/30 via-transparent to-primary/70" />
 
-      <div className="relative z-10 flex min-h-screen items-start justify-center px-6 pt-[18vh] text-center">
+      <div className="relative z-10 flex min-h-screen items-start justify-center px-6 pt-[12vh] text-center">
         <div className="container mx-auto relative">
           <div className="pointer-events-none absolute inset-0 z-0 overflow-visible">
             <AnimatePresence>
@@ -98,13 +98,13 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
-            className="mt-10 relative z-10"
+            className="mt-5 relative z-10"
           >
             <Link to="/shop">
               <motion.span
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.97 }}
-                className="inline-block font-body text-sm tracking-widest text-cream border border-cream/40 px-10 py-4 hover:bg-cream/10 transition-all duration-500"
+                className="inline-block font-body text-xs tracking-widest text-cream border border-cream/40 px-7 py-2.5 hover:bg-cream/10 transition-all duration-500"
               >
                 Shop now
               </motion.span>
