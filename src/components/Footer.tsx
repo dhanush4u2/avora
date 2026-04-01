@@ -61,6 +61,9 @@ const Footer = () => {
             transition={{ duration: 0.6 }}
           >
             <img src={avoraLogo} alt="Avora" className="h-8 w-auto" />
+            <p className="font-display text-cream/50 text-sm italic mt-3">
+              Experience the Eternal High
+            </p>
           </motion.div>
 
           {/* Nav links */}
