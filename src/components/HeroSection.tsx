@@ -61,10 +61,13 @@ const TypewriterText = ({ text }: { text: string }) => {
 };
 
 const HeroSection = () => {
+  const { scrollYProgress } = useScroll();
+  const heroY = useTransform(scrollYProgress, [0, 0.3], ["0%", "15%"]);
+
   return (
     <section id="hero" className="relative min-h-screen flex flex-col overflow-hidden bg-primary">
       {/* Image area */}
-      <div className="relative flex-1 min-h-[55vh]">
+      <div className="relative flex-1 min-h-[55vh] overflow-hidden">
         <img
           src={heroProduct}
           alt="Avora matcha product"
