@@ -51,7 +51,7 @@ const HeroSection = () => {
       />
       <div className="absolute inset-0 bg-gradient-to-b from-primary/30 via-transparent to-primary/70" />
 
-      <div className="relative z-10 flex min-h-screen items-start justify-center px-6 pt-[18vh] text-center">
+      <div className="relative z-10 flex min-h-screen items-start justify-center px-6 pt-[12vh] text-center">
         <div className="container mx-auto relative">
           <div className="pointer-events-none absolute inset-0 z-0 overflow-visible">
             <AnimatePresence>
