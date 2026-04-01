@@ -14,6 +14,60 @@ interface Particle {
 
 let particleId = 0;
 
+const TypewriterText = ({ text }: { text: string }) => {
+  const [visibleCount, setVisibleCount] = useState(0);
+  const chars = text.split("");
+  const typeSpeed = 80;
+  const pauseDuration = 2500;
+  const totalChars = chars.length;
+
+  useEffect(() => {
+    let timeout: ReturnType<typeof setTimeout>;
+    const cycle = () => {
+      let count = 0;
+      const type = () => {
+        count++;
+        setVisibleCount(count);
+        if (count < totalChars) {
+          timeout = setTimeout(type, typeSpeed);
+        } else {
+          timeout = setTimeout(erase, pauseDuration);
+        }
+      };
+      const erase = () => {
+        count--;
+        setVisibleCount(count);
+        if (count > 0) {
+          timeout = setTimeout(erase, 40);
+        } else {
+          timeout = setTimeout(cycle, 500);
+        }
+      };
+      timeout = setTimeout(type, typeSpeed);
+    };
+    const initial = setTimeout(cycle, 1300);
+    return () => { clearTimeout(initial); clearTimeout(timeout); };
+  }, [totalChars]);
+
+  return (
+    <span className="font-semibold italic inline-block align-bottom">
+      {chars.map((char, i) => (
+        <span
+          key={i}
+          className="inline-block"
+          style={{
+            opacity: i < visibleCount ? 1 : 0,
+            whiteSpace: char === " " ? "pre" : undefined,
+          }}
+        >
+          {char}
+        </span>
+      ))}
+      <span className="inline-block w-[3px] h-[0.8em] bg-cream ml-1 align-baseline animate-[pulse_0.8s_ease-in-out_infinite]" />
+    </span>
+  );
+};
+
 const HeroSection = () => {
   const ref = useRef(null);
   const [particles, setParticles] = useState<Particle[]>([]);
@@ -92,26 +146,7 @@ const HeroSection = () => {
             }}
           >
             Experience the{" "}
-            <span className="font-semibold italic inline-block overflow-hidden align-bottom">
-              {"eternal high".split("").map((char, i) => (
-                <motion.span
-                  key={i}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.05, delay: 1.3 + i * 0.08 }}
-                  className="inline-block"
-                  style={{ whiteSpace: char === " " ? "pre" : undefined }}
-                >
-                  {char}
-                </motion.span>
-              ))}
-              <motion.span
-                initial={{ opacity: 1 }}
-                animate={{ opacity: [1, 0, 1] }}
-                transition={{ duration: 0.8, repeat: Infinity, delay: 1.3 + 12 * 0.08 }}
-                className="inline-block w-[3px] h-[0.8em] bg-cream ml-1 align-baseline"
-              />
-            </span>
+            <TypewriterText text="eternal high" />
           </motion.h1>
 
           <motion.div
