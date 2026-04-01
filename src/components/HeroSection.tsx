@@ -91,9 +91,7 @@ const HeroSection = () => {
               textShadow: "0 0 20px rgba(234,222,200,0.6), 0 0 40px rgba(234,222,200,0.3), 0 0 60px rgba(234,222,200,0.15)",
             }}
           >
-            Experience the
-            <br />
-            <span className="font-semibold italic">eternal high</span>
+            Experience the <span className="font-semibold italic">eternal high</span>
           </motion.h1>
 
           <motion.div
