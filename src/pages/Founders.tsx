@@ -261,7 +261,7 @@ const Founders = () => {
           className="mt-16 text-center"
         >
           <Link
-            to="/product/ceremonial-matcha-green-tea-imperial-aaa-grade"
+            to="/shop"
             className="inline-block font-body text-sm tracking-widest text-cream border border-cream/40 px-10 py-4 hover:bg-cream/10 transition-all duration-500"
           >
             Shop Avora
