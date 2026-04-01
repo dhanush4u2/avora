@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Minus, Plus, Loader2 } from "lucide-react";
+import { Minus, Plus, Loader2, ChevronLeft, ChevronRight } from "lucide-react";
 import { useCartStore, ShopifyProduct } from "@/stores/cartStore";
 import { storefrontApiRequest, STOREFRONT_PRODUCT_BY_HANDLE_QUERY } from "@/lib/shopify";
 import { toast } from "sonner";
@@ -95,13 +95,14 @@ const ProductDetail = () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.7 }}
             >
-              <motion.div
-                className="aspect-square overflow-hidden mb-4"
-                whileHover={{ scale: 1.02 }}
-                transition={{ duration: 0.4 }}
-              >
+              {/* Main image with arrows */}
+              <div className="relative aspect-square overflow-hidden mb-4 group">
                 {images[selectedImage] ? (
-                  <img
+                  <motion.img
+                    key={selectedImage}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.3 }}
                     src={images[selectedImage].node.url}
                     alt={images[selectedImage].node.altText || product.title}
                     className="w-full h-full object-cover"
@@ -111,16 +112,36 @@ const ProductDetail = () => {
                     <span className="font-body text-cream/20">No image</span>
                   </div>
                 )}
-              </motion.div>
 
+                {images.length > 1 && (
+                  <>
+                    <button
+                      onClick={() => setSelectedImage(selectedImage === 0 ? images.length - 1 : selectedImage - 1)}
+                      className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center bg-primary/60 backdrop-blur-sm text-cream/80 hover:text-cream hover:bg-primary/80 transition-all duration-300 opacity-0 group-hover:opacity-100"
+                      aria-label="Previous image"
+                    >
+                      <ChevronLeft size={20} />
+                    </button>
+                    <button
+                      onClick={() => setSelectedImage(selectedImage === images.length - 1 ? 0 : selectedImage + 1)}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center bg-primary/60 backdrop-blur-sm text-cream/80 hover:text-cream hover:bg-primary/80 transition-all duration-300 opacity-0 group-hover:opacity-100"
+                      aria-label="Next image"
+                    >
+                      <ChevronRight size={20} />
+                    </button>
+                  </>
+                )}
+              </div>
+
+              {/* Thumbnails */}
               {images.length > 1 && (
                 <div className="flex gap-3">
                   {images.map((img, i) => (
                     <button
                       key={i}
                       onClick={() => setSelectedImage(i)}
-                      className={`w-20 h-20 overflow-hidden border-2 transition-all duration-300 ${
-                        selectedImage === i ? "border-cream" : "border-cream/20 hover:border-cream/50"
+                      className={`w-16 h-16 md:w-20 md:h-20 overflow-hidden border-2 transition-all duration-300 ${
+                        selectedImage === i ? "border-cream opacity-100" : "border-cream/20 opacity-60 hover:opacity-90 hover:border-cream/50"
                       }`}
                     >
                       <img src={img.node.url} alt="" className="w-full h-full object-cover" />
