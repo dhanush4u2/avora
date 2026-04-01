@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import heroProduct from "@/assets/hero-bg.jpg";
@@ -61,17 +61,20 @@ const TypewriterText = ({ text }: { text: string }) => {
 };
 
 const HeroSection = () => {
+  const { scrollYProgress } = useScroll();
+  const heroY = useTransform(scrollYProgress, [0, 0.3], ["0%", "15%"]);
+
   return (
     <section id="hero" className="relative min-h-screen flex flex-col overflow-hidden bg-primary">
       {/* Image area */}
-      <div className="relative flex-1 min-h-[55vh]">
-        <img
+      <div className="relative flex-1 min-h-[55vh] overflow-hidden">
+        <motion.img
           src={heroProduct}
           alt="Avora matcha product"
           width={1920}
           height={1080}
-          className="absolute inset-0 h-full w-full object-cover"
-          style={{ objectPosition: "62% 80%" }}
+          className="absolute inset-0 h-full w-full object-cover scale-110"
+          style={{ objectPosition: "62% 80%", y: heroY }}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-primary/20 via-transparent to-primary" />
       </div>

@@ -1,4 +1,5 @@
-import { motion, useInView, useMotionValue, useTransform } from "framer-motion";
+import { motion, useInView } from "framer-motion";
+import TextReveal from "@/components/TextReveal";
 import { useRef, useState } from "react";
 import regionImg from "@/assets/region.jpg";
 import gradeImg from "@/assets/grade.jpg";
@@ -75,14 +76,12 @@ const AboutSection = () => {
   return (
     <section id="about" className="py-24 md:py-36 bg-primary">
       <div className="container mx-auto px-6" ref={ref}>
-        <motion.h2
-          initial={{ opacity: 0, y: 40 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
+        <TextReveal
           className="font-display text-4xl md:text-6xl text-center text-cream font-semibold mb-8"
+          delay={0}
         >
           Not your stereotypical matcha
-        </motion.h2>
+        </TextReveal>
 
         <motion.p
           initial={{ opacity: 0, y: 30 }}

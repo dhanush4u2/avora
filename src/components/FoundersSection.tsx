@@ -1,6 +1,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Link } from "react-router-dom";
+import TextReveal from "@/components/TextReveal";
 import brewingImg from "@/assets/brewing.jpg";
 
 const FoundersSection = () => {
@@ -29,14 +30,12 @@ const FoundersSection = () => {
         </motion.div>
 
         <div className="w-full md:w-1/2 flex flex-col items-center md:items-start gap-8">
-          <motion.h2
-            initial={{ opacity: 0, y: 40 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8 }}
+          <TextReveal
             className="font-display text-4xl md:text-6xl text-cream font-light text-center md:text-left"
+            delay={0.2}
           >
             Founders' Note
-          </motion.h2>
+          </TextReveal>
 
           <Link to="/founders">
             <motion.span
