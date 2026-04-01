@@ -170,7 +170,6 @@ const HeroSection = () => {
               </motion.span>
             </Link>
           </motion.div>
-        </div>
       </div>
     </section>
     </>
