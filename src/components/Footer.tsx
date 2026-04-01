@@ -3,16 +3,16 @@ import { Link } from "react-router-dom";
 import avoraLogo from "@/assets/avora-logo.png";
 
 const navLinks = [
-  { label: "Homepage", href: "#hero" },
+  { label: "HomePage", href: "#hero" },
   { label: "Founders' Note", href: "#founders" },
   { label: "Shop", href: "/product/ceremonial-matcha-green-tea-imperial-aaa-grade" },
 ];
 
 const policyLinks = [
-  { label: "Refund & returns", href: "/refund-policy" },
-  { label: "Shipping policy", href: "/shipping-policy" },
-  { label: "Privacy policy", href: "/privacy-policy" },
-  { label: "Terms of service", href: "/terms-of-service" },
+  { label: "Refunds & Returns", href: "/refund-policy" },
+  { label: "Shipping Policy", href: "/shipping-policy" },
+  { label: "Privacy Policy", href: "/privacy-policy" },
+  { label: "Terms of Service", href: "/terms-of-service" },
 ];
 
 const LinkList = ({ links, delay }: { links: { label: string; href: string }[]; delay: number }) => (
@@ -61,6 +61,9 @@ const Footer = () => {
             transition={{ duration: 0.6 }}
           >
             <img src={avoraLogo} alt="Avora" className="h-8 w-auto" />
+            <p className="font-display text-cream/50 text-sm italic mt-3">
+              Experience the Eternal High
+            </p>
           </motion.div>
 
           {/* Nav links */}
