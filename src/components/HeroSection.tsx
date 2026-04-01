@@ -107,10 +107,10 @@ const HeroSection = () => {
         className="absolute inset-0 h-full w-full object-cover"
         style={{ objectPosition: "center 75%" }}
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-primary/20 via-transparent to-primary/50" />
+      <div className="absolute inset-0 bg-gradient-to-b from-primary/20 via-transparent to-primary" />
     </section>
 
-    <section className="bg-primary py-16 md:py-20 text-center">
+    <section className="bg-primary -mt-32 relative z-10 pt-8 pb-16 md:pb-20 text-center">
       <div className="container mx-auto px-6 relative">
           <div className="pointer-events-none absolute inset-0 z-0 overflow-visible">
             <AnimatePresence>
