@@ -49,7 +49,7 @@ const Navbar = () => {
           </ul>
 
           <Link to="/" className="absolute left-1/2 -translate-x-1/2">
-            <img src={avoraLogo} alt="Avora" className="h-10 w-auto" />
+            <img src={avoraLogo} alt="Avora" className="h-14 w-auto" />
           </Link>
 
           <div className="flex items-center gap-4">

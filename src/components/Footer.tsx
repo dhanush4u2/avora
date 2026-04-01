@@ -60,7 +60,7 @@ const Footer = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <img src={avoraLogo} alt="Avora" className="h-12 w-auto" />
+            <img src={avoraLogo} alt="Avora" className="h-16 w-auto" />
           </motion.div>
 
           {/* Nav links */}
