@@ -18,7 +18,7 @@ const ShopSection = () => {
 
   return (
     <section id="shop" className="bg-primary" ref={ref}>
-      <div className="relative grid grid-cols-2 overflow-hidden">
+      <div className="relative grid grid-cols-2 overflow-hidden md:max-h-screen">
         {/* First vertical image with parallax */}
         <div className="relative overflow-hidden aspect-[3/4]">
           <motion.img
