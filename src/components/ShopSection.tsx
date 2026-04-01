@@ -20,7 +20,7 @@ const ShopSection = () => {
     <section id="shop" className="bg-primary" ref={ref}>
       <div className="relative grid grid-cols-2 overflow-hidden">
         {/* First vertical image with parallax */}
-        <div className="relative overflow-hidden aspect-[4/5]">
+        <div className="relative overflow-hidden aspect-[3/4]">
           <motion.img
             src={productDisplay}
             alt="Avora matcha products"
@@ -35,7 +35,7 @@ const ShopSection = () => {
         </div>
 
         {/* Second vertical image with parallax */}
-        <div className="relative overflow-hidden aspect-[4/5]">
+        <div className="relative overflow-hidden aspect-[3/4]">
           <motion.img
             src={matchaLatte}
             alt="Matcha preparation"
