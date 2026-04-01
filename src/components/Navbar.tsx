@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ShoppingBag } from "lucide-react";
+import avoraLogo from "@/assets/avora-logo.png";
 import { useCartStore } from "@/stores/cartStore";
 import CartDrawer from "@/components/CartDrawer";
 
