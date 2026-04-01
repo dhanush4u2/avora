@@ -59,7 +59,7 @@ const ShopSection = () => {
                 transition={{ duration: 0.6, delay: 0.3 }}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center justify-center w-20 h-20 md:w-24 md:h-24 rounded-full font-body text-[10px] tracking-widest text-primary bg-cream shadow-lg hover:bg-cream/90 transition-all duration-500"
+                className="inline-flex items-center justify-center w-20 h-20 md:w-24 md:h-24 rounded-full font-body text-[10px] tracking-widest text-primary bg-cream shadow-lg hover:bg-cream/90 transition-all duration-500 text-center leading-tight"
               >
                 Pre-Order
                 <br />
