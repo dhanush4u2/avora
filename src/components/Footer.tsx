@@ -1,21 +1,57 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
-const footerLinks = [
+const navLinks = [
   { label: "Homepage", href: "#hero" },
   { label: "Founders' Note", href: "#founders" },
   { label: "Shop", href: "#shop" },
-  { label: "Refund & returns", href: "/refund-policy", isRoute: true },
-  { label: "Shipping policy", href: "/shipping-policy", isRoute: true },
-  { label: "Privacy policy", href: "/privacy-policy", isRoute: true },
-  { label: "Terms of service", href: "/terms-of-service", isRoute: true },
 ];
+
+const policyLinks = [
+  { label: "Refund & returns", href: "/refund-policy" },
+  { label: "Shipping policy", href: "/shipping-policy" },
+  { label: "Privacy policy", href: "/privacy-policy" },
+  { label: "Terms of service", href: "/terms-of-service" },
+];
+
+const LinkList = ({ links, delay }: { links: { label: string; href: string }[]; delay: number }) => (
+  <motion.ul
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.6, delay }}
+    className="flex flex-col gap-3"
+  >
+    {links.map((link) => (
+      <li key={link.href}>
+        {link.href.startsWith("/") ? (
+          <Link
+            to={link.href}
+            className="font-body text-sm text-cream/60 hover:text-cream transition-colors duration-300"
+          >
+            <motion.span whileHover={{ x: 6 }} className="inline-block">
+              {link.label}
+            </motion.span>
+          </Link>
+        ) : (
+          <motion.a
+            href={link.href}
+            whileHover={{ x: 6 }}
+            className="font-body text-sm text-cream/60 hover:text-cream transition-colors duration-300"
+          >
+            {link.label}
+          </motion.a>
+        )}
+      </li>
+    ))}
+  </motion.ul>
+);
 
 const Footer = () => {
   return (
     <footer className="bg-primary py-16 md:py-24 border-t border-cream/10">
       <div className="container mx-auto px-6">
-        <div className="grid md:grid-cols-3 gap-12 items-start">
+        <div className="grid md:grid-cols-4 gap-12 items-start">
           {/* Logo & tagline */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -30,36 +66,10 @@ const Footer = () => {
           </motion.div>
 
           {/* Nav links */}
-          <motion.ul
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="flex flex-col gap-3"
-          >
-            {footerLinks.map((link) => (
-              <li key={link.href}>
-                {link.isRoute ? (
-                  <Link
-                    to={link.href}
-                    className="font-body text-sm text-cream/60 hover:text-cream transition-colors duration-300"
-                  >
-                    <motion.span whileHover={{ x: 6 }} className="inline-block">
-                      {link.label}
-                    </motion.span>
-                  </Link>
-                ) : (
-                  <motion.a
-                    href={link.href}
-                    whileHover={{ x: 6 }}
-                    className="font-body text-sm text-cream/60 hover:text-cream transition-colors duration-300"
-                  >
-                    {link.label}
-                  </motion.a>
-                )}
-              </li>
-            ))}
-          </motion.ul>
+          <LinkList links={navLinks} delay={0.1} />
+
+          {/* Policy links */}
+          <LinkList links={policyLinks} delay={0.15} />
 
           {/* Contact & legal */}
           <motion.div
