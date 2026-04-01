@@ -1,4 +1,5 @@
-import { motion, useInView, useMotionValue, useTransform } from "framer-motion";
+import { motion, useInView } from "framer-motion";
+import TextReveal from "@/components/TextReveal";
 import { useRef, useState } from "react";
 import regionImg from "@/assets/region.jpg";
 import gradeImg from "@/assets/grade.jpg";
