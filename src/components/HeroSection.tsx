@@ -91,7 +91,8 @@ const HeroSection = () => {
               textShadow: "0 0 20px rgba(234,222,200,0.6), 0 0 40px rgba(234,222,200,0.3), 0 0 60px rgba(234,222,200,0.15)",
             }}
           >
-            Experience the{" "}
+            Experience the
+            <br />
             <TypewriterText text="eternal high" />
           </motion.h1>
 
@@ -107,7 +108,7 @@ const HeroSection = () => {
                 whileTap={{ scale: 0.97 }}
                 className="inline-block font-body text-xs tracking-widest text-cream border border-cream/40 px-7 py-2.5 hover:bg-cream/10 transition-all duration-500"
               >
-                Shop now
+                Pre-order Now!
               </motion.span>
             </Link>
           </motion.div>
