@@ -5,20 +5,17 @@ import FoundersSection from "@/components/FoundersSection";
 import MatchaGuideSection from "@/components/MatchaGuideSection";
 import FaqSection from "@/components/FaqSection";
 import StackedCard from "@/components/StackedCard";
-import MarqueeTicker from "@/components/MarqueeTicker";
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-primary">
       <HeroSection />
-      <MarqueeTicker />
       <StackedCard index={0}>
         <AboutSection />
       </StackedCard>
       <StackedCard index={1}>
         <ShopSection />
       </StackedCard>
-      <MarqueeTicker />
       <StackedCard index={2}>
         <FoundersSection />
       </StackedCard>
