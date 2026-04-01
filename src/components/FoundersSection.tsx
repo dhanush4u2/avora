@@ -9,7 +9,7 @@ const FoundersSection = () => {
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="founders" className="py-24 md:py-36 bg-primary" ref={ref}>
+    <section id="founders" className="py-12 md:py-16 bg-primary md:h-screen md:flex md:items-center" ref={ref}>
       <div className="container mx-auto px-6 flex flex-col md:flex-row items-center gap-10 md:gap-16">
         <motion.div
           initial={{ opacity: 0, x: -50 }}
@@ -25,7 +25,7 @@ const FoundersSection = () => {
             height={800}
             whileHover={{ scale: 1.03 }}
             transition={{ duration: 0.7 }}
-            className="w-full aspect-[3/4] object-cover"
+            className="w-full aspect-[3/4] md:aspect-[4/5] md:max-h-[70vh] object-cover"
           />
         </motion.div>
 

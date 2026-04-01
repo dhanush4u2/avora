@@ -18,9 +18,9 @@ const ShopSection = () => {
 
   return (
     <section id="shop" className="bg-primary" ref={ref}>
-      <div className="relative grid grid-cols-2 overflow-hidden">
+      <div className="relative grid grid-cols-2 overflow-hidden md:max-h-screen">
         {/* First vertical image with parallax */}
-        <div className="relative overflow-hidden aspect-[3/4]">
+        <div className="relative overflow-hidden aspect-[3/4] md:aspect-auto md:h-screen">
           <motion.img
             src={productDisplay}
             alt="Avora matcha products"
@@ -35,7 +35,7 @@ const ShopSection = () => {
         </div>
 
         {/* Second vertical image with parallax */}
-        <div className="relative overflow-hidden aspect-[3/4]">
+        <div className="relative overflow-hidden aspect-[3/4] md:aspect-auto md:h-screen">
           <motion.img
             src={matchaLatte}
             alt="Matcha preparation"
