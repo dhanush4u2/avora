@@ -1,31 +1,49 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Minus, Plus } from "lucide-react";
-import matchaTin from "@/assets/matcha-tin.jpg";
-import matchaDetail from "@/assets/matcha-detail.jpg";
-import { useCart } from "@/contexts/CartContext";
+import { Loader2 } from "lucide-react";
+import { useCartStore, ShopifyProduct } from "@/stores/cartStore";
+import { storefrontApiRequest, STOREFRONT_PRODUCTS_QUERY } from "@/lib/shopify";
 import { toast } from "sonner";
 
-const images = [matchaTin, matchaDetail];
-
 const Shop = () => {
-  const [quantity, setQuantity] = useState(1);
-  const [selectedImage, setSelectedImage] = useState(0);
-  const { addItem } = useCart();
+  const [products, setProducts] = useState<ShopifyProduct[]>([]);
+  const [loading, setLoading] = useState(true);
+  const { addItem, isLoading: cartLoading } = useCartStore();
 
-  const handleAddToCart = () => {
-    addItem(
-      { id: "ceremonial-matcha", name: "Ceremonial Matcha", price: 899, image: matchaTin, weight: "30g" },
-      quantity
-    );
-    toast.success(`Added ${quantity} item${quantity > 1 ? "s" : ""} to cart`);
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const data = await storefrontApiRequest(STOREFRONT_PRODUCTS_QUERY, { first: 20 });
+        if (data?.data?.products?.edges) {
+          setProducts(data.data.products.edges);
+        }
+      } catch (error) {
+        console.error("Failed to fetch products:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProducts();
+  }, []);
+
+  const handleAddToCart = async (product: ShopifyProduct) => {
+    const variant = product.node.variants.edges[0]?.node;
+    if (!variant) return;
+
+    await addItem({
+      product,
+      variantId: variant.id,
+      variantTitle: variant.title,
+      price: variant.price,
+      quantity: 1,
+      selectedOptions: variant.selectedOptions || [],
+    });
+    toast.success(`Added ${product.node.title} to cart`);
   };
 
   return (
     <div className="min-h-screen bg-primary">
-
-      {/* Product section */}
       <div className="pt-28 pb-20">
         <div className="container mx-auto px-6">
           <motion.p
@@ -36,123 +54,70 @@ const Shop = () => {
             Shop
           </motion.p>
 
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 max-w-6xl mx-auto">
-            {/* Left — Images */}
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7 }}
-            >
-              {/* Main image */}
-              <motion.div
-                className="aspect-square overflow-hidden mb-4"
-                whileHover={{ scale: 1.02 }}
-                transition={{ duration: 0.4 }}
-              >
-                <img
-                  src={images[selectedImage]}
-                  alt="Avora Ceremonial Matcha"
-                  className="w-full h-full object-cover"
-                />
-              </motion.div>
+          {loading ? (
+            <div className="flex items-center justify-center py-20">
+              <Loader2 className="w-8 h-8 text-cream/40 animate-spin" />
+            </div>
+          ) : products.length === 0 ? (
+            <div className="text-center py-20">
+              <p className="font-display text-2xl text-cream/60 tracking-wide">No products found</p>
+              <p className="font-body text-sm text-cream/40 mt-2">Check back soon for new products.</p>
+            </div>
+          ) : (
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+              {products.map((product) => {
+                const image = product.node.images.edges[0]?.node;
+                const price = product.node.priceRange.minVariantPrice;
 
-              {/* Thumbnails */}
-              <div className="flex gap-3">
-                {images.map((img, i) => (
-                  <button
-                    key={i}
-                    onClick={() => setSelectedImage(i)}
-                    className={`w-20 h-20 overflow-hidden border-2 transition-all duration-300 ${
-                      selectedImage === i ? "border-cream" : "border-cream/20 hover:border-cream/50"
-                    }`}
+                return (
+                  <motion.div
+                    key={product.node.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
+                    className="group"
                   >
-                    <img src={img} alt="" className="w-full h-full object-cover" />
-                  </button>
-                ))}
-              </div>
-            </motion.div>
+                    <Link to={`/product/${product.node.handle}`}>
+                      <div className="aspect-square overflow-hidden mb-4">
+                        {image ? (
+                          <motion.img
+                            src={image.url}
+                            alt={image.altText || product.node.title}
+                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                          />
+                        ) : (
+                          <div className="w-full h-full bg-cream/5 flex items-center justify-center">
+                            <span className="font-body text-cream/20 text-sm">No image</span>
+                          </div>
+                        )}
+                      </div>
+                    </Link>
 
-            {/* Right — Product info */}
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7, delay: 0.15 }}
-              className="flex flex-col"
-            >
-              <h1 className="font-display text-3xl md:text-4xl text-cream font-light tracking-wide">
-                Ceremonial Matcha
-              </h1>
-              <p className="font-body text-cream/50 text-sm mt-1">30g</p>
-
-              <p className="font-display text-2xl text-cream mt-6">
-                ₹899
-              </p>
-
-              {/* Description */}
-              <div className="mt-8 border-t border-cream/10 pt-8">
-                <p className="font-body text-cream/70 leading-relaxed text-sm">
-                  Our ceremonial matcha is vibrant green, softly aromatic and layered with umami,
-                  offering a calm yet energizing experience in every sip, crafted from first harvest
-                  leaves of Kyoto and Kagoshima.
-                </p>
-              </div>
-
-              {/* Quantity */}
-              <div className="mt-8 flex items-center gap-6">
-                <span className="font-body text-sm text-cream/50 tracking-wide">Quantity</span>
-                <div className="flex items-center border border-cream/20">
-                  <motion.button
-                    whileTap={{ scale: 0.9 }}
-                    onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                    className="w-10 h-10 flex items-center justify-center text-cream/60 hover:text-cream transition-colors"
-                  >
-                    <Minus size={14} />
-                  </motion.button>
-                  <span className="w-12 text-center font-body text-cream text-sm">{quantity}</span>
-                  <motion.button
-                    whileTap={{ scale: 0.9 }}
-                    onClick={() => setQuantity(quantity + 1)}
-                    className="w-10 h-10 flex items-center justify-center text-cream/60 hover:text-cream transition-colors"
-                  >
-                    <Plus size={14} />
-                  </motion.button>
-                </div>
-              </div>
-
-              {/* Add to cart */}
-              <motion.button
-                onClick={handleAddToCart}
-                whileHover={{ scale: 1.02, backgroundColor: "hsl(36 50% 94% / 0.1)" }}
-                whileTap={{ scale: 0.98 }}
-                className="mt-8 w-full py-4 border border-cream/40 font-body text-sm tracking-widest text-cream hover:border-cream transition-all duration-500"
-              >
-                Add to cart
-              </motion.button>
-
-              <Link to="/checkout">
-                <motion.button
-                  onClick={() => {
-                    addItem(
-                      { id: "ceremonial-matcha", name: "Ceremonial Matcha", price: 899, image: matchaTin, weight: "30g" },
-                      quantity
-                    );
-                  }}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="w-full py-4 bg-cream text-primary font-body text-sm tracking-widest font-medium transition-all duration-300"
-                >
-                  Buy now
-                </motion.button>
-              </Link>
-
-              {/* Storage note */}
-              <div className="mt-10 border-t border-cream/10 pt-6">
-                <p className="font-body text-xs text-cream/40 leading-relaxed">
-                  Store in a cool, dry place away from direct sunlight. Keep tin tightly sealed for freshness.
-                </p>
-              </div>
-            </motion.div>
-          </div>
+                    <div className="space-y-2">
+                      <Link to={`/product/${product.node.handle}`}>
+                        <h3 className="font-display text-lg text-cream tracking-wide group-hover:text-cream/80 transition-colors">
+                          {product.node.title}
+                        </h3>
+                      </Link>
+                      <p className="font-display text-cream/80">
+                        {price.currencyCode === 'INR' ? '₹' : price.currencyCode}{' '}
+                        {parseFloat(price.amount).toLocaleString('en-IN')}
+                      </p>
+                      <motion.button
+                        onClick={() => handleAddToCart(product)}
+                        disabled={cartLoading}
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        className="w-full py-3 border border-cream/40 font-body text-xs tracking-widest text-cream hover:border-cream transition-all duration-500 disabled:opacity-50"
+                      >
+                        {cartLoading ? "Adding..." : "Add to cart"}
+                      </motion.button>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+          )}
         </div>
       </div>
     </div>

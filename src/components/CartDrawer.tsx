@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Minus, Plus, ShoppingBag } from "lucide-react";
-import { useCart } from "@/contexts/CartContext";
+import { X, Minus, Plus, ShoppingBag, ExternalLink, Loader2 } from "lucide-react";
+import { useCartStore } from "@/stores/cartStore";
+import { useEffect } from "react";
 
 interface CartDrawerProps {
   open: boolean;
@@ -9,13 +10,24 @@ interface CartDrawerProps {
 }
 
 const CartDrawer = ({ open, onClose }: CartDrawerProps) => {
-  const { items, updateQuantity, removeItem, totalPrice } = useCart();
+  const { items, totalPrice, isLoading, isSyncing, updateQuantity, removeItem, getCheckoutUrl, syncCart } = useCartStore();
+
+  useEffect(() => {
+    if (open) syncCart();
+  }, [open, syncCart]);
+
+  const handleCheckout = () => {
+    const checkoutUrl = getCheckoutUrl();
+    if (checkoutUrl) {
+      window.open(checkoutUrl, '_blank');
+      onClose();
+    }
+  };
 
   return (
     <AnimatePresence>
       {open && (
         <>
-          {/* Overlay */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -24,7 +36,6 @@ const CartDrawer = ({ open, onClose }: CartDrawerProps) => {
             className="fixed inset-0 z-[60] bg-black/60 backdrop-blur-sm"
           />
 
-          {/* Drawer */}
           <motion.div
             initial={{ x: "100%" }}
             animate={{ x: 0 }}
@@ -55,49 +66,59 @@ const CartDrawer = ({ open, onClose }: CartDrawerProps) => {
                 </div>
               ) : (
                 <ul className="space-y-6">
-                  {items.map((item) => (
-                    <li key={item.id} className="flex gap-4">
-                      <div className="w-20 h-20 flex-shrink-0 overflow-hidden">
-                        <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-start justify-between gap-2">
-                          <div>
-                            <p className="font-display text-sm text-cream tracking-wide">{item.name}</p>
-                            <p className="font-body text-xs text-cream/40 mt-0.5">{item.weight}</p>
-                          </div>
-                          <button
-                            onClick={() => removeItem(item.id)}
-                            className="text-cream/30 hover:text-cream/70 transition-colors"
-                          >
-                            <X size={14} />
-                          </button>
+                  {items.map((item) => {
+                    const image = item.product.node.images?.edges?.[0]?.node;
+                    return (
+                      <li key={item.variantId} className="flex gap-4">
+                        <div className="w-20 h-20 flex-shrink-0 overflow-hidden">
+                          {image ? (
+                            <img src={image.url} alt={item.product.node.title} className="w-full h-full object-cover" />
+                          ) : (
+                            <div className="w-full h-full bg-cream/5" />
+                          )}
                         </div>
-                        <div className="flex items-center justify-between mt-3">
-                          <div className="flex items-center border border-cream/20">
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-start justify-between gap-2">
+                            <div>
+                              <p className="font-display text-sm text-cream tracking-wide">{item.product.node.title}</p>
+                              {item.selectedOptions.length > 0 && item.variantTitle !== "Default Title" && (
+                                <p className="font-body text-xs text-cream/40 mt-0.5">
+                                  {item.selectedOptions.map(o => o.value).join(' · ')}
+                                </p>
+                              )}
+                            </div>
                             <button
-                              onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                              className="w-8 h-8 flex items-center justify-center text-cream/60 hover:text-cream transition-colors"
+                              onClick={() => removeItem(item.variantId)}
+                              className="text-cream/30 hover:text-cream/70 transition-colors"
                             >
-                              <Minus size={12} />
-                            </button>
-                            <span className="w-8 text-center font-body text-cream text-xs">
-                              {item.quantity}
-                            </span>
-                            <button
-                              onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                              className="w-8 h-8 flex items-center justify-center text-cream/60 hover:text-cream transition-colors"
-                            >
-                              <Plus size={12} />
+                              <X size={14} />
                             </button>
                           </div>
-                          <p className="font-display text-sm text-cream">
-                            ₹{(item.price * item.quantity).toLocaleString("en-IN")}
-                          </p>
+                          <div className="flex items-center justify-between mt-3">
+                            <div className="flex items-center border border-cream/20">
+                              <button
+                                onClick={() => updateQuantity(item.variantId, item.quantity - 1)}
+                                className="w-8 h-8 flex items-center justify-center text-cream/60 hover:text-cream transition-colors"
+                              >
+                                <Minus size={12} />
+                              </button>
+                              <span className="w-8 text-center font-body text-cream text-xs">{item.quantity}</span>
+                              <button
+                                onClick={() => updateQuantity(item.variantId, item.quantity + 1)}
+                                className="w-8 h-8 flex items-center justify-center text-cream/60 hover:text-cream transition-colors"
+                              >
+                                <Plus size={12} />
+                              </button>
+                            </div>
+                            <p className="font-display text-sm text-cream">
+                              {item.price.currencyCode === 'INR' ? '₹' : item.price.currencyCode}{' '}
+                              {(parseFloat(item.price.amount) * item.quantity).toLocaleString('en-IN')}
+                            </p>
+                          </div>
                         </div>
-                      </div>
-                    </li>
-                  ))}
+                      </li>
+                    );
+                  })}
                 </ul>
               )}
             </div>
@@ -108,19 +129,29 @@ const CartDrawer = ({ open, onClose }: CartDrawerProps) => {
                 <div className="flex items-center justify-between">
                   <span className="font-body text-sm text-cream/60 tracking-wide">Subtotal</span>
                   <span className="font-display text-lg text-cream">
-                    ₹{totalPrice.toLocaleString("en-IN")}
+                    {items[0]?.price.currencyCode === 'INR' ? '₹' : items[0]?.price.currencyCode}{' '}
+                    {totalPrice.toLocaleString('en-IN')}
                   </span>
                 </div>
                 <p className="font-body text-xs text-cream/40">
                   Shipping & taxes calculated at checkout
                 </p>
-                <Link
-                  to="/checkout"
-                  onClick={onClose}
-                  className="block w-full py-4 bg-cream text-primary text-center font-body text-sm tracking-widest font-medium transition-all duration-300 hover:bg-cream/90"
+                <motion.button
+                  onClick={handleCheckout}
+                  disabled={isLoading || isSyncing}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="block w-full py-4 bg-cream text-primary text-center font-body text-sm tracking-widest font-medium transition-all duration-300 hover:bg-cream/90 disabled:opacity-50 flex items-center justify-center gap-2"
                 >
-                  Checkout
-                </Link>
+                  {isLoading || isSyncing ? (
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                  ) : (
+                    <>
+                      <ExternalLink className="w-4 h-4" />
+                      Checkout
+                    </>
+                  )}
+                </motion.button>
               </div>
             )}
           </motion.div>

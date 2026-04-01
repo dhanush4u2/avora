@@ -2,14 +2,14 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ShoppingBag } from "lucide-react";
-import { useCart } from "@/contexts/CartContext";
+import { useCartStore } from "@/stores/cartStore";
 import CartDrawer from "@/components/CartDrawer";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
-  const { totalItems } = useCart();
+  const totalItems = useCartStore(state => state.totalItems);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -30,13 +30,10 @@ const Navbar = () => {
         animate={{ y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled
-            ? "bg-primary/95 backdrop-blur-md shadow-sm"
-            : "bg-transparent"
+          scrolled ? "bg-primary/95 backdrop-blur-md shadow-sm" : "bg-transparent"
         }`}
       >
         <div className="container mx-auto flex items-center justify-between px-6 py-4">
-          {/* Left nav links */}
           <ul className="hidden md:flex items-center gap-8">
             {links.map((link) => (
               <li key={link.href}>
@@ -50,12 +47,10 @@ const Navbar = () => {
             ))}
           </ul>
 
-          {/* Center logo */}
           <Link to="/" className="font-display text-3xl font-semibold text-cream tracking-wide absolute left-1/2 -translate-x-1/2">
             avora
           </Link>
 
-          {/* Right side — cart */}
           <div className="flex items-center gap-4">
             <button
               onClick={() => setCartOpen(true)}
@@ -74,7 +69,6 @@ const Navbar = () => {
               )}
             </button>
 
-            {/* Mobile toggle */}
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
               className="md:hidden text-cream"
@@ -85,7 +79,6 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* Mobile menu */}
         <AnimatePresence>
           {mobileOpen && (
             <motion.div
