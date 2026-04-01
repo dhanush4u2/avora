@@ -11,7 +11,7 @@ import Footer from "@/components/Footer";
 import IntroAnimation from "@/components/IntroAnimation";
 import { useCartSync } from "@/hooks/useCartSync";
 import Index from "./pages/Index.tsx";
-import Shop from "./pages/Shop.tsx";
+
 import ProductDetail from "./pages/ProductDetail.tsx";
 import Founders from "./pages/Founders.tsx";
 import RefundPolicy from "./pages/RefundPolicy.tsx";
