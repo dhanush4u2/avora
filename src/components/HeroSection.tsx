@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import heroProduct from "@/assets/hero-bg.jpg";
