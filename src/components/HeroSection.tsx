@@ -46,7 +46,7 @@ const HeroSection = () => {
         alt="Avora matcha product"
         width={1920}
         height={1080}
-        className="absolute inset-0 h-full w-full object-cover opacity-60"
+        className="absolute inset-0 h-full w-full object-cover object-bottom opacity-60"
       />
       <div className="absolute inset-0 bg-gradient-to-b from-primary/40 via-primary/20 to-primary/80" />
 
