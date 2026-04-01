@@ -9,26 +9,44 @@ const ShopSection = () => {
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="shop" className="bg-primary" ref={ref}>
-      <div className="relative">
-        {/* First image */}
-        <div className="relative group overflow-hidden">
-          <motion.img
-            src={productDisplay}
-            alt="Avora matcha products"
-            loading="lazy"
-            width={1920}
-            height={800}
-            initial={{ opacity: 0, scale: 1.05 }}
-            animate={inView ? { opacity: 1, scale: 1 } : {}}
-            whileHover={{ scale: 1.02 }}
-            transition={{ duration: 1 }}
-            className="w-full h-[60vh] md:h-[70vh] object-cover"
-          />
+    <section id="shop" className="bg-primary py-16 md:py-24" ref={ref}>
+      <div className="container mx-auto px-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 max-w-5xl mx-auto">
+          {/* First vertical image */}
+          <div className="relative group overflow-hidden">
+            <motion.img
+              src={productDisplay}
+              alt="Avora matcha products"
+              loading="lazy"
+              width={800}
+              height={1200}
+              initial={{ opacity: 0, scale: 1.05 }}
+              animate={inView ? { opacity: 1, scale: 1 } : {}}
+              whileHover={{ scale: 1.02 }}
+              transition={{ duration: 1 }}
+              className="w-full h-[70vh] md:h-[80vh] object-cover"
+            />
+          </div>
+
+          {/* Second vertical image */}
+          <div className="relative group overflow-hidden">
+            <motion.img
+              src={matchaLatte}
+              alt="Matcha preparation"
+              loading="lazy"
+              width={800}
+              height={1200}
+              initial={{ opacity: 0 }}
+              animate={inView ? { opacity: 1 } : {}}
+              whileHover={{ scale: 1.02 }}
+              transition={{ duration: 1, delay: 0.2 }}
+              className="w-full h-[70vh] md:h-[80vh] object-cover"
+            />
+          </div>
         </div>
 
-        {/* Shop button overlapping between images */}
-        <div className="relative z-10 flex justify-center -mt-7 -mb-7">
+        {/* Shop button below images */}
+        <div className="flex justify-center mt-8">
           <Link to="/shop">
             <motion.span
               initial={{ opacity: 0, y: 20 }}
@@ -41,22 +59,6 @@ const ShopSection = () => {
               Shop Now
             </motion.span>
           </Link>
-        </div>
-
-        {/* Second image */}
-        <div className="relative group overflow-hidden">
-          <motion.img
-            src={matchaLatte}
-            alt="Matcha preparation"
-            loading="lazy"
-            width={1920}
-            height={600}
-            initial={{ opacity: 0 }}
-            animate={inView ? { opacity: 1 } : {}}
-            whileHover={{ scale: 1.02 }}
-            transition={{ duration: 1, delay: 0.2 }}
-            className="w-full h-[50vh] md:h-[60vh] object-cover"
-          />
         </div>
       </div>
     </section>
