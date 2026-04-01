@@ -43,6 +43,7 @@ const TypewriterText = ({ text }: { text: string }) => {
           timeout = setTimeout(erase, 40);
         } else {
           timeout = setTimeout(cycle, 500);
+          setShowCursor(true);
         }
       };
       timeout = setTimeout(type, typeSpeed);
