@@ -17,7 +17,7 @@ const faqs = [
   },
   {
     q: "How much matcha should I use per serving?",
-    a: "We recommend 1–2 teaspoons per cup, depending on how strong you like it. Start light—you can always add more.",
+    a: "We recommend 1–2 teaspoons per cup, depending on how strong you like it. Start light, you can always add more.",
   },
   {
     q: "Is Avora matcha suitable for daily consumption?",
