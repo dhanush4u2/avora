@@ -92,26 +92,7 @@ const HeroSection = () => {
             }}
           >
             Experience the{" "}
-            <span className="font-semibold italic inline-block overflow-hidden align-bottom">
-              {"eternal high".split("").map((char, i) => (
-                <motion.span
-                  key={i}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.05, delay: 1.3 + i * 0.08 }}
-                  className="inline-block"
-                  style={{ whiteSpace: char === " " ? "pre" : undefined }}
-                >
-                  {char}
-                </motion.span>
-              ))}
-              <motion.span
-                initial={{ opacity: 1 }}
-                animate={{ opacity: [1, 0, 1] }}
-                transition={{ duration: 0.8, repeat: Infinity, delay: 1.3 + 12 * 0.08 }}
-                className="inline-block w-[3px] h-[0.8em] bg-cream ml-1 align-baseline"
-              />
-            </span>
+            <TypewriterText text="eternal high" />
           </motion.h1>
 
           <motion.div
