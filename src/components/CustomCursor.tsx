@@ -62,7 +62,7 @@ const CustomCursor = () => {
         animate={{
           width: isHovering ? 32 : 22,
           height: isHovering ? 32 : 22,
-          rotate: isHovering ? 20 : -15,
+          rotate: isHovering ? 10 : 0,
         }}
         transition={{ type: "spring", damping: 15, stiffness: 200 }}
         className="select-none drop-shadow-sm"
