@@ -102,7 +102,7 @@ const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.8 }}
             className="mt-5 relative z-10"
           >
-            <Link to="/shop">
+            <Link to="/product/ceremonial-matcha-green-tea-imperial-aaa-grade">
               <motion.span
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.97 }}
