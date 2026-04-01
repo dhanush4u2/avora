@@ -60,10 +60,7 @@ const Footer = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <span className="font-display text-3xl text-cream font-semibold tracking-wide">avora</span>
-            <p className="font-display text-cream/50 text-sm italic mt-3">
-              Experience the eternal high
-            </p>
+            <img src={avoraLogo} alt="Avora" className="h-12 w-auto" />
           </motion.div>
 
           {/* Nav links */}

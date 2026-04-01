@@ -48,8 +48,8 @@ const Navbar = () => {
             ))}
           </ul>
 
-          <Link to="/" className="font-display text-3xl font-semibold text-cream tracking-wide absolute left-1/2 -translate-x-1/2">
-            avora
+          <Link to="/" className="absolute left-1/2 -translate-x-1/2">
+            <img src={avoraLogo} alt="Avora" className="h-10 w-auto" />
           </Link>
 
           <div className="flex items-center gap-4">
