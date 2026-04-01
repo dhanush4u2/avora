@@ -47,6 +47,30 @@ const LinkList = ({ links, delay }: { links: { label: string; href: string }[]; 
   </motion.ul>
 );
 
+const Footer = () => {
+  return (
+    <footer className="bg-primary py-16 md:py-24 border-t border-cream/10">
+      <div className="container mx-auto px-6">
+        <div className="grid md:grid-cols-4 gap-12 items-start">
+          {/* Logo & tagline */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <span className="font-display text-3xl text-cream font-semibold tracking-wide">avora</span>
+            <p className="font-display text-cream/50 text-sm italic mt-3">
+              Experience the eternal high
+            </p>
+          </motion.div>
+
+          {/* Nav links */}
+          <LinkList links={navLinks} delay={0.1} />
+
+          {/* Policy links */}
+          <LinkList links={policyLinks} delay={0.15} />
+
           {/* Contact & legal */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
