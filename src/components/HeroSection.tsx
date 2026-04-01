@@ -46,9 +46,10 @@ const HeroSection = () => {
         alt="Avora matcha product"
         width={1920}
         height={1080}
-        className="absolute inset-0 h-full w-full object-cover object-bottom opacity-60"
+        className="absolute inset-0 h-full w-full object-cover"
+        style={{ objectPosition: "center 65%" }}
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-primary/40 via-primary/20 to-primary/80" />
+      <div className="absolute inset-0 bg-gradient-to-b from-primary/30 via-transparent to-primary/70" />
 
       <div className="relative z-10 flex min-h-screen items-center justify-center px-6 text-center">
         <div className="container mx-auto relative">
