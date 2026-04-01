@@ -63,28 +63,7 @@ const TypewriterText = ({ text }: { text: string }) => {
 
 const HeroSection = () => {
   const ref = useRef(null);
-  const [particles, setParticles] = useState<Particle[]>([]);
 
-  const spawnParticles = useCallback(() => {
-    const newParticles: Particle[] = Array.from({ length: 5 }, () => ({
-      id: particleId++,
-      x: 20 + Math.random() * 60,
-      size: Math.random() * 3 + 2,
-      duration: Math.random() * 2 + 2,
-      delay: Math.random() * 0.5,
-      opacity: Math.random() * 0.3 + 0.3,
-    }));
-    setParticles((prev) => [...prev.slice(-50), ...newParticles]);
-  }, []);
-
-  useEffect(() => {
-    const interval = setInterval(spawnParticles, 400);
-    const timeout = setTimeout(spawnParticles, 800);
-    return () => {
-      clearInterval(interval);
-      clearTimeout(timeout);
-    };
-  }, [spawnParticles]);
 
   return (
     <section id="hero" className="relative min-h-screen flex flex-col overflow-hidden bg-primary" ref={ref}>
