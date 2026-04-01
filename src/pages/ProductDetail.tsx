@@ -62,7 +62,7 @@ const ProductDetail = () => {
     );
   }
 
-  const images = product.images.edges;
+  const images = product.images.edges.length > 0 ? product.images.edges : fallbackImages;
   const variant = product.variants.edges[0]?.node;
   const price = variant?.price || product.priceRange.minVariantPrice;
 
