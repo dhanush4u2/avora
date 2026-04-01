@@ -65,9 +65,9 @@ const HeroSection = () => {
   const heroY = useTransform(scrollYProgress, [0, 0.3], ["0%", "15%"]);
 
   return (
-    <section id="hero" className="relative min-h-screen flex flex-col overflow-hidden bg-primary">
-      {/* Image area — fixed aspect ratio so the crop never changes */}
-      <div className="relative w-full overflow-hidden" style={{ aspectRatio: "16 / 10" }}>
+    <section id="hero" className="relative h-screen flex flex-col overflow-hidden bg-primary">
+      {/* Image area — takes ~60% of viewport, same crop everywhere */}
+      <div className="relative w-full flex-[3] min-h-0 overflow-hidden">
         <motion.img
           src={heroProduct}
           alt="Avora matcha product"
