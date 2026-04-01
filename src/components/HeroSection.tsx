@@ -51,7 +51,7 @@ const HeroSection = () => {
       />
       <div className="absolute inset-0 bg-gradient-to-b from-primary/30 via-transparent to-primary/70" />
 
-      <div className="relative z-10 flex min-h-screen items-start justify-center px-6 pt-[30vh] text-center">
+      <div className="relative z-10 flex min-h-screen items-start justify-center px-6 pt-[18vh] text-center">
         <div className="container mx-auto relative">
           <div className="pointer-events-none absolute inset-0 z-0 overflow-visible">
             <AnimatePresence>
@@ -91,9 +91,7 @@ const HeroSection = () => {
               textShadow: "0 0 20px rgba(234,222,200,0.6), 0 0 40px rgba(234,222,200,0.3), 0 0 60px rgba(234,222,200,0.15)",
             }}
           >
-            Experience the
-            <br />
-            <span className="font-semibold italic">eternal high</span>
+            Experience the <span className="font-semibold italic">eternal high</span>
           </motion.h1>
 
           <motion.div
