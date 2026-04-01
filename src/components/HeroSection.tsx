@@ -3,16 +3,6 @@ import { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import heroProduct from "@/assets/hero-bg.jpg";
 
-interface Particle {
-  id: number;
-  x: number;
-  size: number;
-  duration: number;
-  delay: number;
-  opacity: number;
-}
-
-let particleId = 0;
 
 const TypewriterText = ({ text }: { text: string }) => {
   const [visibleCount, setVisibleCount] = useState(0);
