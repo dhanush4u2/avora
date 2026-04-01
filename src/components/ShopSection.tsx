@@ -20,36 +20,32 @@ const ShopSection = () => {
     <section id="shop" className="bg-primary" ref={ref}>
       <div className="relative grid grid-cols-2 overflow-hidden">
         {/* First vertical image with parallax */}
-        <div className="relative overflow-hidden">
+        <div className="relative overflow-hidden aspect-[4/5]">
           <motion.img
             src={productDisplay}
             alt="Avora matcha products"
             loading="lazy"
-            width={960}
-            height={1200}
             initial={{ opacity: 0, scale: 1.05 }}
             animate={inView ? { opacity: 1, scale: 1 } : {}}
             whileHover={{ scale: 1.02 }}
             transition={{ duration: 1 }}
             style={{ y: y1 }}
-            className="w-full h-[70vh] md:h-[85vh] object-cover scale-110"
+            className="absolute inset-0 w-full h-full object-cover scale-110"
           />
         </div>
 
         {/* Second vertical image with parallax */}
-        <div className="relative overflow-hidden">
+        <div className="relative overflow-hidden aspect-[4/5]">
           <motion.img
             src={matchaLatte}
             alt="Matcha preparation"
             loading="lazy"
-            width={960}
-            height={1200}
             initial={{ opacity: 0 }}
             animate={inView ? { opacity: 1 } : {}}
             whileHover={{ scale: 1.02 }}
             transition={{ duration: 1, delay: 0.2 }}
             style={{ y: y2 }}
-            className="w-full h-[70vh] md:h-[85vh] object-cover scale-110"
+            className="absolute inset-0 w-full h-full object-cover scale-110"
           />
         </div>
 
