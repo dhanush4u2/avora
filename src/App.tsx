@@ -9,6 +9,7 @@ import Navbar from "@/components/Navbar";
 import ScrollToTop from "@/components/ScrollToTop";
 import Footer from "@/components/Footer";
 import CustomCursor from "@/components/CustomCursor";
+import IntroAnimation from "@/components/IntroAnimation";
 import Index from "./pages/Index.tsx";
 import Shop from "./pages/Shop.tsx";
 import Checkout from "./pages/Checkout.tsx";
@@ -21,33 +22,39 @@ import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <CartProvider>
-      <TooltipProvider>
-        <CustomCursor />
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <ScrollToTop />
-          <Navbar />
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/shop" element={<Shop />} />
-            <Route path="/checkout" element={<Checkout />} />
-            <Route path="/founders" element={<Founders />} />
-            <Route path="/refund-policy" element={<RefundPolicy />} />
-            <Route path="/shipping-policy" element={<ShippingPolicy />} />
-            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-            <Route path="/terms-of-service" element={<TermsOfService />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-          <Footer />
-        </BrowserRouter>
-      </TooltipProvider>
-    </CartProvider>
-  </QueryClientProvider>
-);
+const App = () => {
+  const [showIntro, setShowIntro] = useState(true);
+  const handleIntroComplete = useCallback(() => setShowIntro(false), []);
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <CartProvider>
+        <TooltipProvider>
+          <CustomCursor />
+          {showIntro && <IntroAnimation onComplete={handleIntroComplete} />}
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <ScrollToTop />
+            <Navbar />
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/shop" element={<Shop />} />
+              <Route path="/checkout" element={<Checkout />} />
+              <Route path="/founders" element={<Founders />} />
+              <Route path="/refund-policy" element={<RefundPolicy />} />
+              <Route path="/shipping-policy" element={<ShippingPolicy />} />
+              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="/terms-of-service" element={<TermsOfService />} />
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+            <Footer />
+          </BrowserRouter>
+        </TooltipProvider>
+      </CartProvider>
+    </QueryClientProvider>
+  );
+};
 
 export default App;
