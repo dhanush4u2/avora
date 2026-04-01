@@ -16,6 +16,7 @@ let particleId = 0;
 
 const TypewriterText = ({ text }: { text: string }) => {
   const [visibleCount, setVisibleCount] = useState(0);
+  const [showCursor, setShowCursor] = useState(true);
   const chars = text.split("");
   const typeSpeed = 80;
   const pauseDuration = 2500;
@@ -31,6 +32,7 @@ const TypewriterText = ({ text }: { text: string }) => {
         if (count < totalChars) {
           timeout = setTimeout(type, typeSpeed);
         } else {
+          setShowCursor(false);
           timeout = setTimeout(erase, pauseDuration);
         }
       };
@@ -41,6 +43,7 @@ const TypewriterText = ({ text }: { text: string }) => {
           timeout = setTimeout(erase, 40);
         } else {
           timeout = setTimeout(cycle, 500);
+          setShowCursor(true);
         }
       };
       timeout = setTimeout(type, typeSpeed);
@@ -63,7 +66,7 @@ const TypewriterText = ({ text }: { text: string }) => {
           {char}
         </span>
       ))}
-      <span className="inline-block w-[3px] h-[0.8em] bg-cream ml-1 align-baseline animate-[pulse_0.8s_ease-in-out_infinite]" />
+      {showCursor && <span className="inline-block w-[3px] h-[0.8em] bg-cream ml-1 align-baseline animate-[pulse_0.8s_ease-in-out_infinite]" />}
     </span>
   );
 };
