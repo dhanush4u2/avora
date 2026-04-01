@@ -77,7 +77,7 @@ const HeroSection = () => {
       </div>
 
       {/* Text area - below image */}
-      <div className="relative z-10 flex items-center justify-center px-6 pb-16 -mt-20 text-center">
+      <div className="relative z-10 flex items-center justify-center px-6 pb-16 -mt-10 text-center">
         <div className="container mx-auto relative">
           <motion.h1
             initial={{ opacity: 0, y: 60 }}
