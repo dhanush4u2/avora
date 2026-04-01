@@ -66,7 +66,8 @@ const HeroSection = () => {
 
   return (
     <section id="hero" className="relative h-screen flex flex-col overflow-hidden bg-primary">
-      <div className="relative w-full overflow-hidden" style={{ aspectRatio: "16 / 10" }}>
+      {/* Image area — takes ~60% of viewport, same crop everywhere */}
+      <div className="relative w-full flex-[3] min-h-0 overflow-hidden">
         <motion.img
           src={heroProduct}
           alt="Avora matcha product"
