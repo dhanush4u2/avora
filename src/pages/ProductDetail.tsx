@@ -5,6 +5,19 @@ import { Minus, Plus, Loader2, ChevronLeft, ChevronRight } from "lucide-react";
 import { useCartStore, ShopifyProduct } from "@/stores/cartStore";
 import { storefrontApiRequest, STOREFRONT_PRODUCT_BY_HANDLE_QUERY } from "@/lib/shopify";
 import { toast } from "sonner";
+import matchaGallery1 from "@/assets/matcha-gallery-1.jpg";
+import matchaGallery2 from "@/assets/matcha-gallery-2.jpg";
+import matchaGallery3 from "@/assets/matcha-gallery-3.jpg";
+import matchaGallery4 from "@/assets/matcha-gallery-4.jpg";
+import matchaGallery5 from "@/assets/matcha-gallery-5.jpg";
+
+const fallbackImages = [
+  { node: { url: matchaGallery1, altText: "Ceremonial matcha powder" } },
+  { node: { url: matchaGallery2, altText: "Matcha latte" } },
+  { node: { url: matchaGallery3, altText: "Bamboo matcha whisk" } },
+  { node: { url: matchaGallery4, altText: "Matcha powder sifting" } },
+  { node: { url: matchaGallery5, altText: "Matcha tea set" } },
+];
 
 const ProductDetail = () => {
   const { handle } = useParams<{ handle: string }>();
