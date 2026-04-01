@@ -17,7 +17,7 @@ const MatchaGuideSection = () => {
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="py-24 md:py-36 bg-primary" ref={ref}>
+    <section className="py-12 md:py-20 bg-primary" ref={ref}>
       <div className="container mx-auto px-6 flex flex-col md:flex-row items-center gap-12 md:gap-16">
         {/* Left text */}
         <div className="w-full md:w-1/2 flex flex-col gap-6">
