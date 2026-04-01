@@ -7,7 +7,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import Navbar from "@/components/Navbar";
 import ScrollToTop from "@/components/ScrollToTop";
 import Footer from "@/components/Footer";
-import CustomCursor from "@/components/CustomCursor";
+
 import IntroAnimation from "@/components/IntroAnimation";
 import { useCartSync } from "@/hooks/useCartSync";
 import Index from "./pages/Index.tsx";
