@@ -52,7 +52,7 @@ const ShopSection = () => {
               transition={{ duration: 0.6, delay: 0.3 }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}
-              className="inline-block font-body text-sm tracking-widest text-primary bg-cream px-12 py-4 shadow-lg hover:bg-cream/90 transition-all duration-500"
+              className="inline-flex items-center justify-center w-28 h-28 md:w-32 md:h-32 rounded-full font-body text-xs tracking-widest text-primary bg-cream shadow-lg hover:bg-cream/90 transition-all duration-500"
             >
               Shop Now
             </motion.span>
