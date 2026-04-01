@@ -32,6 +32,7 @@ const TypewriterText = ({ text }: { text: string }) => {
         if (count < totalChars) {
           timeout = setTimeout(type, typeSpeed);
         } else {
+          setShowCursor(false);
           timeout = setTimeout(erase, pauseDuration);
         }
       };
