@@ -103,3 +103,10 @@
     text-wrap: balance;
   }
 }
+
+/* Hide default cursor on non-touch devices */
+@media (pointer: fine) {
+  * {
+    cursor: none !important;
+  }
+}
