@@ -65,8 +65,7 @@ const CustomCursor = () => {
           rotate: isHovering ? 10 : 0,
         }}
         transition={{ type: "spring", damping: 15, stiffness: 200 }}
-        className="select-none drop-shadow-sm"
-        style={{ filter: "saturate(1.2)" }}
+        className="select-none drop-shadow-sm invert"
         draggable={false}
       />
     </motion.div>
