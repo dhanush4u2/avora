@@ -71,7 +71,7 @@ const HeroSection = () => {
           width={1920}
           height={1080}
           className="absolute inset-0 h-full w-full object-cover"
-          style={{ objectPosition: "center 11%" }}
+          style={{ objectPosition: "center 80%" }}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-primary/20 via-transparent to-primary" />
       </div>
