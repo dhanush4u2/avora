@@ -64,7 +64,7 @@ const HeroSection = () => {
   return (
     <section id="hero" className="relative min-h-screen flex flex-col overflow-hidden bg-primary">
       {/* Image area */}
-      <div className="relative flex-1 min-h-[55vh]">
+      <div className="relative flex-1 min-h-[55vh] mt-16">
         <img
           src={heroProduct}
           alt="Avora matcha product"
