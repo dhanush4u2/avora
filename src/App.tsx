@@ -7,11 +7,11 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import Navbar from "@/components/Navbar";
 import ScrollToTop from "@/components/ScrollToTop";
 import Footer from "@/components/Footer";
-import CustomCursor from "@/components/CustomCursor";
+
 import IntroAnimation from "@/components/IntroAnimation";
 import { useCartSync } from "@/hooks/useCartSync";
 import Index from "./pages/Index.tsx";
-import Shop from "./pages/Shop.tsx";
+
 import ProductDetail from "./pages/ProductDetail.tsx";
 import Founders from "./pages/Founders.tsx";
 import RefundPolicy from "./pages/RefundPolicy.tsx";
@@ -31,7 +31,7 @@ const AppContent = () => {
       <Navbar />
       <Routes>
         <Route path="/" element={<Index />} />
-        <Route path="/shop" element={<Shop />} />
+        
         <Route path="/product/:handle" element={<ProductDetail />} />
         <Route path="/founders" element={<Founders />} />
         <Route path="/refund-policy" element={<RefundPolicy />} />
@@ -53,7 +53,7 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <CustomCursor />
+        
         {showIntro && <IntroAnimation onComplete={handleIntroComplete} />}
         <Toaster />
         <Sonner />

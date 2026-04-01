@@ -67,14 +67,14 @@ const HeroSection = () => {
   return (
     <section id="hero" className="relative min-h-screen flex flex-col overflow-hidden bg-primary">
       {/* Image area */}
-      <div className="relative flex-1 min-h-[55vh] overflow-hidden">
+      <div className="relative flex-1 min-h-[55vh] overflow-hidden flex items-center justify-center">
         <motion.img
           src={heroProduct}
           alt="Avora matcha product"
           width={1920}
           height={1080}
-          className="absolute inset-0 h-full w-full object-cover scale-110"
-          style={{ objectPosition: "62% 80%", y: heroY }}
+          className="w-full h-full object-contain"
+          style={{ y: heroY }}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-primary/20 via-transparent to-primary" />
       </div>
@@ -102,7 +102,7 @@ const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.8 }}
             className="mt-5 relative z-10"
           >
-            <Link to="/shop">
+            <Link to="/product/ceremonial-matcha-green-tea-imperial-aaa-grade">
               <motion.span
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.97 }}
