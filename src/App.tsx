@@ -31,7 +31,7 @@ const AppContent = () => {
       <Navbar />
       <Routes>
         <Route path="/" element={<Index />} />
-        <Route path="/shop" element={<Shop />} />
+        <Route path="/shop" element={<Navigate to="/product/ceremonial-matcha-green-tea-imperial-aaa-grade" replace />} />
         <Route path="/product/:handle" element={<ProductDetail />} />
         <Route path="/founders" element={<Founders />} />
         <Route path="/refund-policy" element={<RefundPolicy />} />

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const navLinks = [
   { label: "Homepage", href: "#hero" },
   { label: "Founders' Note", href: "#founders" },
-  { label: "Shop", href: "#shop" },
+  { label: "Shop", href: "/product/ceremonial-matcha-green-tea-imperial-aaa-grade" },
 ];
 
 const policyLinks = [
