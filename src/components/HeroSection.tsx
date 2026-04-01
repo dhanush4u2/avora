@@ -1,5 +1,5 @@
-import { motion, AnimatePresence } from "framer-motion";
-import { useRef, useState, useCallback, useEffect } from "react";
+import { motion } from "framer-motion";
+import { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import heroProduct from "@/assets/hero-bg.jpg";
 
