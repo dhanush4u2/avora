@@ -106,7 +106,17 @@
 
 /* Hide default cursor on non-touch devices */
 @media (pointer: fine) {
-  * {
+  *,
+  html,
+  body,
+  #root,
+  #root *,
+  a,
+  button,
+  input,
+  textarea,
+  select,
+  [role="button"] {
     cursor: none !important;
   }
 }
