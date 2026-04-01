@@ -66,21 +66,21 @@ const HeroSection = () => {
 
   return (
     <section id="hero" className="relative min-h-screen flex flex-col overflow-hidden bg-primary">
-      {/* Image area */}
-      <div className="relative flex-1 min-h-[55vh] overflow-hidden">
+      {/* Image area — fixed aspect ratio so the crop never changes */}
+      <div className="relative w-full overflow-hidden" style={{ aspectRatio: "16 / 10" }}>
         <motion.img
           src={heroProduct}
           alt="Avora matcha product"
           width={1920}
           height={1080}
-          className="absolute inset-0 h-full w-full object-cover scale-110"
+          className="absolute inset-0 h-full w-full object-cover"
           style={{ objectPosition: "62% 80%", y: heroY }}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-primary/20 via-transparent to-primary" />
       </div>
 
       {/* Text area - below image */}
-      <div className="relative z-10 flex items-center justify-center px-6 pb-16 -mt-20 text-center">
+      <div className="relative z-10 flex flex-1 items-center justify-center px-6 pb-16 -mt-20 text-center">
         <div className="container mx-auto relative">
           <motion.h1
             initial={{ opacity: 0, y: 60 }}
