@@ -60,12 +60,13 @@ const CustomCursor = () => {
         src={cursorLeaf}
         alt=""
         animate={{
-          width: isHovering ? 48 : 36,
-          height: isHovering ? 48 : 36,
-          rotate: isHovering ? 15 : 0,
+          width: isHovering ? 32 : 22,
+          height: isHovering ? 32 : 22,
+          rotate: isHovering ? 20 : -15,
         }}
-        transition={{ duration: 0.3, ease: "easeOut" }}
-        className="select-none"
+        transition={{ type: "spring", damping: 15, stiffness: 200 }}
+        className="select-none drop-shadow-sm"
+        style={{ filter: "saturate(1.2)" }}
         draggable={false}
       />
     </motion.div>
