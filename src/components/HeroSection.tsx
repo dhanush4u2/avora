@@ -66,7 +66,7 @@ const TypewriterText = ({ text }: { text: string }) => {
           {char}
         </span>
       ))}
-      <span className="inline-block w-[3px] h-[0.8em] bg-cream ml-1 align-baseline animate-[pulse_0.8s_ease-in-out_infinite]" />
+      {showCursor && <span className="inline-block w-[3px] h-[0.8em] bg-cream ml-1 align-baseline animate-[pulse_0.8s_ease-in-out_infinite]" />}
     </span>
   );
 };
