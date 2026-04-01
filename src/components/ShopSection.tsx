@@ -35,7 +35,7 @@ const ShopSection = () => {
         </div>
 
         {/* Second vertical image with parallax */}
-        <div className="relative overflow-hidden aspect-[3/4]">
+        <div className="relative overflow-hidden aspect-[3/4] md:aspect-auto md:h-screen">
           <motion.img
             src={matchaLatte}
             alt="Matcha preparation"
