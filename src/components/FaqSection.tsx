@@ -5,7 +5,7 @@ import { ChevronDown } from "lucide-react";
 const faqs = [
   {
     q: "How long does it take for my Avora matcha to reach me?",
-    a: "Orders are typically processed within 24–48 hours and delivered within X–Y business days, depending on your location. You'll receive tracking details as soon as your order ships.",
+    a: "Orders are typically processed within 24–48 hours and delivered within 5–7 business days, depending on your location. You'll receive tracking details as soon as your order ships.",
   },
   {
     q: "Where do you ship?",
