@@ -2,54 +2,68 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Link } from "react-router-dom";
 import TextReveal from "@/components/TextReveal";
-import brewingImg from "@/assets/founders-note.jpg";
+import foundersImg from "@/assets/founders-note.jpg";
 
 const FoundersSection = () => {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="founders" className="py-12 md:py-16 bg-primary md:h-screen md:flex md:items-center" ref={ref}>
-      <div className="container mx-auto px-6 flex flex-col md:flex-row items-center gap-10 md:gap-16">
-        <motion.div
-          initial={{ opacity: 0, x: -50 }}
-          animate={inView ? { opacity: 1, x: 0 } : {}}
-          transition={{ duration: 0.9 }}
-          className="w-full md:w-1/2 overflow-hidden rounded-lg"
-        >
-          <motion.img
-            src={brewingImg}
-            alt="Avora founders"
-            loading="lazy"
-            width={600}
-            height={800}
-            whileHover={{ scale: 1.03 }}
-            transition={{ duration: 0.7 }}
-            className="w-full aspect-[3/4] md:aspect-[4/5] md:max-h-[70vh] object-cover"
-          />
-        </motion.div>
-
-        <div className="w-full md:w-1/2 flex flex-col items-center md:items-start gap-8">
+    <section id="founders" className="bg-primary" ref={ref}>
+      <div className="flex flex-col md:flex-row min-h-[80vh] md:min-h-screen">
+        {/* Left: Text content */}
+        <div className="w-full md:w-1/2 flex flex-col justify-center px-8 md:px-16 lg:px-24 py-16 md:py-20">
           <TextReveal
-            className="font-display text-4xl md:text-6xl text-cream font-light text-center md:text-left"
+            className="font-display text-4xl md:text-5xl lg:text-6xl text-cream font-light leading-tight"
             delay={0.2}
           >
             Founders' Note
           </TextReveal>
 
-          <Link to="/founders">
-            <motion.span
-              initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.97 }}
-              className="inline-block font-body text-sm tracking-widest text-cream border border-cream/40 px-10 py-4 hover:bg-cream/10 transition-all duration-500"
-            >
-              Read our story
-            </motion.span>
-          </Link>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7, delay: 0.4 }}
+            className="font-body text-cream/70 text-base md:text-lg leading-relaxed mt-8 max-w-md"
+          >
+            Matcha wasn't a trend for us — it was transformational. Read about
+            how Avora came to life and the belief that drives every cup.
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.6 }}
+            className="mt-10"
+          >
+            <Link to="/founders">
+              <motion.span
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.97 }}
+                className="inline-block font-body text-sm tracking-widest text-cream border border-cream/40 px-10 py-4 hover:bg-cream/10 transition-all duration-500"
+              >
+                Read our story
+              </motion.span>
+            </Link>
+          </motion.div>
         </div>
+
+        {/* Right: Image */}
+        <motion.div
+          initial={{ opacity: 0, x: 50 }}
+          animate={inView ? { opacity: 1, x: 0 } : {}}
+          transition={{ duration: 0.9 }}
+          className="w-full md:w-1/2 relative min-h-[60vh] md:min-h-0"
+        >
+          <img
+            src={foundersImg}
+            alt="Avora founder"
+            loading="lazy"
+            width={800}
+            height={1200}
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+        </motion.div>
       </div>
     </section>
   );
