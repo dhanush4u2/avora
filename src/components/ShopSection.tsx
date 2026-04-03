@@ -18,9 +18,9 @@ const ShopSection = () => {
 
   return (
     <section id="shop" className="bg-primary" ref={ref}>
-      <div className="relative grid grid-cols-2 overflow-hidden md:max-h-screen">
+      <div className="relative grid grid-cols-2 overflow-hidden h-[70vh] md:h-screen">
         {/* First vertical image with parallax */}
-        <div className="relative overflow-hidden aspect-[3/4] md:aspect-auto md:h-screen">
+        <div className="relative overflow-hidden">
           <motion.img
             src={productDisplay}
             alt="Avora matcha products"
@@ -30,12 +30,12 @@ const ShopSection = () => {
             whileHover={{ scale: 1.02 }}
             transition={{ duration: 1 }}
             style={{ y: y1 }}
-            className="absolute inset-0 w-full h-full object-cover object-bottom scale-110"
+            className="absolute inset-0 w-full h-full object-cover scale-110"
           />
         </div>
 
         {/* Second vertical image with parallax */}
-        <div className="relative overflow-hidden aspect-[3/4] md:aspect-auto md:h-screen">
+        <div className="relative overflow-hidden">
           <motion.img
             src={matchaLatte}
             alt="Matcha preparation"
@@ -45,7 +45,7 @@ const ShopSection = () => {
             whileHover={{ scale: 1.02 }}
             transition={{ duration: 1, delay: 0.2 }}
             style={{ y: y2 }}
-            className="absolute inset-0 w-full h-full object-cover object-bottom scale-110"
+            className="absolute inset-0 w-full h-full object-cover scale-110"
           />
         </div>
 
