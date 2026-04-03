@@ -30,7 +30,7 @@ const ShopSection = () => {
             whileHover={{ scale: 1.02 }}
             transition={{ duration: 1 }}
             style={{ y: y1 }}
-            className="absolute inset-0 w-full h-full object-cover scale-110"
+            className="absolute inset-0 w-full h-full object-cover object-bottom scale-110"
           />
         </div>
 
