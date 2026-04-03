@@ -13,8 +13,8 @@ const ShopSection = () => {
     offset: ["start end", "end start"],
   });
 
-  const y1 = useTransform(scrollYProgress, [0, 1], ["0%", "-8%"]);
-  const y2 = useTransform(scrollYProgress, [0, 1], ["0%", "-12%"]);
+  const y1 = useTransform(scrollYProgress, [0, 1], ["0%", "-10%"]);
+  const y2 = useTransform(scrollYProgress, [0, 1], ["0%", "-10%"]);
 
   return (
     <section id="shop" className="bg-primary" ref={ref}>
