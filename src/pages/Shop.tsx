@@ -5,6 +5,19 @@ import { Loader2 } from "lucide-react";
 import { useCartStore, ShopifyProduct } from "@/stores/cartStore";
 import { storefrontApiRequest, STOREFRONT_PRODUCTS_QUERY } from "@/lib/shopify";
 import { toast } from "sonner";
+import shop1 from "@/assets/shop-1.jpg";
+import shop2 from "@/assets/shop-2.jpg";
+import shop3 from "@/assets/shop-3.jpg";
+import shop4 from "@/assets/shop-4.jpg";
+import shop5 from "@/assets/shop-5.jpg";
+
+const galleryImages = [
+  { src: shop1, alt: "Avora matcha tins on red background" },
+  { src: shop2, alt: "Hand holding Avora matcha tin" },
+  { src: shop3, alt: "Scooping matcha from Avora tin" },
+  { src: shop4, alt: "Avora matcha with whisk and glass" },
+  { src: shop5, alt: "Pouring matcha latte with Avora tin" },
+];
 
 const Shop = () => {
   const [products, setProducts] = useState<ShopifyProduct[]>([]);
@@ -54,6 +67,27 @@ const Shop = () => {
             Shop
           </motion.p>
 
+          {/* Image Gallery */}
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 max-w-6xl mx-auto mb-20">
+            {galleryImages.map((img, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: i * 0.1 }}
+                className={`overflow-hidden ${i === 0 ? "col-span-2 md:col-span-1 row-span-2" : ""}`}
+              >
+                <img
+                  src={img.src}
+                  alt={img.alt}
+                  loading="lazy"
+                  className="w-full h-full object-cover aspect-[3/4] hover:scale-105 transition-transform duration-700"
+                />
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Products */}
           {loading ? (
             <div className="flex items-center justify-center py-20">
               <Loader2 className="w-8 h-8 text-cream/40 animate-spin" />
@@ -66,7 +100,6 @@ const Shop = () => {
           ) : (
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
               {products.map((product) => {
-                const image = product.node.images.edges[0]?.node;
                 const price = product.node.priceRange.minVariantPrice;
 
                 return (
@@ -78,18 +111,10 @@ const Shop = () => {
                     className="group"
                   >
                     <Link to={`/product/${product.node.handle}`}>
-                      <div className="aspect-square overflow-hidden mb-4">
-                        {image ? (
-                          <motion.img
-                            src={image.url}
-                            alt={image.altText || product.node.title}
-                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                          />
-                        ) : (
-                          <div className="w-full h-full bg-cream/5 flex items-center justify-center">
-                            <span className="font-body text-cream/20 text-sm">No image</span>
-                          </div>
-                        )}
+                      <div className="aspect-square overflow-hidden mb-4 bg-cream/5 flex items-center justify-center">
+                        <span className="font-display text-lg text-cream/60 tracking-wide">
+                          {product.node.title}
+                        </span>
                       </div>
                     </Link>
 
