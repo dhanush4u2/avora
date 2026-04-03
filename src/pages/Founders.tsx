@@ -1,7 +1,6 @@
-import { motion, useScroll, useTransform, type Easing } from "framer-motion";
-import { useRef } from "react";
+import { motion, type Easing } from "framer-motion";
 import { Link } from "react-router-dom";
-import foundersPortrait from "@/assets/founders-portrait.jpg";
+import foundersHero from "@/assets/founders-hero.jpg";
 import foundersMatcha from "@/assets/founders-matcha.jpg";
 
 const ease: Easing = [0.25, 0.1, 0.25, 1];
@@ -16,36 +15,45 @@ const fadeUp = {
 };
 
 const Founders = () => {
-  const heroRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: heroRef,
-    offset: ["start start", "end start"],
-  });
-  const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
-
   return (
     <div className="min-h-screen bg-primary">
 
-      {/* Hero image */}
-      <div ref={heroRef} className="relative h-[70vh] overflow-hidden">
-        <motion.img
-          src={foundersPortrait}
-          alt="Avora founders Shruti and Elishia"
-          className="w-full h-full object-cover"
-          style={{ y: heroY }}
-          width={1200}
-          height={800}
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/30 via-transparent to-primary" />
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.3 }}
-          className="absolute bottom-12 left-0 right-0 text-center"
-        >
-          <h1 className="font-display text-5xl md:text-7xl text-cream font-light tracking-wide">
+      {/* Hero: side-by-side layout */}
+      <div className="flex flex-col md:flex-row min-h-[80vh] md:min-h-screen">
+        {/* Left: Title & intro */}
+        <div className="w-full md:w-1/2 flex flex-col justify-center px-8 md:px-16 lg:px-24 py-16 md:py-20">
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.3 }}
+            className="font-display text-5xl md:text-7xl text-cream font-light tracking-wide"
+          >
             Founders' note
-          </h1>
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.5 }}
+            className="font-body text-cream/70 text-base md:text-lg leading-relaxed mt-8 max-w-md"
+          >
+            Matcha wasn't a trend for us — it was transformational. This is the story of how Avora came to life.
+          </motion.p>
+        </div>
+
+        {/* Right: Image */}
+        <motion.div
+          initial={{ opacity: 0, x: 50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.9 }}
+          className="w-full md:w-1/2 relative min-h-[60vh] md:min-h-0"
+        >
+          <img
+            src={foundersHero}
+            alt="Avora founder Shruti"
+            className="absolute inset-0 w-full h-full object-cover"
+            width={800}
+            height={1200}
+          />
         </motion.div>
       </div>
 
