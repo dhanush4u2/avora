@@ -1,7 +1,6 @@
-import { motion, useScroll, useTransform, type Easing } from "framer-motion";
-import { useRef } from "react";
+import { motion, type Easing } from "framer-motion";
 import { Link } from "react-router-dom";
-import foundersPortrait from "@/assets/founders-portrait.jpg";
+import foundersImg from "@/assets/founders-note.jpg";
 import foundersMatcha from "@/assets/founders-matcha.jpg";
 
 const ease: Easing = [0.25, 0.1, 0.25, 1];
@@ -16,36 +15,57 @@ const fadeUp = {
 };
 
 const Founders = () => {
-  const heroRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: heroRef,
-    offset: ["start start", "end start"],
-  });
-  const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
-
   return (
     <div className="min-h-screen bg-primary">
 
-      {/* Hero image */}
-      <div ref={heroRef} className="relative h-[70vh] overflow-hidden">
-        <motion.img
-          src={foundersPortrait}
-          alt="Avora founders Shruti and Elishia"
-          className="w-full h-full object-cover"
-          style={{ y: heroY }}
-          width={1200}
-          height={800}
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/30 via-transparent to-primary" />
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.3 }}
-          className="absolute bottom-12 left-0 right-0 text-center"
-        >
-          <h1 className="font-display text-5xl md:text-7xl text-cream font-light tracking-wide">
+      {/* Hero: text left, image right */}
+      <div className="flex flex-col md:flex-row min-h-[80vh] md:min-h-screen">
+        {/* Left: Title + intro */}
+        <div className="w-full md:w-1/2 flex flex-col justify-center px-8 md:px-16 lg:px-24 py-16 md:py-20">
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.2 }}
+            className="font-display text-5xl md:text-6xl lg:text-7xl text-cream font-light tracking-wide leading-tight"
+          >
             Founders' note
-          </h1>
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+            className="font-body text-cream/70 text-lg md:text-xl leading-relaxed mt-8 max-w-lg"
+          >
+            For many, matcha feels like a moment — a trend that travelled from
+            Japan alongside Studio Ghibli films, anime, and a wave of cultural
+            fascination. Beautiful, yes. But fleeting.
+          </motion.p>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.7 }}
+            className="font-display text-cream text-2xl md:text-3xl font-light italic mt-8"
+          >
+            For Shruti, matcha was never a trend. It was transformational.
+          </motion.p>
+        </div>
+
+        {/* Right: Image */}
+        <motion.div
+          initial={{ opacity: 0, x: 50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.9, delay: 0.3 }}
+          className="w-full md:w-1/2 relative min-h-[60vh] md:min-h-0"
+        >
+          <img
+            src={foundersImg}
+            alt="Avora founder"
+            width={800}
+            height={1200}
+            className="absolute inset-0 w-full h-full object-cover"
+          />
         </motion.div>
       </div>
 
@@ -59,24 +79,6 @@ const Founders = () => {
         >
           <motion.p
             custom={0}
-            variants={fadeUp}
-            className="font-body text-cream/80 text-lg md:text-xl leading-relaxed"
-          >
-            For many, matcha feels like a moment — a trend that travelled from
-            Japan alongside Studio Ghibli films, anime, and a wave of cultural
-            fascination. Beautiful, yes. But fleeting.
-          </motion.p>
-
-          <motion.p
-            custom={1}
-            variants={fadeUp}
-            className="font-display text-cream text-2xl md:text-3xl font-light italic"
-          >
-            For Shruti, matcha was never a trend. It was transformational.
-          </motion.p>
-
-          <motion.p
-            custom={2}
             variants={fadeUp}
             className="font-body text-cream/80 text-lg md:text-xl leading-relaxed"
           >
@@ -96,25 +98,13 @@ const Founders = () => {
           viewport={{ once: true, margin: "-50px" }}
           className="my-16 md:my-24 border-l-2 border-cream/30 pl-8 md:pl-12 space-y-4"
         >
-          <motion.p
-            custom={0}
-            variants={fadeUp}
-            className="font-body text-cream/60 text-lg leading-relaxed"
-          >
+          <motion.p custom={0} variants={fadeUp} className="font-body text-cream/60 text-lg leading-relaxed">
             Coffee made her jittery, followed by an inevitable crash.
           </motion.p>
-          <motion.p
-            custom={1}
-            variants={fadeUp}
-            className="font-body text-cream/60 text-lg leading-relaxed"
-          >
+          <motion.p custom={1} variants={fadeUp} className="font-body text-cream/60 text-lg leading-relaxed">
             Tea was calming, but too gentle.
           </motion.p>
-          <motion.p
-            custom={2}
-            variants={fadeUp}
-            className="font-display text-cream text-xl md:text-2xl font-light"
-          >
+          <motion.p custom={2} variants={fadeUp} className="font-display text-cream text-xl md:text-2xl font-light">
             And then came matcha.
           </motion.p>
         </motion.div>
@@ -125,31 +115,19 @@ const Founders = () => {
           viewport={{ once: true, margin: "-50px" }}
           className="space-y-8"
         >
-          <motion.p
-            custom={0}
-            variants={fadeUp}
-            className="font-body text-cream/80 text-lg md:text-xl leading-relaxed"
-          >
+          <motion.p custom={0} variants={fadeUp} className="font-body text-cream/80 text-lg md:text-xl leading-relaxed">
             Matcha met her exactly where she was. A steady rise. Sustained
             energy. Focus without frenzy. Power without burnout. Cup after cup,
             it supported her active lifestyle, sharpened her mind, and grounded
             her body. And once it became part of her rhythm, it stayed.
           </motion.p>
 
-          <motion.p
-            custom={1}
-            variants={fadeUp}
-            className="font-body text-cream/80 text-lg md:text-xl leading-relaxed"
-          >
+          <motion.p custom={1} variants={fadeUp} className="font-body text-cream/80 text-lg md:text-xl leading-relaxed">
             As with everything Shruti believes in deeply, she couldn't keep this
             discovery to herself.
           </motion.p>
 
-          <motion.p
-            custom={2}
-            variants={fadeUp}
-            className="font-body text-cream/80 text-lg md:text-xl leading-relaxed"
-          >
+          <motion.p custom={2} variants={fadeUp} className="font-body text-cream/80 text-lg md:text-xl leading-relaxed">
             She saw matcha not just as a drink, but as a quiet ally — one that
             could support a CEO powering through long days, a dancer moving
             through rehearsals, or anyone who cares about their health, energy,
@@ -157,11 +135,7 @@ const Founders = () => {
             life, without elitism, without stereotypes.
           </motion.p>
 
-          <motion.p
-            custom={3}
-            variants={fadeUp}
-            className="font-display text-cream text-2xl md:text-3xl font-light italic"
-          >
+          <motion.p custom={3} variants={fadeUp} className="font-display text-cream text-2xl md:text-3xl font-light italic">
             That belief became Avora Matcha.
           </motion.p>
         </motion.div>
@@ -175,14 +149,12 @@ const Founders = () => {
         transition={{ duration: 1 }}
         className="w-full h-[50vh] md:h-[60vh] overflow-hidden"
       >
-        <motion.img
+        <img
           src={foundersMatcha}
           alt="Matcha preparation"
           loading="lazy"
           width={1200}
           height={1400}
-          whileHover={{ scale: 1.03 }}
-          transition={{ duration: 0.7 }}
           className="w-full h-full object-cover"
         />
       </motion.div>
@@ -195,42 +167,26 @@ const Founders = () => {
           viewport={{ once: true, margin: "-50px" }}
           className="space-y-8"
         >
-          <motion.p
-            custom={0}
-            variants={fadeUp}
-            className="font-body text-cream/80 text-lg md:text-xl leading-relaxed"
-          >
+          <motion.p custom={0} variants={fadeUp} className="font-body text-cream/80 text-lg md:text-xl leading-relaxed">
             Avora truly came alive when Shruti met a kindred spirit — Elishia. A
             marketer by day, a devoted matcha lover by heart, and an unwavering
             believer in Shruti's vision. Drawn to the passion, the purpose, and
             the possibility, Elishia joined Shruti as a partner on this journey.
           </motion.p>
 
-          <motion.p
-            custom={1}
-            variants={fadeUp}
-            className="font-display text-cream text-2xl md:text-3xl font-light text-center my-16"
-          >
+          <motion.p custom={1} variants={fadeUp} className="font-display text-cream text-2xl md:text-3xl font-light text-center my-16">
             Together, they built Avora on one simple truth:
             <br />
             <span className="italic">Matcha is for everyone.</span>
           </motion.p>
 
-          <motion.p
-            custom={2}
-            variants={fadeUp}
-            className="font-body text-cream/80 text-lg md:text-xl leading-relaxed"
-          >
+          <motion.p custom={2} variants={fadeUp} className="font-body text-cream/80 text-lg md:text-xl leading-relaxed">
             No labels. No archetypes. Just the best quality matcha, meant to help
             you feel your best, live fully, and show up as yourself — whatever
             that looks like.
           </motion.p>
 
-          <motion.p
-            custom={3}
-            variants={fadeUp}
-            className="font-body text-cream/80 text-lg md:text-xl leading-relaxed"
-          >
+          <motion.p custom={3} variants={fadeUp} className="font-body text-cream/80 text-lg md:text-xl leading-relaxed">
             We're so excited for you to try Avora. Here's to better energy,
             better rituals, and better days — one cup at a time.
           </motion.p>
