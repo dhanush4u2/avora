@@ -5,6 +5,7 @@ import { Minus, Plus, Loader2, ChevronLeft, ChevronRight } from "lucide-react";
 import { useCartStore, ShopifyProduct } from "@/stores/cartStore";
 import { storefrontApiRequest, STOREFRONT_PRODUCT_BY_HANDLE_QUERY } from "@/lib/shopify";
 import { toast } from "sonner";
+import productHero from "@/assets/product-hero.png";
 import matchaGallery1 from "@/assets/matcha-gallery-1.jpg";
 import matchaGallery2 from "@/assets/matcha-gallery-2.jpg";
 import matchaGallery3 from "@/assets/matcha-gallery-3.jpg";
@@ -12,6 +13,7 @@ import matchaGallery4 from "@/assets/matcha-gallery-4.jpg";
 import matchaGallery5 from "@/assets/matcha-gallery-5.jpg";
 
 const fallbackImages = [
+  { node: { url: productHero, altText: "Avora Ceremonial Grade Matcha" } },
   { node: { url: matchaGallery1, altText: "Ceremonial matcha powder" } },
   { node: { url: matchaGallery2, altText: "Matcha latte" } },
   { node: { url: matchaGallery3, altText: "Bamboo matcha whisk" } },
@@ -62,7 +64,7 @@ const ProductDetail = () => {
     );
   }
 
-  const images = product.images.edges.length > 0 ? product.images.edges : fallbackImages;
+  const images = fallbackImages;
   const variant = product.variants.edges[0]?.node;
   const price = variant?.price || product.priceRange.minVariantPrice;
 
