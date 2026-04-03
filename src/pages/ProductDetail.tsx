@@ -5,7 +5,6 @@ import { Minus, Plus, Loader2, ChevronLeft, ChevronRight } from "lucide-react";
 import { useCartStore, ShopifyProduct } from "@/stores/cartStore";
 import { storefrontApiRequest, STOREFRONT_PRODUCT_BY_HANDLE_QUERY } from "@/lib/shopify";
 import { toast } from "sonner";
-import productHero from "@/assets/product-hero.png";
 import shop1 from "@/assets/shop-1.jpg";
 import shop2 from "@/assets/shop-2.jpg";
 import shop3 from "@/assets/shop-3.jpg";
@@ -13,7 +12,6 @@ import shop4 from "@/assets/shop-4.jpg";
 import shop5 from "@/assets/shop-5.jpg";
 
 const fallbackImages = [
-  { node: { url: productHero, altText: "Avora Ceremonial Grade Matcha" } },
   { node: { url: shop1, altText: "Avora matcha tins on red background" } },
   { node: { url: shop2, altText: "Hand holding Avora matcha tin" } },
   { node: { url: shop3, altText: "Scooping matcha from Avora tin" } },
