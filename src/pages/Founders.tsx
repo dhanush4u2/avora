@@ -1,6 +1,6 @@
 import { motion, type Easing } from "framer-motion";
 import { Link } from "react-router-dom";
-import foundersImg from "@/assets/founders-note.jpg";
+import foundersImg from "@/assets/founders-cam.jpg";
 import foundersMatcha from "@/assets/founders-matcha.jpg";
 
 const ease: Easing = [0.25, 0.1, 0.25, 1];

@@ -2,7 +2,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Link } from "react-router-dom";
 import TextReveal from "@/components/TextReveal";
-import foundersImg from "@/assets/founders-note.jpg";
+import foundersImg from "@/assets/founders-portrait.jpg";
 
 const FoundersSection = () => {
   const ref = useRef(null);
