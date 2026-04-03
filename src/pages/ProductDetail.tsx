@@ -6,19 +6,19 @@ import { useCartStore, ShopifyProduct } from "@/stores/cartStore";
 import { storefrontApiRequest, STOREFRONT_PRODUCT_BY_HANDLE_QUERY } from "@/lib/shopify";
 import { toast } from "sonner";
 import productHero from "@/assets/product-hero.png";
-import matchaGallery1 from "@/assets/matcha-gallery-1.jpg";
-import matchaGallery2 from "@/assets/matcha-gallery-2.jpg";
-import matchaGallery3 from "@/assets/matcha-gallery-3.jpg";
-import matchaGallery4 from "@/assets/matcha-gallery-4.jpg";
-import matchaGallery5 from "@/assets/matcha-gallery-5.jpg";
+import shop1 from "@/assets/shop-1.jpg";
+import shop2 from "@/assets/shop-2.jpg";
+import shop3 from "@/assets/shop-3.jpg";
+import shop4 from "@/assets/shop-4.jpg";
+import shop5 from "@/assets/shop-5.jpg";
 
 const fallbackImages = [
   { node: { url: productHero, altText: "Avora Ceremonial Grade Matcha" } },
-  { node: { url: matchaGallery1, altText: "Ceremonial matcha powder" } },
-  { node: { url: matchaGallery2, altText: "Matcha latte" } },
-  { node: { url: matchaGallery3, altText: "Bamboo matcha whisk" } },
-  { node: { url: matchaGallery4, altText: "Matcha powder sifting" } },
-  { node: { url: matchaGallery5, altText: "Matcha tea set" } },
+  { node: { url: shop1, altText: "Avora matcha tins on red background" } },
+  { node: { url: shop2, altText: "Hand holding Avora matcha tin" } },
+  { node: { url: shop3, altText: "Scooping matcha from Avora tin" } },
+  { node: { url: shop4, altText: "Avora matcha with whisk and glass" } },
+  { node: { url: shop5, altText: "Pouring matcha latte with Avora tin" } },
 ];
 
 const ProductDetail = () => {
