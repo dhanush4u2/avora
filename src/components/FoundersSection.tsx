@@ -10,47 +10,10 @@ const FoundersSection = () => {
 
   return (
     <section id="founders" className="bg-primary" ref={ref}>
-      <div className="flex flex-col md:flex-row min-h-[80vh] md:min-h-screen">
-        {/* Left: Text content */}
-        <div className="w-full md:w-1/2 flex flex-col justify-center px-8 md:px-16 lg:px-24 py-16 md:py-20">
-          <TextReveal
-            className="font-display text-4xl md:text-5xl lg:text-6xl text-cream font-light leading-tight"
-            delay={0.2}
-          >
-            Founders' Note
-          </TextReveal>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.4 }}
-            className="font-body text-cream/70 text-base md:text-lg leading-relaxed mt-8 max-w-md"
-          >
-            Matcha wasn't a trend for us — it was transformational. Read about
-            how Avora came to life and the belief that drives every cup.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.6 }}
-            className="mt-10"
-          >
-            <Link to="/founders">
-              <motion.span
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.97 }}
-                className="inline-block font-body text-sm tracking-widest text-cream border border-cream/40 px-10 py-4 hover:bg-cream/10 transition-all duration-500"
-              >
-                Read our story
-              </motion.span>
-            </Link>
-          </motion.div>
-        </div>
-
-        {/* Right: Image */}
+      <div className="flex flex-col-reverse md:flex-row min-h-[80vh] md:min-h-screen">
+        {/* Left: Image */}
         <motion.div
-          initial={{ opacity: 0, x: 50 }}
+          initial={{ opacity: 0, x: -50 }}
           animate={inView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.9 }}
           className="w-full md:w-1/2 relative min-h-[60vh] md:min-h-0"
@@ -64,6 +27,33 @@ const FoundersSection = () => {
             className="absolute inset-0 w-full h-full object-cover"
           />
         </motion.div>
+
+        {/* Right: Text content */}
+        <div className="w-full md:w-1/2 flex flex-col justify-center px-8 md:px-16 lg:px-24 py-16 md:py-20">
+          <TextReveal
+            className="font-display text-4xl md:text-5xl lg:text-6xl text-cream font-light leading-tight"
+            delay={0.2}
+          >
+            Founders' Note
+          </TextReveal>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="mt-10"
+          >
+            <Link to="/founders">
+              <motion.span
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.97 }}
+                className="inline-block font-body text-sm tracking-widest text-cream border border-cream/40 px-10 py-4 hover:bg-cream/10 transition-all duration-500"
+              >
+                Read our story
+              </motion.span>
+            </Link>
+          </motion.div>
+        </div>
       </div>
     </section>
   );
