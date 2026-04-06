@@ -62,7 +62,7 @@ const HeroSection = () => {
           <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-light text-cream leading-tight tracking-wide cursor-default">
             Experience the
             <br />
-            <TypewriterText text="eternal high" />
+            <span className="font-semibold italic">eternal high</span>
           </h1>
 
           <div className="mt-5">
