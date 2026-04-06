@@ -70,22 +70,21 @@ const HeroSection = () => {
   });
 
   // Parallax on image
-  const heroY = useTransform(scrollYProgress, [0, 0.5], ["0%", "10%"]);
+  const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "10%"]);
 
-  // Text appears very quickly — first 5-15% of scroll
-  const textOpacity = useTransform(scrollYProgress, [0.02, 0.12], [0, 1]);
-  const textY = useTransform(scrollYProgress, [0.02, 0.12], [40, 0]);
+  // Text appears almost immediately — within first tiny scroll
+  const textOpacity = useTransform(scrollYProgress, [0, 0.08], [0, 1]);
+  const textY = useTransform(scrollYProgress, [0, 0.08], [30, 0]);
 
-  // Image blur & darken — settles by 15%, then stays until 70% before next section
-  const blur = useTransform(scrollYProgress, [0.02, 0.15], [0, 5]);
-  const overlayOpacity = useTransform(scrollYProgress, [0.02, 0.15], [0, 0.35]);
+  // Image blur & darken — quick and snappy
+  const blur = useTransform(scrollYProgress, [0, 0.1], [0, 5]);
+  const overlayOpacity = useTransform(scrollYProgress, [0, 0.1], [0, 0.35]);
 
   useMotionValueEvent(blur, "change", (v) => setBlurValue(v));
 
   return (
-    // Extra tall section to give scroll room for the effect
-    <section id="hero" ref={sectionRef} className="relative h-[200vh]">
-      {/* Sticky container — fills viewport and stays pinned */}
+    // 130vh = just enough room for reveal + a beat to read, then next section
+    <section id="hero" ref={sectionRef} className="relative h-[130vh]">
       <div className="sticky top-0 h-screen w-full overflow-hidden bg-primary">
         {/* Full-viewport image */}
         <motion.img
@@ -107,10 +106,10 @@ const HeroSection = () => {
           style={{ opacity: overlayOpacity }}
         />
 
-        {/* Gradient blend at bottom for transition to next section */}
+        {/* Gradient blend at bottom */}
         <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-primary to-transparent" />
 
-        {/* Text & button — absolute overlay on top of image */}
+        {/* Text & button — overlay */}
         <motion.div
           className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center z-10"
           style={{ opacity: textOpacity, y: textY }}
