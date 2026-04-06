@@ -44,8 +44,6 @@ const CustomCursor = () => {
     };
   }, [cursorX, cursorY, isVisible]);
 
-  if (!isVisible) return null;
-
   return (
     <motion.div
       className="fixed top-0 left-0 z-[9999] pointer-events-none"
@@ -54,6 +52,7 @@ const CustomCursor = () => {
         y: cursorY,
         translateX: "-50%",
         translateY: "-50%",
+        opacity: isVisible ? 1 : 0,
       }}
     >
       <motion.img
