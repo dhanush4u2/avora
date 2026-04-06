@@ -37,13 +37,12 @@ const Founders = () => {
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.9 }}
-          className="w-full md:w-1/2"
-          style={{ aspectRatio: '4 / 5' }}
+          className="w-full md:w-1/2 flex items-center justify-center"
         >
           <img
             src={foundersHero}
             alt="Avora founder Shruti"
-            className="w-full h-full object-cover"
+            className="w-full h-auto object-contain"
             width={800}
             height={1000}
           />
