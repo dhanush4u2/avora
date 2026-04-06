@@ -26,20 +26,18 @@ const HeroSection = () => {
   return (
     <section id="hero" ref={sectionRef} className="relative h-[145vh]">
       <div className="sticky top-0 h-screen w-full overflow-hidden bg-primary">
-        <div className="absolute inset-0 overflow-hidden">
-          <motion.img
-            src={heroProduct}
-            alt="Avora matcha product"
-            width={1920}
-            height={1080}
-            className="absolute left-1/2 top-0 w-full -translate-x-1/2 object-contain origin-top"
-            style={{
-              scale: 2,
-              y: heroY,
-              filter: `blur(${blurValue}px)`,
-            }}
-          />
-        </div>
+        <motion.img
+          src={heroProduct}
+          alt="Avora matcha product"
+          width={1920}
+          height={1080}
+          className="absolute inset-0 h-full w-full object-cover"
+          style={{
+            objectPosition: "62% 80%",
+            y: heroY,
+            filter: `blur(${blurValue}px)`,
+          }}
+        />
 
         <motion.div
           className="absolute inset-0 bg-primary"
