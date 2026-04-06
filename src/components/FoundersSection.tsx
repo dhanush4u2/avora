@@ -29,8 +29,8 @@ const FoundersSection = () => {
               className="w-full h-full object-contain"
             />
           </motion.div>
-          {/* Gradient fade starting after the image edge */}
-          <div className="absolute inset-y-0 -right-24 w-24 bg-gradient-to-r from-primary to-transparent pointer-events-none" />
+          {/* Gradient fade starting at 98% of image */}
+          <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-primary to-transparent pointer-events-none" />
         </div>
 
         {/* Right: Text content — pushed more to the right */}
