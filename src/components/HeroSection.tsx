@@ -63,30 +63,26 @@ const TypewriterText = ({ text }: { text: string }) => {
 const HeroSection = () => {
   const sectionRef = useRef(null);
   const [blurValue, setBlurValue] = useState(0);
+  const [showOverlay, setShowOverlay] = useState(false);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start start", "end start"],
   });
 
-  // Parallax on image
   const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "10%"]);
+  const blur = useTransform(scrollYProgress, [0.015, 0.12], [0, 5]);
+  const overlayOpacity = useTransform(scrollYProgress, [0.015, 0.12], [0, 0.38]);
 
-  // Text appears almost immediately — within first tiny scroll
-  const textOpacity = useTransform(scrollYProgress, [0, 0.08], [0, 1]);
-  const textY = useTransform(scrollYProgress, [0, 0.08], [30, 0]);
+  useMotionValueEvent(scrollYProgress, "change", (value) => {
+    setShowOverlay(value > 0.015);
+  });
 
-  // Image blur & darken — quick and snappy
-  const blur = useTransform(scrollYProgress, [0, 0.1], [0, 5]);
-  const overlayOpacity = useTransform(scrollYProgress, [0, 0.1], [0, 0.35]);
-
-  useMotionValueEvent(blur, "change", (v) => setBlurValue(v));
+  useMotionValueEvent(blur, "change", (value) => setBlurValue(value));
 
   return (
-    // 130vh = just enough room for reveal + a beat to read, then next section
-    <section id="hero" ref={sectionRef} className="relative h-[130vh]">
+    <section id="hero" ref={sectionRef} className="relative h-[145vh]">
       <div className="sticky top-0 h-screen w-full overflow-hidden bg-primary">
-        {/* Full-viewport image */}
         <motion.img
           src={heroProduct}
           alt="Avora matcha product"
@@ -100,19 +96,25 @@ const HeroSection = () => {
           }}
         />
 
-        {/* Dark overlay */}
         <motion.div
           className="absolute inset-0 bg-primary"
           style={{ opacity: overlayOpacity }}
         />
 
-        {/* Gradient blend at bottom */}
         <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-primary to-transparent" />
 
-        {/* Text & button — overlay */}
         <motion.div
-          className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center z-10"
-          style={{ opacity: textOpacity, y: textY }}
+          initial={false}
+          animate={showOverlay ? "visible" : "hidden"}
+          variants={{
+            hidden: { opacity: 0, y: 28 },
+            visible: {
+              opacity: 1,
+              y: 0,
+              transition: { duration: 0.45, ease: [0.25, 0.1, 0.25, 1] },
+            },
+          }}
+          className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 text-center"
         >
           <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-light text-cream leading-tight tracking-wide cursor-default">
             Experience the
