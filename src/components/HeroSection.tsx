@@ -72,13 +72,13 @@ const HeroSection = () => {
   // Parallax on image
   const heroY = useTransform(scrollYProgress, [0, 0.5], ["0%", "10%"]);
 
-  // Text fades in during 30-55% of scroll through the section
-  const textOpacity = useTransform(scrollYProgress, [0.15, 0.35], [0, 1]);
-  const textY = useTransform(scrollYProgress, [0.15, 0.35], [50, 0]);
+  // Text appears very quickly — first 5-15% of scroll
+  const textOpacity = useTransform(scrollYProgress, [0.02, 0.12], [0, 1]);
+  const textY = useTransform(scrollYProgress, [0.02, 0.12], [40, 0]);
 
-  // Image blur & darken synced with text reveal
-  const blur = useTransform(scrollYProgress, [0.15, 0.4], [0, 6]);
-  const overlayOpacity = useTransform(scrollYProgress, [0.15, 0.4], [0, 0.4]);
+  // Image blur & darken — settles by 15%, then stays until 70% before next section
+  const blur = useTransform(scrollYProgress, [0.02, 0.15], [0, 5]);
+  const overlayOpacity = useTransform(scrollYProgress, [0.02, 0.15], [0, 0.35]);
 
   useMotionValueEvent(blur, "change", (v) => setBlurValue(v));
 
