@@ -1,6 +1,6 @@
 import { motion, type Easing } from "framer-motion";
 import { Link } from "react-router-dom";
-import foundersHero from "@/assets/founders-hero.jpg";
+import foundersHero from "@/assets/founders-page.png";
 import foundersMatcha from "@/assets/founders-matcha.jpg";
 
 const ease: Easing = [0.25, 0.1, 0.25, 1];
@@ -30,14 +30,6 @@ const Founders = () => {
           >
             Founders' note
           </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.5 }}
-            className="font-body text-cream/70 text-base md:text-lg leading-relaxed mt-8 max-w-md"
-          >
-            Matcha wasn't a trend for us — it was transformational. This is the story of how Avora came to life.
-          </motion.p>
         </div>
 
         {/* Right: Image */}
@@ -45,14 +37,15 @@ const Founders = () => {
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.9 }}
-          className="w-full md:w-1/2 relative min-h-[60vh] md:min-h-0"
+          className="w-full md:w-1/2"
+          style={{ aspectRatio: '4 / 5' }}
         >
           <img
             src={foundersHero}
             alt="Avora founder Shruti"
-            className="absolute inset-0 w-full h-full object-cover"
+            className="w-full h-full object-cover"
             width={800}
-            height={1200}
+            height={1000}
           />
         </motion.div>
       </div>
