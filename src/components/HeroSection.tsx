@@ -69,22 +69,25 @@ const HeroSection = () => {
     offset: ["start start", "end start"],
   });
 
-  const heroY = useTransform(scrollYProgress, [0, 0.3], ["0%", "15%"]);
+  // Parallax on image
+  const heroY = useTransform(scrollYProgress, [0, 0.5], ["0%", "10%"]);
 
-  // Text appears as you scroll
-  const textOpacity = useTransform(scrollYProgress, [0, 0.08, 0.2], [0, 0, 1]);
-  const textY = useTransform(scrollYProgress, [0, 0.08, 0.2], [40, 40, 0]);
+  // Text fades in during 30-55% of scroll through the section
+  const textOpacity = useTransform(scrollYProgress, [0.15, 0.35], [0, 1]);
+  const textY = useTransform(scrollYProgress, [0.15, 0.35], [50, 0]);
 
-  // Image blurs as text appears
-  const blur = useTransform(scrollYProgress, [0, 0.08, 0.22], [0, 0, 5]);
-  const overlayOpacity = useTransform(scrollYProgress, [0, 0.08, 0.22], [0, 0, 0.35]);
+  // Image blur & darken synced with text reveal
+  const blur = useTransform(scrollYProgress, [0.15, 0.4], [0, 6]);
+  const overlayOpacity = useTransform(scrollYProgress, [0.15, 0.4], [0, 0.4]);
 
   useMotionValueEvent(blur, "change", (v) => setBlurValue(v));
 
   return (
-    <section id="hero" ref={sectionRef} className="relative min-h-screen flex flex-col overflow-hidden bg-primary">
-      {/* Image area — original aspect ratio */}
-      <div className="relative w-full overflow-hidden" style={{ aspectRatio: "16 / 10" }}>
+    // Extra tall section to give scroll room for the effect
+    <section id="hero" ref={sectionRef} className="relative h-[200vh]">
+      {/* Sticky container — fills viewport and stays pinned */}
+      <div className="sticky top-0 h-screen w-full overflow-hidden bg-primary">
+        {/* Full-viewport image */}
         <motion.img
           src={heroProduct}
           alt="Avora matcha product"
@@ -97,27 +100,28 @@ const HeroSection = () => {
             filter: `blur(${blurValue}px)`,
           }}
         />
-        {/* Dark overlay for text readability */}
+
+        {/* Dark overlay */}
         <motion.div
           className="absolute inset-0 bg-primary"
           style={{ opacity: overlayOpacity }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/20 via-transparent to-primary" />
-      </div>
 
-      {/* Text area - below image, scroll-revealed */}
-      <div className="relative z-10 flex flex-1 items-center justify-center px-6 pb-16 -mt-20 text-center">
+        {/* Gradient blend at bottom for transition to next section */}
+        <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-primary to-transparent" />
+
+        {/* Text & button — absolute overlay on top of image */}
         <motion.div
-          className="container mx-auto relative"
+          className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center z-10"
           style={{ opacity: textOpacity, y: textY }}
         >
-          <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-light text-cream leading-tight tracking-wide relative z-10 cursor-default">
+          <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-light text-cream leading-tight tracking-wide cursor-default">
             Experience the
             <br />
             <TypewriterText text="eternal high" />
           </h1>
 
-          <div className="mt-5 relative z-10">
+          <div className="mt-5">
             <Link to="/product/ceremonial-matcha-green-tea-imperial-aaa-grade">
               <motion.span
                 whileHover={{ scale: 1.05 }}
