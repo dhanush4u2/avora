@@ -11,26 +11,30 @@ const FoundersSection = () => {
   return (
     <section id="founders" className="bg-primary" ref={ref}>
       <div className="flex flex-col-reverse md:flex-row items-center py-12 md:py-16 md:pr-12 lg:pr-16">
-        {/* Left: Image — flush to left edge, rounded on right side only */}
-        <motion.div
-          initial={{ opacity: 0, x: -50 }}
-          animate={inView ? { opacity: 1, x: 0 } : {}}
-          transition={{ duration: 0.9 }}
-          className="w-full md:w-1/2 rounded-r-3xl overflow-hidden bg-primary"
-          style={{ aspectRatio: '2 / 3', maxWidth: '600px' }}
-        >
-          <img
-            src={foundersImg}
-            alt="Avora founder"
-            loading="lazy"
-            width={800}
-            height={1200}
-            className="w-full h-full object-contain"
-          />
-        </motion.div>
+        {/* Left: Image with gradient fade on right */}
+        <div className="relative w-full md:w-1/2" style={{ maxWidth: '600px' }}>
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.9 }}
+            className="w-full rounded-r-3xl overflow-hidden bg-primary"
+            style={{ aspectRatio: '2 / 3' }}
+          >
+            <img
+              src={foundersImg}
+              alt="Avora founder"
+              loading="lazy"
+              width={800}
+              height={1200}
+              className="w-full h-full object-contain"
+            />
+          </motion.div>
+          {/* Gradient fade on the right edge */}
+          <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-primary to-transparent pointer-events-none" />
+        </div>
 
-        {/* Right: Text content */}
-        <div className="w-full md:w-1/2 flex flex-col justify-center px-8 md:px-16 lg:px-24 py-16 md:py-20">
+        {/* Right: Text content — pushed more to the right */}
+        <div className="w-full md:w-1/2 flex flex-col justify-center px-8 md:px-20 lg:px-32 py-16 md:py-20">
           <TextReveal
             className="font-display text-4xl md:text-5xl lg:text-6xl text-cream font-light leading-tight"
             delay={0.2}
