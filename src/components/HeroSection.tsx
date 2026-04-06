@@ -32,11 +32,11 @@ const HeroSection = () => {
             alt="Avora matcha product"
             width={1920}
             height={1080}
-            className="absolute left-1/2 bottom-0 w-full -translate-x-1/2 object-contain"
+            className="absolute left-1/2 top-0 w-full -translate-x-1/2 object-contain origin-top"
             style={{
+              scale: 2,
               y: heroY,
               filter: `blur(${blurValue}px)`,
-              clipPath: "inset(50% 0 0 0)",
             }}
           />
         </div>
