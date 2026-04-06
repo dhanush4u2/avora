@@ -32,12 +32,9 @@ const HeroSection = () => {
             alt="Avora matcha product"
             width={1920}
             height={1080}
-            className="absolute left-0 w-full"
+            className="absolute left-1/2 top-0 w-full -translate-x-1/2 object-contain origin-top"
             style={{
-              top: "-100%",
-              height: "200%",
-              objectFit: "cover",
-              objectPosition: "center bottom",
+              scale: 2,
               y: heroY,
               filter: `blur(${blurValue}px)`,
             }}
