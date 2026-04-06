@@ -1,64 +1,7 @@
 import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import heroProduct from "@/assets/hero-bg.jpg";
-
-const TypewriterText = ({ text }: { text: string }) => {
-  const [visibleCount, setVisibleCount] = useState(0);
-  const [showCursor, setShowCursor] = useState(true);
-  const chars = text.split("");
-  const typeSpeed = 80;
-  const pauseDuration = 2500;
-  const totalChars = chars.length;
-
-  useEffect(() => {
-    let timeout: ReturnType<typeof setTimeout>;
-    const cycle = () => {
-      let count = 0;
-      const type = () => {
-        count++;
-        setVisibleCount(count);
-        if (count < totalChars) {
-          timeout = setTimeout(type, typeSpeed);
-        } else {
-          setShowCursor(false);
-          timeout = setTimeout(erase, pauseDuration);
-        }
-      };
-      const erase = () => {
-        count--;
-        setVisibleCount(count);
-        if (count > 0) {
-          timeout = setTimeout(erase, 40);
-        } else {
-          timeout = setTimeout(cycle, 500);
-          setShowCursor(true);
-        }
-      };
-      timeout = setTimeout(type, typeSpeed);
-    };
-    const initial = setTimeout(cycle, 1300);
-    return () => { clearTimeout(initial); clearTimeout(timeout); };
-  }, [totalChars]);
-
-  return (
-    <span className="font-semibold italic inline-block align-bottom">
-      {chars.map((char, i) => (
-        <span
-          key={i}
-          className="inline-block"
-          style={{
-            opacity: i < visibleCount ? 1 : 0,
-            whiteSpace: char === " " ? "pre" : undefined,
-          }}
-        >
-          {char}
-        </span>
-      ))}
-      {showCursor && <span className="inline-block w-[3px] h-[0.8em] bg-cream ml-1 align-baseline animate-[pulse_0.8s_ease-in-out_infinite]" />}
-    </span>
-  );
-};
 
 const HeroSection = () => {
   const sectionRef = useRef(null);
