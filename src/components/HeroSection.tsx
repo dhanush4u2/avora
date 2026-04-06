@@ -69,30 +69,22 @@ const HeroSection = () => {
     offset: ["start start", "end start"],
   });
 
-  // Text fades in as you scroll down
-  const textOpacity = useTransform(scrollYProgress, [0, 0.15, 0.35], [0, 0, 1]);
-  const textY = useTransform(scrollYProgress, [0, 0.15, 0.35], [60, 60, 0]);
+  const heroY = useTransform(scrollYProgress, [0, 0.3], ["0%", "15%"]);
 
-  // Image blur
-  const blur = useTransform(scrollYProgress, [0, 0.15, 0.4], [0, 0, 6]);
+  // Text appears as you scroll
+  const textOpacity = useTransform(scrollYProgress, [0, 0.08, 0.2], [0, 0, 1]);
+  const textY = useTransform(scrollYProgress, [0, 0.08, 0.2], [40, 40, 0]);
 
-  // Dark overlay
-  const overlayOpacity = useTransform(scrollYProgress, [0, 0.15, 0.4], [0, 0, 0.45]);
+  // Image blurs as text appears
+  const blur = useTransform(scrollYProgress, [0, 0.08, 0.22], [0, 0, 5]);
+  const overlayOpacity = useTransform(scrollYProgress, [0, 0.08, 0.22], [0, 0, 0.35]);
 
-  // Parallax
-  const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
-
-  // Sync blur to state for CSS filter
   useMotionValueEvent(blur, "change", (v) => setBlurValue(v));
 
   return (
-    <section
-      id="hero"
-      ref={sectionRef}
-      className="relative h-[200vh]"
-    >
-      <div className="sticky top-0 h-screen w-full overflow-hidden">
-        {/* Full-bleed image with dynamic blur */}
+    <section id="hero" ref={sectionRef} className="relative min-h-screen flex flex-col overflow-hidden bg-primary">
+      {/* Image area — original aspect ratio */}
+      <div className="relative w-full overflow-hidden" style={{ aspectRatio: "16 / 10" }}>
         <motion.img
           src={heroProduct}
           alt="Avora matcha product"
@@ -103,28 +95,29 @@ const HeroSection = () => {
             objectPosition: "62% 80%",
             y: heroY,
             filter: `blur(${blurValue}px)`,
-            WebkitFilter: `blur(${blurValue}px)`,
           }}
         />
-
-        {/* Dark overlay */}
+        {/* Dark overlay for text readability */}
         <motion.div
           className="absolute inset-0 bg-primary"
           style={{ opacity: overlayOpacity }}
         />
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/20 via-transparent to-primary" />
+      </div>
 
-        {/* Text & button — scroll-revealed */}
+      {/* Text area - below image, scroll-revealed */}
+      <div className="relative z-10 flex flex-1 items-center justify-center px-6 pb-16 -mt-20 text-center">
         <motion.div
-          className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center z-10"
+          className="container mx-auto relative"
           style={{ opacity: textOpacity, y: textY }}
         >
-          <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-light text-cream leading-tight tracking-wide cursor-default">
+          <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-light text-cream leading-tight tracking-wide relative z-10 cursor-default">
             Experience the
             <br />
             <TypewriterText text="eternal high" />
           </h1>
 
-          <div className="mt-5">
+          <div className="mt-5 relative z-10">
             <Link to="/product/ceremonial-matcha-green-tea-imperial-aaa-grade">
               <motion.span
                 whileHover={{ scale: 1.05 }}
