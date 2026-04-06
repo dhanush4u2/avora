@@ -1,4 +1,4 @@
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { Link } from "react-router-dom";
 import TextReveal from "@/components/TextReveal";
@@ -8,52 +8,73 @@ const FoundersSection = () => {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+
+  const imageScale = useTransform(scrollYProgress, [0, 0.5], [1.15, 1]);
+  const imageY = useTransform(scrollYProgress, [0, 1], ["-5%", "5%"]);
+
   return (
-    <section id="founders" className="bg-primary" ref={ref}>
-      <div className="flex flex-col-reverse md:flex-row items-center justify-center px-6 md:px-12 lg:px-16 py-12 md:py-16">
-        {/* Left: Image — flush to left edge, rounded on right side only */}
+    <section id="founders" className="bg-primary overflow-hidden" ref={ref}>
+      <div className="relative min-h-[80vh] md:min-h-[85vh] flex items-center">
+        {/* Image — fills ~60% width, bleeds under text */}
         <motion.div
-          initial={{ opacity: 0, x: -50 }}
-          animate={inView ? { opacity: 1, x: 0 } : {}}
-          transition={{ duration: 0.9 }}
-          className="w-full md:w-5/12 rounded-3xl overflow-hidden bg-primary"
-          style={{ aspectRatio: '2 / 3', maxWidth: '480px' }}
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          transition={{ duration: 1.2 }}
+          className="absolute inset-0 w-full md:w-[60%] overflow-hidden"
         >
-          <img
+          <motion.img
             src={foundersImg}
             alt="Avora founder"
             loading="lazy"
             width={800}
             height={1200}
-            className="w-full h-full object-contain"
+            style={{ scale: imageScale, y: imageY }}
+            className="w-full h-full object-cover"
           />
+          {/* Gradient overlay for text readability — fades from right */}
+          <div className="absolute inset-0 bg-gradient-to-l from-primary via-primary/80 to-transparent md:via-primary/40" />
         </motion.div>
 
-        {/* Right: Text content */}
-        <div className="w-full md:w-1/2 flex flex-col justify-center px-8 md:px-16 lg:px-24 py-16 md:py-20">
-          <TextReveal
-            className="font-display text-4xl md:text-5xl lg:text-6xl text-cream font-light leading-tight"
-            delay={0.2}
-          >
-            Founders' Note
-          </TextReveal>
+        {/* Text content — overlaps image from the right */}
+        <div className="relative z-10 w-full flex justify-end">
+          <div className="w-full md:w-1/2 px-8 md:px-16 lg:px-24 py-20 md:py-28">
+            <TextReveal
+              className="font-display text-4xl md:text-5xl lg:text-6xl text-cream font-light leading-tight"
+              delay={0.2}
+            >
+              Founders' Note
+            </TextReveal>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="mt-10"
-          >
-            <Link to="/founders">
-              <motion.span
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.97 }}
-                className="inline-block font-body text-sm tracking-widest text-cream border border-cream/40 px-10 py-4 hover:bg-cream/10 transition-all duration-500"
-              >
-                Read our story
-              </motion.span>
-            </Link>
-          </motion.div>
+            <motion.p
+              initial={{ opacity: 0, y: 15 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.5 }}
+              className="font-body text-cream/60 text-base md:text-lg leading-relaxed mt-6 max-w-sm"
+            >
+              The story of how matcha became more than a drink — it became Avora.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.7 }}
+              className="mt-10"
+            >
+              <Link to="/founders">
+                <motion.span
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.97 }}
+                  className="inline-block font-body text-sm tracking-widest text-cream border border-cream/40 px-10 py-4 hover:bg-cream/10 transition-all duration-500"
+                >
+                  Read our story
+                </motion.span>
+              </Link>
+            </motion.div>
+          </div>
         </div>
       </div>
     </section>
