@@ -10,13 +10,14 @@ const FoundersSection = () => {
 
   return (
     <section id="founders" className="bg-primary" ref={ref}>
-      <div className="flex flex-col-reverse md:flex-row items-stretch min-h-[75vh] md:min-h-[85vh]">
+      <div className="flex flex-col-reverse md:flex-row items-center">
         {/* Left: Image — flush to left edge, rounded on right side only */}
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           animate={inView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.9 }}
-          className="w-full md:w-1/2 relative min-h-[60vh] md:min-h-0 rounded-r-3xl overflow-hidden"
+          className="w-full md:w-1/2 rounded-r-3xl overflow-hidden bg-primary"
+          style={{ aspectRatio: '2 / 3', maxWidth: '600px' }}
         >
           <img
             src={foundersImg}
@@ -24,7 +25,7 @@ const FoundersSection = () => {
             loading="lazy"
             width={800}
             height={1200}
-            className="absolute inset-0 w-full h-full object-cover"
+            className="w-full h-full object-contain"
           />
         </motion.div>
 
