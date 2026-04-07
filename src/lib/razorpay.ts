@@ -51,7 +51,7 @@ async function verifyPayment(
   razorpay_payment_id: string,
   razorpay_signature: string,
   orderDetails: {
-    items: Array<{ variantId: string; quantity: number; price: string; title: string }>;
+    items: Array<{ variantId: string; quantity: number; price: string }>;
     totalAmount: string;
     customer?: CustomerDetails;
   }
@@ -115,7 +115,6 @@ export async function initiateRazorpayCheckout({ items, totalAmount, customer, o
                 variantId: i.variantId,
                 quantity: i.quantity,
                 price: i.price.amount,
-                title: i.product.node.title,
               })),
               totalAmount: totalAmount.toString(),
               customer,

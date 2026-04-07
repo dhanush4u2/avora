@@ -37,7 +37,7 @@ Deno.serve(async (req) => {
       })
     }
 
-    // Verify Razorpay signature
+    // Verify signature
     const generatedSignature = await hmacSha256(
       keySecret,
       `${razorpay_order_id}|${razorpay_payment_id}`
@@ -50,95 +50,60 @@ Deno.serve(async (req) => {
       })
     }
 
-    // Payment verified — create order in Shopify via Admin API
+    // Payment verified - now create order in Shopify so Eshopbox picks it up
     let shopifyOrderId = null
-    let shopifyOrderName = null
     try {
       const shopifyToken = Deno.env.get('SHOPIFY_ACCESS_TOKEN')
       if (shopifyToken && orderDetails) {
-        const customer = orderDetails.customer || {}
-
-        const orderPayload: Record<string, unknown> = {
-          line_items: (orderDetails.items || []).map((item: { title?: string; variantId?: string; quantity: number; price: string }) => {
-            const lineItem: Record<string, unknown> = {
-              title: item.title || 'Product',
-              price: item.price,
-              quantity: item.quantity,
-            }
-            // Include variant_id if available for inventory tracking
-            if (item.variantId) {
-              const numericId = item.variantId.split('/').pop()
-              if (numericId && !isNaN(Number(numericId))) {
-                lineItem.variant_id = parseInt(numericId)
-              }
-            }
-            return lineItem
-          }),
-          financial_status: 'paid',
-          transactions: [{
-            kind: 'sale',
-            status: 'success',
-            amount: orderDetails.totalAmount,
-            gateway: 'Razorpay',
-          }],
-          note: `Razorpay Payment ID: ${razorpay_payment_id} | Order ID: ${razorpay_order_id}`,
-          tags: 'razorpay,lovable-checkout',
-          send_receipt: true,
-          inventory_behaviour: 'decrement_obeying_policy',
-        }
-
-        // Add customer info
-        if (customer.name || customer.email || customer.phone) {
-          const nameParts = (customer.name || '').split(' ')
-          orderPayload.customer = {
-            first_name: nameParts[0] || '',
-            last_name: nameParts.slice(1).join(' ') || '',
-            email: customer.email || '',
-            phone: customer.phone || '',
-          }
-          orderPayload.email = customer.email || ''
-          orderPayload.phone = customer.phone || ''
-        }
-
-        // Add shipping address
-        if (customer.address) {
-          orderPayload.shipping_address = {
-            first_name: (customer.name || '').split(' ')[0] || '',
-            last_name: (customer.name || '').split(' ').slice(1).join(' ') || '',
-            address1: customer.address,
-            city: customer.city || '',
-            province: customer.state || '',
-            zip: customer.pincode || '',
-            country: 'India',
-            country_code: 'IN',
-            phone: customer.phone || '',
-          }
-          // Copy as billing address too
-          orderPayload.billing_address = orderPayload.shipping_address
-        }
-
-        console.log('Creating Shopify order:', JSON.stringify(orderPayload, null, 2))
-
         const shopifyRes = await fetch(
-          'https://a0c8rs-h4.myshopify.com/admin/api/2024-01/orders.json',
+          'https://a0c8rs-h4.myshopify.com/admin/api/2025-07/orders.json',
           {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
               'X-Shopify-Access-Token': shopifyToken,
             },
-            body: JSON.stringify({ order: orderPayload }),
+            body: JSON.stringify({
+              order: {
+                line_items: orderDetails.items.map((item: { variantId: string; quantity: number; price: string }) => ({
+                  variant_id: parseInt(item.variantId.split('/').pop() || '0'),
+                  quantity: item.quantity,
+                  price: item.price,
+                })),
+                financial_status: 'paid',
+                transactions: [{
+                  kind: 'sale',
+                  status: 'success',
+                  amount: orderDetails.totalAmount,
+                  gateway: 'Razorpay',
+                }],
+                note: `Razorpay Payment ID: ${razorpay_payment_id}`,
+                tags: 'razorpay,lovable-checkout',
+                ...(orderDetails.customer ? {
+                  customer: {
+                    first_name: orderDetails.customer.name?.split(' ')[0] || '',
+                    last_name: orderDetails.customer.name?.split(' ').slice(1).join(' ') || '',
+                    email: orderDetails.customer.email || '',
+                    phone: orderDetails.customer.phone || '',
+                  },
+                  shipping_address: orderDetails.customer.address ? {
+                    address1: orderDetails.customer.address,
+                    city: orderDetails.customer.city || '',
+                    province: orderDetails.customer.state || '',
+                    zip: orderDetails.customer.pincode || '',
+                    country: 'India',
+                  } : undefined,
+                } : {}),
+              },
+            }),
           }
         )
 
         if (shopifyRes.ok) {
           const shopifyOrder = await shopifyRes.json()
           shopifyOrderId = shopifyOrder.order?.id
-          shopifyOrderName = shopifyOrder.order?.name
-          console.log('Shopify order created:', shopifyOrderId, shopifyOrderName)
         } else {
-          const errText = await shopifyRes.text()
-          console.error('Shopify order creation failed:', shopifyRes.status, errText)
+          console.error('Shopify order creation failed:', await shopifyRes.text())
         }
       }
     } catch (e) {
@@ -149,7 +114,6 @@ Deno.serve(async (req) => {
       verified: true, 
       paymentId: razorpay_payment_id,
       shopifyOrderId,
-      shopifyOrderName,
     }), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     })

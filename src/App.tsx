@@ -20,7 +20,6 @@ import PrivacyPolicy from "./pages/PrivacyPolicy.tsx";
 import TermsOfService from "./pages/TermsOfService.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import OrderSuccess from "./pages/OrderSuccess.tsx";
-import Checkout from "./pages/Checkout.tsx";
 
 const queryClient = new QueryClient();
 
@@ -35,7 +34,6 @@ const AppContent = () => {
         <Route path="/" element={<Index />} />
         <Route path="/shop" element={<Navigate to="/product/ceremonial-matcha" replace />} />
         <Route path="/order-success" element={<OrderSuccess />} />
-        <Route path="/checkout" element={<Checkout />} />
         <Route path="/product/:handle" element={<ProductDetail />} />
         <Route path="/founders" element={<Founders />} />
         <Route path="/refund-policy" element={<RefundPolicy />} />
