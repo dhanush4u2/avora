@@ -10,19 +10,19 @@ const features = [
     num: "01",
     title: "Region",
     image: regionImg,
-    desc: "Sourced from certified organic farms, our matcha is pure, natural, and free from harmful chemicals.",
+    desc: "Our matcha is made from first-harvest leaves sourced from Kyoto and Kagoshima, Japan.",
   },
   {
     num: "02",
     title: "Grade",
     image: gradeImg,
-    desc: "We partner with farmers who practice sustainable agriculture, protecting the earth for future generations.",
+    desc: "This is ceremonial-grade matcha, crafted from carefully selected leaves for a smooth, refined cup. It is made to deliver a high-quality everyday drinking experience.",
   },
   {
     num: "03",
-    title: "Tasting notes",
+    title: "Tasting Notes",
     image: tastingImg,
-    desc: "Every cup is crafted to nourish your body and calm your mind, bringing balance to your daily ritual.",
+    desc: "It has a vibrant green color, rich umami, and a fresh aroma. Each sip is full-bodied, calm, and gently energizing.",
   },
 ];
 
