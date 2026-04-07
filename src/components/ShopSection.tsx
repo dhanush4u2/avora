@@ -11,7 +11,7 @@ const ShopSection = () => {
 
   return (
     <section id="shop" className="bg-primary" ref={ref}>
-      <div className="flex flex-col md:flex-row items-center py-12 md:py-16 md:pl-12 lg:pl-16">
+      <div className="flex flex-col md:flex-row items-center py-12 md:py-16 md:pl-12 lg:pl-16 md:pr-0">
         {/* Left: Text + button */}
         <div className="w-full md:w-[30%] flex flex-col justify-center items-end text-right px-8 md:px-10 lg:px-14 py-16 md:py-20">
           <TextReveal
@@ -47,7 +47,7 @@ const ShopSection = () => {
             initial={{ opacity: 0, x: 50 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.9 }}
-            className="w-full rounded-l-3xl overflow-hidden bg-primary"
+            className="w-full rounded-l-3xl overflow-hidden bg-primary md:rounded-r-none"
           >
             <img
               src={matchaLatte}
