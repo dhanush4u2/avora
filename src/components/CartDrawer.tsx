@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Minus, Plus, ShoppingBag, Loader2, ExternalLink } from "lucide-react";
+import { X, Minus, Plus, ShoppingBag, Loader2 } from "lucide-react";
 import { useCartStore } from "@/stores/cartStore";
 
 interface CartDrawerProps {
@@ -9,18 +10,16 @@ interface CartDrawerProps {
 }
 
 const CartDrawer = ({ open, onClose }: CartDrawerProps) => {
-  const { items, totalPrice, isLoading, isSyncing, updateQuantity, removeItem, getCheckoutUrl, syncCart } = useCartStore();
+  const navigate = useNavigate();
+  const { items, totalPrice, isLoading, isSyncing, updateQuantity, removeItem, syncCart } = useCartStore();
 
   useEffect(() => {
     if (open) syncCart();
   }, [open, syncCart]);
 
   const handleCheckout = () => {
-    const checkoutUrl = getCheckoutUrl();
-    if (checkoutUrl) {
-      window.open(checkoutUrl, '_blank');
-      onClose();
-    }
+    onClose();
+    navigate('/checkout');
   };
 
   return (
@@ -122,7 +121,7 @@ const CartDrawer = ({ open, onClose }: CartDrawerProps) => {
                   whileTap={{ scale: 0.98 }}
                   className="w-full py-4 bg-cream text-primary text-center font-body text-sm tracking-widest font-medium transition-all duration-300 hover:bg-cream/90 disabled:opacity-50 flex items-center justify-center gap-2"
                 >
-                  {isLoading || isSyncing ? <Loader2 className="w-4 h-4 animate-spin" /> : <><ExternalLink size={14} /> Pre-Order Now</>}
+                  {isLoading || isSyncing ? <Loader2 className="w-4 h-4 animate-spin" /> : "Checkout"}
                 </motion.button>
               </div>
             )}
