@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
-import { Minus, Plus, Loader2, ChevronLeft, ChevronRight } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Minus, Plus, Loader2, ChevronLeft, ChevronRight, X } from "lucide-react";
 import { useCartStore, ShopifyProduct } from "@/stores/cartStore";
 import { storefrontApiRequest, STOREFRONT_PRODUCT_BY_HANDLE_QUERY } from "@/lib/shopify";
 import { initiateRazorpayCheckout } from "@/lib/razorpay";
 import { toast } from "sonner";
+import type { CartItem } from "@/lib/shopify";
 import shop1 from "@/assets/shop-new-1.jpg";
 import shop2 from "@/assets/shop-new-2.jpg";
 import shop3 from "@/assets/shop-new-3.jpg";
@@ -25,6 +26,12 @@ const ProductDetail = () => {
   const { addItem, isLoading: cartLoading, clearCart } = useCartStore();
   const navigate = useNavigate();
   const [buyLoading, setBuyLoading] = useState(false);
+  const [showCheckoutForm, setShowCheckoutForm] = useState(false);
+  const [pendingItem, setPendingItem] = useState<CartItem | null>(null);
+  const [pendingTotal, setPendingTotal] = useState(0);
+  const [customer, setCustomer] = useState({
+    name: '', email: '', phone: '', address: '', city: '', state: '', pincode: '',
+  });
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -79,11 +86,10 @@ const ProductDetail = () => {
     toast.success(`Added ${quantity} item${quantity > 1 ? "s" : ""} to cart`);
   };
 
-  const handleBuyNow = async () => {
+  const handleBuyNow = () => {
     if (!variant) return;
-    setBuyLoading(true);
     const shopifyProduct: ShopifyProduct = { node: product };
-    const cartItem = {
+    const cartItem: CartItem = {
       product: shopifyProduct,
       variantId: variant.id,
       variantTitle: variant.title,
@@ -92,13 +98,25 @@ const ProductDetail = () => {
       selectedOptions: variant.selectedOptions || [],
       lineId: null,
     };
+    setPendingItem(cartItem);
+    setPendingTotal(parseFloat(variant.price.amount) * quantity);
+    setShowCheckoutForm(true);
+  };
 
+  const handlePay = () => {
+    if (!pendingItem) return;
+    if (!customer.name || !customer.email || !customer.phone) {
+      toast.error("Please fill in name, email, and phone");
+      return;
+    }
+    setBuyLoading(true);
     initiateRazorpayCheckout({
-      items: [cartItem],
-      totalAmount: parseFloat(variant.price.amount) * quantity,
-      customer: { name: '', email: '', phone: '' },
+      items: [pendingItem],
+      totalAmount: pendingTotal,
+      customer,
       onSuccess: (paymentId) => {
         setBuyLoading(false);
+        setShowCheckoutForm(false);
         clearCart();
         navigate(`/order-success?payment_id=${paymentId}`);
       },
