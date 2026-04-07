@@ -66,7 +66,7 @@ const HeroSection = () => {
           </h1>
 
           <div className="mt-5">
-            <Link to="/product/ceremonial-matcha-green-tea-imperial-aaa-grade">
+            <Link to="/product/ceremonial-matcha">
               <motion.span
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.97 }}

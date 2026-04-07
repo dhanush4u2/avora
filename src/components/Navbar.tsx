@@ -20,7 +20,7 @@ const Navbar = () => {
 
   const links = [
     { label: "Home", href: "/" },
-    { label: "Shop", href: "/product/ceremonial-matcha-green-tea-imperial-aaa-grade" },
+    { label: "Shop", href: "/product/ceremonial-matcha" },
     { label: "Founders' Note", href: "/founders" },
   ];
 

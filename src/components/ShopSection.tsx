@@ -52,7 +52,7 @@ const ShopSection = () => {
         {/* Magnetic Shop button centered overlapping both images */}
         <div className="absolute inset-0 flex items-center justify-center z-10">
           <MagneticButton strength={0.4}>
-            <Link to="/product/ceremonial-matcha-green-tea-imperial-aaa-grade">
+            <Link to="/product/ceremonial-matcha">
               <motion.span
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={inView ? { opacity: 1, scale: 1 } : {}}
