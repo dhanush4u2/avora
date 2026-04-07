@@ -23,11 +23,11 @@ const FoundersSection = () => {
               src={foundersImg}
               alt="Avora founder"
               loading="lazy"
-              className="block h-auto w-full object-contain md:mr-auto md:w-[108%] md:max-w-none md:-ml-[4%] lg:w-[112%] lg:-ml-[5%]"
+              className="block h-auto w-full object-contain md:mr-auto md:w-[116%] md:max-w-none md:-ml-[10%] lg:w-[120%] lg:-ml-[12%]"
             />
           </motion.div>
           {/* Gradient fade on right edge */}
-          <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-primary to-transparent pointer-events-none" />
+          <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-primary to-transparent pointer-events-none" />
         </div>
 
         {/* Right: Text content */}
