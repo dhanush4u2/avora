@@ -42,21 +42,19 @@ const ShopSection = () => {
         </div>
 
         {/* Right: Image flush to right edge with left gradient fade */}
-        <div className="relative w-full md:w-1/2" style={{ maxWidth: '600px', marginLeft: 'auto' }}>
+        <div className="relative w-full md:w-[55%]" style={{ marginLeft: 'auto' }}>
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.9 }}
             className="w-full rounded-l-3xl overflow-hidden bg-primary"
-            style={{ aspectRatio: '16 / 9' }}
+            style={{ aspectRatio: '4 / 3' }}
           >
             <img
               src={matchaLatte}
               alt="Avora matcha model"
               loading="lazy"
-              width={800}
-              height={1200}
-              className="w-full h-full object-contain"
+              className="w-full h-full object-cover scale-110"
             />
           </motion.div>
           {/* Gradient fade on left edge */}
