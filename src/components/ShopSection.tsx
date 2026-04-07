@@ -1,4 +1,4 @@
-import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Link } from "react-router-dom";
 import productDisplay from "@/assets/product-display.jpg";
@@ -8,51 +8,37 @@ import MagneticButton from "@/components/MagneticButton";
 const ShopSection = () => {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  });
-
-  const y1 = useTransform(scrollYProgress, [0, 1], ["0%", "-10%"]);
-  const y2 = useTransform(scrollYProgress, [0, 1], ["0%", "-10%"]);
 
   return (
     <section id="shop" className="bg-primary" ref={ref}>
-      <div className="relative grid grid-cols-2 overflow-hidden h-[70vh] md:h-screen">
-        {/* First vertical image with parallax */}
-        <div className="relative overflow-hidden">
+      <div className="relative grid grid-cols-2 items-center gap-3 overflow-hidden px-3 py-6 md:gap-4 md:px-4 md:py-8 lg:px-6 lg:py-10">
+        <div className="flex min-h-[16rem] items-center justify-center md:min-h-[24rem] lg:min-h-[32rem]">
           <motion.img
             src={productDisplay}
             alt="Avora matcha products"
             loading="lazy"
-            initial={{ opacity: 0, scale: 1.05 }}
-            animate={inView ? { opacity: 1, scale: 1 } : {}}
-            whileHover={{ scale: 1.02 }}
-            transition={{ duration: 1 }}
-            style={{ y: y1 }}
-            className="absolute inset-0 w-full h-full object-cover scale-110"
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8 }}
+            className="h-full w-full object-contain"
           />
         </div>
 
-        {/* Second vertical image with parallax */}
-        <div className="relative overflow-hidden">
+        <div className="flex min-h-[16rem] items-center justify-center md:min-h-[24rem] lg:min-h-[32rem]">
           <motion.img
             src={matchaLatte}
             alt="Matcha preparation"
             loading="lazy"
-            initial={{ opacity: 0 }}
-            animate={inView ? { opacity: 1 } : {}}
-            whileHover={{ scale: 1.02 }}
-            transition={{ duration: 1, delay: 0.2 }}
-            style={{ y: y2 }}
-            className="absolute inset-0 w-full h-full object-cover scale-110"
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.15 }}
+            className="h-full w-full object-contain"
           />
         </div>
 
-        {/* Magnetic Shop button centered overlapping both images */}
-        <div className="absolute inset-0 flex items-center justify-center z-10">
+        <div className="pointer-events-none absolute inset-0 flex items-center justify-center z-10">
           <MagneticButton strength={0.4}>
-            <Link to="/product/ceremonial-matcha">
+            <Link to="/product/ceremonial-matcha" className="pointer-events-auto">
               <motion.span
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={inView ? { opacity: 1, scale: 1 } : {}}
