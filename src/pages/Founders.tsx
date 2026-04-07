@@ -26,7 +26,7 @@ const Founders = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.3 }}
-            className="font-display text-5xl md:text-7xl text-cream font-light tracking-wide"
+            className="font-display text-3xl md:text-5xl text-cream font-light tracking-wide"
           >
             Founders' Note
           </motion.h1>
@@ -44,7 +44,7 @@ const Founders = () => {
           <img
             src={foundersHero}
             alt="Avora founder Shruti"
-            className="max-w-full h-auto"
+            className="max-w-[80%] h-auto"
             width={800}
             height={1000}
           />
