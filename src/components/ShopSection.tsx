@@ -13,7 +13,7 @@ const ShopSection = () => {
     <section id="shop" className="bg-primary" ref={ref}>
       <div className="flex flex-col md:flex-row items-center py-12 md:py-16 md:pl-12 lg:pl-16">
         {/* Left: Text + button */}
-        <div className="w-full md:w-1/2 flex flex-col justify-center px-8 md:px-20 lg:px-32 py-16 md:py-20">
+        <div className="w-full md:w-1/2 flex flex-col justify-center items-end text-right px-8 md:px-20 lg:px-32 py-16 md:py-20">
           <TextReveal
             className="font-display text-4xl md:text-5xl lg:text-6xl text-cream font-light leading-tight"
             delay={0.2}
