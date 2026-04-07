@@ -71,7 +71,7 @@ const Checkout = () => {
     await initiateRazorpayCheckout({
       items,
       totalAmount: totalPrice,
-      customer: result.data,
+      customer: result.data as { name: string; email: string; phone: string; address?: string; city?: string; state?: string; pincode?: string },
       onSuccess: (paymentId) => {
         clearCart();
         navigate(`/order-success?payment_id=${paymentId}`);
@@ -179,7 +179,7 @@ function Field({
         placeholder={placeholder}
         className="w-full bg-transparent border border-cream/20 px-4 py-3 font-body text-sm text-cream placeholder:text-cream/30 focus:outline-none focus:border-cream/50 transition-colors"
       />
-      {error && <p className="font-body text-xs text-red-400 mt-1">{error}</p>}
+      {error && <p className="font-body text-xs text-destructive mt-1">{error}</p>}
     </div>
   );
 }
