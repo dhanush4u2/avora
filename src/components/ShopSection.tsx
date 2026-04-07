@@ -11,7 +11,7 @@ const ShopSection = () => {
 
   return (
     <section id="shop" className="bg-primary" ref={ref}>
-      <div className="flex flex-col md:flex-row items-center py-12 md:py-16 md:pl-12 lg:pl-16">
+      <div className="flex flex-col md:flex-row items-center py-12 md:py-16 md:pl-12 lg:pl-16 md:pr-0">
         {/* Left: Text + button */}
         <div className="w-full md:w-[30%] flex flex-col justify-center items-end text-right px-8 md:px-10 lg:px-14 py-16 md:py-20">
           <TextReveal
