@@ -5,18 +5,14 @@ import { Loader2 } from "lucide-react";
 import { useCartStore, ShopifyProduct } from "@/stores/cartStore";
 import { storefrontApiRequest, STOREFRONT_PRODUCTS_QUERY } from "@/lib/shopify";
 import { toast } from "sonner";
-import shop1 from "@/assets/shop-1.jpg";
-import shop2 from "@/assets/shop-2.jpg";
-import shop3 from "@/assets/shop-3.jpg";
-import shop4 from "@/assets/shop-4.jpg";
-import shop5 from "@/assets/shop-5.jpg";
+import shop1 from "@/assets/shop-new-1.jpg";
+import shop2 from "@/assets/shop-new-2.jpg";
+import shop3 from "@/assets/shop-new-3.jpg";
 
 const galleryImages = [
-  { src: shop1, alt: "Avora matcha tins on red background" },
-  { src: shop2, alt: "Hand holding Avora matcha tin" },
-  { src: shop3, alt: "Scooping matcha from Avora tin" },
-  { src: shop4, alt: "Avora matcha with whisk and glass" },
-  { src: shop5, alt: "Pouring matcha latte with Avora tin" },
+  { src: shop1, alt: "Avora ceremonial matcha tin front view" },
+  { src: shop2, alt: "Avora matcha tin angled view" },
+  { src: shop3, alt: "Pouring matcha latte with Avora tin" },
 ];
 
 const Shop = () => {
