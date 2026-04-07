@@ -5,7 +5,7 @@ import avoraLogo from "@/assets/avora-logo.png";
 const navLinks = [
   { label: "HomePage", href: "#hero" },
   { label: "Founders' Note", href: "#founders" },
-  { label: "Shop", href: "/product/ceremonial-matcha-green-tea-imperial-aaa-grade" },
+  { label: "Shop", href: "/product/ceremonial-matcha" },
 ];
 
 const policyLinks = [
