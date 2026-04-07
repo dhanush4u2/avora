@@ -5,14 +5,15 @@ import { Loader2 } from "lucide-react";
 import { useCartStore, ShopifyProduct } from "@/stores/cartStore";
 import { storefrontApiRequest, STOREFRONT_PRODUCTS_QUERY } from "@/lib/shopify";
 import { toast } from "sonner";
+import { getCropSettings } from "@/hooks/useImageCropSettings";
 import shop1 from "@/assets/shop-new-1.jpg";
 import shop2 from "@/assets/shop-new-2.jpg";
 import shop3 from "@/assets/shop-new-3.jpg";
 
 const galleryImages = [
-  { src: shop1, alt: "Avora ceremonial matcha tin front view" },
-  { src: shop2, alt: "Avora matcha tin angled view" },
-  { src: shop3, alt: "Pouring matcha latte with Avora tin" },
+  { src: shop1, alt: "Avora ceremonial matcha tin front view", cropKey: "shop-1" },
+  { src: shop2, alt: "Avora matcha tin angled view", cropKey: "shop-2" },
+  { src: shop3, alt: "Pouring matcha latte with Avora tin", cropKey: "shop-3" },
 ];
 
 const Shop = () => {
