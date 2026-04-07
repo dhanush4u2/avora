@@ -11,30 +11,27 @@ const FoundersSection = () => {
   return (
     <section id="founders" className="bg-primary" ref={ref}>
       <div className="flex flex-col-reverse md:flex-row items-center py-12 md:py-16 md:pr-12 lg:pr-16">
-        {/* Left: Image with gradient fade on right */}
-        <div className="relative w-full md:w-1/2" style={{ maxWidth: '600px' }}>
+        {/* Left: Image flush to left edge, cropped slightly from left */}
+        <div className="relative w-full md:flex-1 md:min-w-0">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.9 }}
-            className="w-full rounded-r-3xl overflow-hidden bg-primary"
-            style={{ aspectRatio: '2 / 3' }}
+            className="w-full overflow-hidden bg-primary"
           >
             <img
               src={foundersImg}
               alt="Avora founder"
               loading="lazy"
-              width={800}
-              height={1200}
-              className="w-full h-full object-contain"
+              className="block h-auto w-full object-contain md:mr-auto md:w-[108%] md:max-w-none md:-ml-[4%] lg:w-[112%] lg:-ml-[5%]"
             />
           </motion.div>
-          {/* Gradient fade starting at 98% of image */}
+          {/* Gradient fade on right edge */}
           <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-primary to-transparent pointer-events-none" />
         </div>
 
-        {/* Right: Text content — pushed more to the right */}
-        <div className="w-full md:w-1/2 flex flex-col justify-center px-8 md:px-20 lg:px-32 py-16 md:py-20">
+        {/* Right: Text content */}
+        <div className="w-full md:w-[18rem] md:flex-none flex flex-col justify-center px-8 md:px-6 lg:px-10 py-16 md:py-20">
           <TextReveal
             className="font-display text-4xl md:text-5xl lg:text-6xl text-cream font-light leading-tight"
             delay={0.2}
