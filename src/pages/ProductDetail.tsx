@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Minus, Plus, Loader2, ChevronLeft, ChevronRight } from "lucide-react";
 import { useCartStore, ShopifyProduct } from "@/stores/cartStore";
-import { storefrontApiRequest, STOREFRONT_PRODUCT_BY_HANDLE_QUERY, createShopifyCart } from "@/lib/shopify";
+import { storefrontApiRequest, STOREFRONT_PRODUCT_BY_HANDLE_QUERY } from "@/lib/shopify";
 import { toast } from "sonner";
-import type { CartItem } from "@/lib/shopify";
 import shop1 from "@/assets/shop-new-1.jpg";
 import shop2 from "@/assets/shop-new-2.jpg";
 import shop3 from "@/assets/shop-new-3.jpg";
@@ -18,12 +17,12 @@ const fallbackImages = [
 
 const ProductDetail = () => {
   const { handle } = useParams<{ handle: string }>();
+  const navigate = useNavigate();
   const [product, setProduct] = useState<ShopifyProduct["node"] | null>(null);
   const [loading, setLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
   const [selectedImage, setSelectedImage] = useState(0);
   const { addItem, isLoading: cartLoading } = useCartStore();
-  const [buyLoading, setBuyLoading] = useState(false);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -80,30 +79,16 @@ const ProductDetail = () => {
 
   const handleBuyNow = async () => {
     if (!variant) return;
-    setBuyLoading(true);
-    try {
-      const shopifyProduct: ShopifyProduct = { node: product };
-      const cartItem: CartItem = {
-        product: shopifyProduct,
-        variantId: variant.id,
-        variantTitle: variant.title,
-        price: variant.price,
-        quantity,
-        selectedOptions: variant.selectedOptions || [],
-        lineId: null,
-      };
-      const result = await createShopifyCart(cartItem);
-      if (result?.checkoutUrl) {
-        window.open(result.checkoutUrl, '_blank');
-      } else {
-        toast.error("Failed to create checkout. Please try again.");
-      }
-    } catch (error) {
-      console.error("Buy now failed:", error);
-      toast.error("Something went wrong. Please try again.");
-    } finally {
-      setBuyLoading(false);
-    }
+    const shopifyProduct: ShopifyProduct = { node: product };
+    await addItem({
+      product: shopifyProduct,
+      variantId: variant.id,
+      variantTitle: variant.title,
+      price: variant.price,
+      quantity,
+      selectedOptions: variant.selectedOptions || [],
+    });
+    navigate('/checkout');
   };
 
   return (
@@ -228,12 +213,12 @@ const ProductDetail = () => {
 
               <motion.button
                 onClick={handleBuyNow}
-                disabled={cartLoading || buyLoading}
+                disabled={cartLoading}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 className="mt-3 w-full py-4 bg-cream text-primary font-body text-sm tracking-widest font-medium transition-all duration-300 disabled:opacity-50"
               >
-                {buyLoading ? "Processing..." : "Pre-Order Now"}
+                {cartLoading ? "Processing..." : "Buy Now"}
               </motion.button>
             </motion.div>
           </div>
