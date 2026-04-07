@@ -11,8 +11,27 @@ const ShopSection = () => {
 
   return (
     <section id="shop" className="bg-primary" ref={ref}>
-      <div className="flex flex-col md:flex-row items-center py-12 md:py-16 md:pl-12 lg:pl-16">
-        <div className="w-full md:w-[18rem] md:flex-none flex flex-col justify-center items-end text-right px-8 md:px-6 lg:px-10 py-16 md:py-20">
+      <div className="flex flex-col md:flex-row items-center py-12 md:py-16 md:pr-12 lg:pr-16">
+        {/* Left: Image flush to left edge */}
+        <div className="relative w-full md:flex-1 md:min-w-0">
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.9 }}
+            className="w-full overflow-hidden bg-primary"
+          >
+            <img
+              src={matchaLatte}
+              alt="Avora matcha model"
+              loading="lazy"
+              className="block h-auto w-full object-contain md:mr-auto md:w-[108%] md:max-w-none lg:w-[112%]"
+            />
+          </motion.div>
+          <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-primary to-transparent pointer-events-none" />
+        </div>
+
+        {/* Right: Text + button */}
+        <div className="w-full md:w-[18rem] md:flex-none flex flex-col justify-center px-8 md:px-6 lg:px-10 py-16 md:py-20">
           <TextReveal
             className="font-display text-4xl md:text-5xl lg:text-6xl text-cream font-light leading-tight"
             delay={0.2}
@@ -38,23 +57,6 @@ const ShopSection = () => {
               </Link>
             </MagneticButton>
           </motion.div>
-        </div>
-
-        <div className="relative w-full md:flex-1 md:min-w-0">
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.9 }}
-            className="w-full overflow-hidden bg-primary"
-          >
-            <img
-              src={matchaLatte}
-              alt="Avora matcha model"
-              loading="lazy"
-              className="block h-auto w-full object-contain md:ml-auto md:w-[108%] md:max-w-none lg:w-[112%]"
-            />
-          </motion.div>
-          <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-primary to-transparent pointer-events-none" />
         </div>
       </div>
     </section>
