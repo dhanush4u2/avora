@@ -24,7 +24,7 @@ const ShopSection = () => {
               src={matchaLatte}
               alt="Avora matcha model"
               loading="lazy"
-              className="block h-auto w-full object-contain md:mr-auto md:w-[108%] md:max-w-none lg:w-[112%]"
+              className="block h-auto w-full object-contain md:mr-auto md:w-[116%] md:max-w-none md:-ml-[10%] lg:w-[120%] lg:-ml-[12%]"
             />
           </motion.div>
           <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-primary to-transparent pointer-events-none" />
