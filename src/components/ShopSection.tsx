@@ -1,8 +1,8 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Link } from "react-router-dom";
-import productDisplay from "@/assets/product-display.jpg";
 import matchaLatte from "@/assets/matcha-latte.jpg";
+import TextReveal from "@/components/TextReveal";
 import MagneticButton from "@/components/MagneticButton";
 
 const ShopSection = () => {
@@ -11,69 +11,56 @@ const ShopSection = () => {
 
   return (
     <section id="shop" className="bg-primary" ref={ref}>
-      <div className="relative px-4 py-6 md:px-5 md:py-8 lg:px-6 lg:py-10">
-        <div className="grid grid-cols-1 items-center gap-4 md:grid-cols-2 md:gap-5">
-          <div className="flex justify-center">
-            <motion.img
-              src={productDisplay}
-              alt="Avora matcha products"
-              loading="lazy"
-              initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8 }}
-              className="block h-auto w-full max-w-full object-contain md:max-h-[34rem] lg:max-h-[40rem]"
-            />
-          </div>
+      <div className="flex flex-col md:flex-row items-center py-12 md:py-16 md:pl-12 lg:pl-16">
+        {/* Left: Text + button */}
+        <div className="w-full md:w-1/2 flex flex-col justify-center px-8 md:px-20 lg:px-32 py-16 md:py-20">
+          <TextReveal
+            className="font-display text-4xl md:text-5xl lg:text-6xl text-cream font-light leading-tight"
+            delay={0.2}
+          >
+            Shop
+          </TextReveal>
 
-          <div className="flex justify-center">
-            <motion.img
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="mt-10"
+          >
+            <MagneticButton strength={0.4}>
+              <Link to="/product/ceremonial-matcha">
+                <motion.span
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.97 }}
+                  className="inline-block font-body text-sm tracking-widest text-cream border border-cream/40 px-10 py-4 hover:bg-cream/10 transition-all duration-500"
+                >
+                  Pre-Order Now
+                </motion.span>
+              </Link>
+            </MagneticButton>
+          </motion.div>
+        </div>
+
+        {/* Right: Image flush to right edge with left gradient fade */}
+        <div className="relative w-full md:w-1/2" style={{ maxWidth: '600px', marginLeft: 'auto' }}>
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.9 }}
+            className="w-full rounded-l-3xl overflow-hidden bg-primary"
+            style={{ aspectRatio: '2 / 3' }}
+          >
+            <img
               src={matchaLatte}
-              alt="Matcha preparation"
+              alt="Avora matcha model"
               loading="lazy"
-              initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.15 }}
-              className="block h-auto w-full max-w-full object-contain md:max-h-[34rem] lg:max-h-[40rem]"
+              width={800}
+              height={1200}
+              className="w-full h-full object-contain"
             />
-          </div>
-        </div>
-
-        <div className="mt-5 flex justify-center md:hidden">
-          <MagneticButton strength={0.4}>
-            <Link to="/product/ceremonial-matcha">
-              <motion.span
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={inView ? { opacity: 1, scale: 1 } : {}}
-                transition={{ duration: 0.6, delay: 0.3 }}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                className="inline-flex h-20 w-20 items-center justify-center rounded-full bg-cream text-center font-body text-[10px] leading-tight tracking-widest text-primary shadow-lg transition-all duration-500 hover:bg-cream/90"
-              >
-                Pre-Order
-                <br />
-                Now
-              </motion.span>
-            </Link>
-          </MagneticButton>
-        </div>
-
-        <div className="pointer-events-none absolute inset-0 z-10 hidden items-center justify-center md:flex">
-          <MagneticButton strength={0.4}>
-            <Link to="/product/ceremonial-matcha" className="pointer-events-auto">
-              <motion.span
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={inView ? { opacity: 1, scale: 1 } : {}}
-                transition={{ duration: 0.6, delay: 0.3 }}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                className="inline-flex h-20 w-20 items-center justify-center rounded-full bg-cream text-center font-body text-[10px] leading-tight tracking-widest text-primary shadow-lg transition-all duration-500 hover:bg-cream/90 md:h-24 md:w-24"
-              >
-                Pre-Order
-                <br />
-                Now
-              </motion.span>
-            </Link>
-          </MagneticButton>
+          </motion.div>
+          {/* Gradient fade on left edge */}
+          <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-primary to-transparent pointer-events-none" />
         </div>
       </div>
     </section>
