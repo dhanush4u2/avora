@@ -74,12 +74,21 @@ const Shop = () => {
                 transition={{ duration: 0.6, delay: i * 0.1 }}
                 className={`overflow-hidden ${i === 0 ? "col-span-2 md:col-span-1 row-span-2" : ""}`}
               >
-                <img
-                  src={img.src}
-                  alt={img.alt}
-                  loading="lazy"
-                  className="w-full h-full object-contain aspect-[3/4] hover:scale-105 transition-transform duration-700 bg-cream/5"
-                />
+              {(() => {
+                const crop = getCropSettings(img.cropKey);
+                return (
+                  <img
+                    src={img.src}
+                    alt={img.alt}
+                    loading="lazy"
+                    className="w-full h-full object-cover aspect-[3/4] transition-transform duration-700 bg-cream/5"
+                    style={{
+                      objectPosition: crop.objectPosition,
+                      transform: `scale(${crop.scale})`,
+                    }}
+                  />
+                );
+              })()}
               </motion.div>
             ))}
           </div>
