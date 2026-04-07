@@ -47,7 +47,7 @@ const ShopSection = () => {
             initial={{ opacity: 0, x: 50 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.9 }}
-            className="w-full rounded-l-3xl overflow-hidden bg-primary"
+            className="w-full rounded-l-3xl overflow-hidden bg-primary md:rounded-r-none"
           >
             <img
               src={matchaLatte}
