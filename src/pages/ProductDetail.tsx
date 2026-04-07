@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
-import { Minus, Plus, Loader2, ChevronLeft, ChevronRight } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Minus, Plus, Loader2, ChevronLeft, ChevronRight, X } from "lucide-react";
 import { useCartStore, ShopifyProduct } from "@/stores/cartStore";
 import { storefrontApiRequest, STOREFRONT_PRODUCT_BY_HANDLE_QUERY } from "@/lib/shopify";
 import { initiateRazorpayCheckout } from "@/lib/razorpay";
 import { toast } from "sonner";
+import type { CartItem } from "@/lib/shopify";
 import shop1 from "@/assets/shop-new-1.jpg";
 import shop2 from "@/assets/shop-new-2.jpg";
 import shop3 from "@/assets/shop-new-3.jpg";
@@ -25,6 +26,12 @@ const ProductDetail = () => {
   const { addItem, isLoading: cartLoading, clearCart } = useCartStore();
   const navigate = useNavigate();
   const [buyLoading, setBuyLoading] = useState(false);
+  const [showCheckoutForm, setShowCheckoutForm] = useState(false);
+  const [pendingItem, setPendingItem] = useState<CartItem | null>(null);
+  const [pendingTotal, setPendingTotal] = useState(0);
+  const [customer, setCustomer] = useState({
+    name: '', email: '', phone: '', address: '', city: '', state: '', pincode: '',
+  });
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -81,9 +88,8 @@ const ProductDetail = () => {
 
   const handleBuyNow = () => {
     if (!variant) return;
-    setBuyLoading(true);
     const shopifyProduct: ShopifyProduct = { node: product };
-    const cartItem = {
+    const cartItem: CartItem = {
       product: shopifyProduct,
       variantId: variant.id,
       variantTitle: variant.title,
@@ -92,12 +98,25 @@ const ProductDetail = () => {
       selectedOptions: variant.selectedOptions || [],
       lineId: null,
     };
+    setPendingItem(cartItem);
+    setPendingTotal(parseFloat(variant.price.amount) * quantity);
+    setShowCheckoutForm(true);
+  };
 
+  const handlePay = () => {
+    if (!pendingItem) return;
+    if (!customer.name || !customer.email || !customer.phone) {
+      toast.error("Please fill in name, email, and phone");
+      return;
+    }
+    setBuyLoading(true);
     initiateRazorpayCheckout({
-      items: [cartItem],
-      totalAmount: parseFloat(variant.price.amount) * quantity,
+      items: [pendingItem],
+      totalAmount: pendingTotal,
+      customer,
       onSuccess: (paymentId) => {
         setBuyLoading(false);
+        setShowCheckoutForm(false);
         clearCart();
         navigate(`/order-success?payment_id=${paymentId}`);
       },
@@ -248,6 +267,77 @@ const ProductDetail = () => {
           </div>
         </div>
       </div>
+
+      {/* Checkout Form Modal */}
+      <AnimatePresence>
+        {showCheckoutForm && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setShowCheckoutForm(false)}
+              className="fixed inset-0 z-[60] bg-black/60 backdrop-blur-sm"
+            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              className="fixed inset-0 z-[70] flex items-center justify-center px-4"
+            >
+              <div className="bg-primary border border-cream/10 w-full max-w-md max-h-[90vh] overflow-y-auto p-6">
+                <div className="flex items-center justify-between mb-6">
+                  <h2 className="font-display text-xl text-cream tracking-wide">Checkout</h2>
+                  <button onClick={() => setShowCheckoutForm(false)} className="text-cream/60 hover:text-cream transition-colors">
+                    <X size={20} />
+                  </button>
+                </div>
+                <div className="border-b border-cream/10 pb-4 mb-4">
+                  <p className="font-body text-xs text-cream/50 tracking-wide mb-2">Order Summary</p>
+                  <div className="flex justify-between items-center">
+                    <span className="font-display text-sm text-cream">{product.title} × {quantity}</span>
+                    <span className="font-display text-sm text-cream">₹ {pendingTotal.toLocaleString('en-IN')}</span>
+                  </div>
+                </div>
+                <p className="font-body text-xs text-cream/50 mb-4">Fill in your details to complete purchase</p>
+                <div className="space-y-3">
+                  {[
+                    { key: 'name', label: 'Full Name', required: true },
+                    { key: 'email', label: 'Email', type: 'email', required: true },
+                    { key: 'phone', label: 'Phone', type: 'tel', required: true },
+                    { key: 'address', label: 'Address' },
+                    { key: 'city', label: 'City' },
+                    { key: 'state', label: 'State' },
+                    { key: 'pincode', label: 'Pincode' },
+                  ].map(({ key, label, type, required }) => (
+                    <div key={key}>
+                      <label className="font-body text-xs text-cream/50 tracking-wide block mb-1">
+                        {label} {required && <span className="text-red-400">*</span>}
+                      </label>
+                      <input
+                        type={type || 'text'}
+                        value={(customer as Record<string, string>)[key]}
+                        onChange={e => setCustomer(prev => ({ ...prev, [key]: e.target.value }))}
+                        className="w-full bg-cream/5 border border-cream/15 text-cream font-body text-sm px-3 py-2.5 focus:outline-none focus:border-cream/40 transition-colors"
+                        placeholder={label}
+                      />
+                    </div>
+                  ))}
+                </div>
+                <motion.button
+                  onClick={handlePay}
+                  disabled={buyLoading}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="mt-6 w-full py-4 bg-cream text-primary text-center font-body text-sm tracking-widest font-medium transition-all duration-300 hover:bg-cream/90 disabled:opacity-50 flex items-center justify-center gap-2"
+                >
+                  {buyLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : "Pay Now"}
+                </motion.button>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
