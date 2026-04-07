@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Minus, Plus, Loader2, ChevronLeft, ChevronRight } from "lucide-react";
 import { useCartStore, ShopifyProduct } from "@/stores/cartStore";
 import { storefrontApiRequest, STOREFRONT_PRODUCT_BY_HANDLE_QUERY } from "@/lib/shopify";
+import { initiateRazorpayCheckout } from "@/lib/razorpay";
 import { toast } from "sonner";
 import shop1 from "@/assets/shop-new-1.jpg";
 import shop2 from "@/assets/shop-new-2.jpg";
@@ -21,7 +22,9 @@ const ProductDetail = () => {
   const [loading, setLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
   const [selectedImage, setSelectedImage] = useState(0);
-  const { addItem, isLoading: cartLoading, getCheckoutUrl } = useCartStore();
+  const { addItem, isLoading: cartLoading, clearCart } = useCartStore();
+  const navigate = useNavigate();
+  const [buyLoading, setBuyLoading] = useState(false);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -78,19 +81,34 @@ const ProductDetail = () => {
 
   const handleBuyNow = async () => {
     if (!variant) return;
+    setBuyLoading(true);
     const shopifyProduct: ShopifyProduct = { node: product };
-    await addItem({
+    const cartItem = {
       product: shopifyProduct,
       variantId: variant.id,
       variantTitle: variant.title,
       price: variant.price,
       quantity,
       selectedOptions: variant.selectedOptions || [],
+      lineId: null,
+    };
+
+    initiateRazorpayCheckout({
+      items: [cartItem],
+      totalAmount: parseFloat(variant.price.amount) * quantity,
+      customer: { name: '', email: '', phone: '' },
+      onSuccess: (paymentId) => {
+        setBuyLoading(false);
+        clearCart();
+        navigate(`/order-success?payment_id=${paymentId}`);
+      },
+      onFailure: (error) => {
+        setBuyLoading(false);
+        if (error !== 'Payment cancelled') {
+          toast.error(error);
+        }
+      },
     });
-    const checkoutUrl = useCartStore.getState().getCheckoutUrl();
-    if (checkoutUrl) {
-      window.open(checkoutUrl, '_blank');
-    }
   };
 
   return (
@@ -220,12 +238,12 @@ const ProductDetail = () => {
 
               <motion.button
                 onClick={handleBuyNow}
-                disabled={cartLoading}
+                disabled={cartLoading || buyLoading}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 className="mt-3 w-full py-4 bg-cream text-primary font-body text-sm tracking-widest font-medium transition-all duration-300 disabled:opacity-50"
               >
-                {cartLoading ? "Processing..." : "Pre-Order Now"}
+                {buyLoading ? "Processing..." : "Pre-Order Now"}
               </motion.button>
             </motion.div>
           </div>
