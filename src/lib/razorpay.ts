@@ -23,7 +23,7 @@ interface CustomerDetails {
 interface CheckoutOptions {
   items: CartItem[];
   totalAmount: number;
-  customer: CustomerDetails;
+  customer?: CustomerDetails;
   onSuccess: (paymentId: string) => void;
   onFailure: (error: string) => void;
 }
