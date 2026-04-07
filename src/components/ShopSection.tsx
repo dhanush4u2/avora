@@ -11,7 +11,7 @@ const ShopSection = () => {
 
   return (
     <section id="shop" className="bg-primary" ref={ref}>
-      <div className="flex flex-col md:flex-row items-center py-12 md:py-16 md:pl-12 lg:pl-16 md:pr-0">
+      <div className="flex flex-col md:flex-row items-center py-12 md:py-16 md:pl-12 lg:pl-16 pr-0">
         {/* Left: Text + button */}
         <div className="w-full md:w-[30%] flex flex-col justify-center items-end text-right px-8 md:px-10 lg:px-14 py-16 md:py-20">
           <TextReveal
@@ -42,7 +42,7 @@ const ShopSection = () => {
         </div>
 
         {/* Right: Image flush to right edge with left gradient fade */}
-        <div className="relative w-full md:w-[70%]" style={{ marginLeft: 'auto' }}>
+        <div className="relative w-full md:w-[75%]" style={{ marginLeft: 'auto', marginRight: 0 }}>
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
