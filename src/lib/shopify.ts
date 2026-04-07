@@ -49,16 +49,6 @@ export interface ShopifyProduct {
   };
 }
 
-export interface CartItem {
-  lineId: string | null;
-  product: ShopifyProduct;
-  variantId: string;
-  variantTitle: string;
-  price: { amount: string; currencyCode: string };
-  quantity: number;
-  selectedOptions: Array<{ name: string; value: string }>;
-}
-
 export async function storefrontApiRequest(query: string, variables: Record<string, unknown> = {}) {
   const response = await fetch(SHOPIFY_STOREFRONT_URL, {
     method: 'POST',
@@ -184,8 +174,7 @@ export const STOREFRONT_PRODUCT_BY_HANDLE_QUERY = `
   }
 `;
 
-// --- Shopify Cart Mutations ---
-
+// Cart mutations
 const CART_QUERY = `
   query cart($id: ID!) {
     cart(id: $id) { id totalQuantity }
@@ -249,6 +238,16 @@ function isCartNotFoundError(userErrors: Array<{ field: string[] | null; message
   return userErrors.some(e => e.message.toLowerCase().includes('cart not found') || e.message.toLowerCase().includes('does not exist'));
 }
 
+export interface CartItem {
+  lineId: string | null;
+  product: ShopifyProduct;
+  variantId: string;
+  variantTitle: string;
+  price: { amount: string; currencyCode: string };
+  quantity: number;
+  selectedOptions: Array<{ name: string; value: string }>;
+}
+
 export async function createShopifyCart(item: CartItem): Promise<{ cartId: string; checkoutUrl: string; lineId: string } | null> {
   const data = await storefrontApiRequest(CART_CREATE_MUTATION, {
     input: { lines: [{ quantity: item.quantity, merchandiseId: item.variantId }] },
@@ -294,10 +293,7 @@ export async function updateShopifyCartLine(cartId: string, lineId: string, quan
 
   const userErrors = data?.data?.cartLinesUpdate?.userErrors || [];
   if (isCartNotFoundError(userErrors)) return { success: false, cartNotFound: true };
-  if (userErrors.length > 0) {
-    console.error('Update line failed:', userErrors);
-    return { success: false };
-  }
+  if (userErrors.length > 0) return { success: false };
   return { success: true };
 }
 
@@ -309,17 +305,8 @@ export async function removeLineFromShopifyCart(cartId: string, lineId: string):
 
   const userErrors = data?.data?.cartLinesRemove?.userErrors || [];
   if (isCartNotFoundError(userErrors)) return { success: false, cartNotFound: true };
-  if (userErrors.length > 0) {
-    console.error('Remove line failed:', userErrors);
-    return { success: false };
-  }
+  if (userErrors.length > 0) return { success: false };
   return { success: true };
 }
 
-export async function fetchShopifyCart(cartId: string): Promise<{ exists: boolean; totalQuantity: number }> {
-  const data = await storefrontApiRequest(CART_QUERY, { id: cartId });
-  if (!data) return { exists: false, totalQuantity: 0 };
-  const cart = data?.data?.cart;
-  if (!cart || cart.totalQuantity === 0) return { exists: false, totalQuantity: 0 };
-  return { exists: true, totalQuantity: cart.totalQuantity };
-}
+export { CART_QUERY };

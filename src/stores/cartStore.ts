@@ -7,7 +7,8 @@ import {
   addLineToShopifyCart,
   updateShopifyCartLine,
   removeLineFromShopifyCart,
-  fetchShopifyCart,
+  storefrontApiRequest,
+  CART_QUERY,
 } from '@/lib/shopify';
 
 interface CartStore {
@@ -26,13 +27,6 @@ interface CartStore {
   totalPrice: number;
 }
 
-function calcTotals(items: CartItem[]) {
-  return {
-    totalItems: items.reduce((s, i) => s + i.quantity, 0),
-    totalPrice: items.reduce((s, i) => s + parseFloat(i.price.amount) * i.quantity, 0),
-  };
-}
-
 export const useCartStore = create<CartStore>()(
   persist(
     (set, get) => ({
@@ -46,7 +40,7 @@ export const useCartStore = create<CartStore>()(
 
       addItem: async (item) => {
         const { items, cartId, clearCart } = get();
-        const existing = items.find(i => i.variantId === item.variantId);
+        const existingItem = items.find(i => i.variantId === item.variantId);
 
         set({ isLoading: true });
         try {
@@ -58,29 +52,35 @@ export const useCartStore = create<CartStore>()(
                 cartId: result.cartId,
                 checkoutUrl: result.checkoutUrl,
                 items: newItems,
-                ...calcTotals(newItems),
+                totalItems: newItems.reduce((s, i) => s + i.quantity, 0),
+                totalPrice: newItems.reduce((s, i) => s + parseFloat(i.price.amount) * i.quantity, 0),
               });
             }
-          } else if (existing) {
-            const newQuantity = existing.quantity + item.quantity;
-            if (!existing.lineId) {
-              console.error('Cannot update quantity for item without lineId');
-              return;
-            }
-            const result = await updateShopifyCartLine(cartId, existing.lineId, newQuantity);
+          } else if (existingItem) {
+            const newQuantity = existingItem.quantity + item.quantity;
+            if (!existingItem.lineId) return;
+            const result = await updateShopifyCartLine(cartId, existingItem.lineId, newQuantity);
             if (result.success) {
-              const updated = get().items.map(i =>
-                i.variantId === item.variantId ? { ...i, quantity: newQuantity } : i
-              );
-              set({ items: updated, ...calcTotals(updated) });
+              const currentItems = get().items;
+              const updated = currentItems.map(i => i.variantId === item.variantId ? { ...i, quantity: newQuantity } : i);
+              set({
+                items: updated,
+                totalItems: updated.reduce((s, i) => s + i.quantity, 0),
+                totalPrice: updated.reduce((s, i) => s + parseFloat(i.price.amount) * i.quantity, 0),
+              });
             } else if (result.cartNotFound) {
               clearCart();
             }
           } else {
             const result = await addLineToShopifyCart(cartId, { ...item, lineId: null });
             if (result.success) {
-              const updated = [...get().items, { ...item, lineId: result.lineId ?? null }];
-              set({ items: updated, ...calcTotals(updated) });
+              const currentItems = get().items;
+              const updated = [...currentItems, { ...item, lineId: result.lineId ?? null }];
+              set({
+                items: updated,
+                totalItems: updated.reduce((s, i) => s + i.quantity, 0),
+                totalPrice: updated.reduce((s, i) => s + parseFloat(i.price.amount) * i.quantity, 0),
+              });
             } else if (result.cartNotFound) {
               clearCart();
             }
@@ -106,10 +106,13 @@ export const useCartStore = create<CartStore>()(
         try {
           const result = await updateShopifyCartLine(cartId, item.lineId, quantity);
           if (result.success) {
-            const updated = get().items.map(i =>
-              i.variantId === variantId ? { ...i, quantity } : i
-            );
-            set({ items: updated, ...calcTotals(updated) });
+            const currentItems = get().items;
+            const updated = currentItems.map(i => i.variantId === variantId ? { ...i, quantity } : i);
+            set({
+              items: updated,
+              totalItems: updated.reduce((s, i) => s + i.quantity, 0),
+              totalPrice: updated.reduce((s, i) => s + parseFloat(i.price.amount) * i.quantity, 0),
+            });
           } else if (result.cartNotFound) {
             clearCart();
           }
@@ -129,11 +132,16 @@ export const useCartStore = create<CartStore>()(
         try {
           const result = await removeLineFromShopifyCart(cartId, item.lineId);
           if (result.success) {
-            const updated = get().items.filter(i => i.variantId !== variantId);
-            if (updated.length === 0) {
+            const currentItems = get().items;
+            const newItems = currentItems.filter(i => i.variantId !== variantId);
+            if (newItems.length === 0) {
               clearCart();
             } else {
-              set({ items: updated, ...calcTotals(updated) });
+              set({
+                items: newItems,
+                totalItems: newItems.reduce((s, i) => s + i.quantity, 0),
+                totalPrice: newItems.reduce((s, i) => s + parseFloat(i.price.amount) * i.quantity, 0),
+              });
             }
           } else if (result.cartNotFound) {
             clearCart();
@@ -146,7 +154,6 @@ export const useCartStore = create<CartStore>()(
       },
 
       clearCart: () => set({ items: [], cartId: null, checkoutUrl: null, totalItems: 0, totalPrice: 0 }),
-
       getCheckoutUrl: () => get().checkoutUrl,
 
       syncCart: async () => {
@@ -155,8 +162,10 @@ export const useCartStore = create<CartStore>()(
 
         set({ isSyncing: true });
         try {
-          const result = await fetchShopifyCart(cartId);
-          if (!result.exists) clearCart();
+          const data = await storefrontApiRequest(CART_QUERY, { id: cartId });
+          if (!data) return;
+          const cart = data?.data?.cart;
+          if (!cart || cart.totalQuantity === 0) clearCart();
         } catch (error) {
           console.error('Failed to sync cart:', error);
         } finally {
@@ -165,15 +174,9 @@ export const useCartStore = create<CartStore>()(
       },
     }),
     {
-      name: 'avora-cart',
+      name: 'shopify-cart',
       storage: createJSONStorage(() => localStorage),
-      partialize: (state) => ({
-        items: state.items,
-        cartId: state.cartId,
-        checkoutUrl: state.checkoutUrl,
-        totalItems: state.totalItems,
-        totalPrice: state.totalPrice,
-      }),
+      partialize: (state) => ({ items: state.items, cartId: state.cartId, checkoutUrl: state.checkoutUrl, totalItems: state.totalItems, totalPrice: state.totalPrice }),
     }
   )
 );

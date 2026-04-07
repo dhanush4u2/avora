@@ -3,9 +3,8 @@ import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Minus, Plus, Loader2, ChevronLeft, ChevronRight } from "lucide-react";
 import { useCartStore, ShopifyProduct } from "@/stores/cartStore";
-import { storefrontApiRequest, STOREFRONT_PRODUCT_BY_HANDLE_QUERY, createShopifyCart } from "@/lib/shopify";
+import { storefrontApiRequest, STOREFRONT_PRODUCT_BY_HANDLE_QUERY } from "@/lib/shopify";
 import { toast } from "sonner";
-import type { CartItem } from "@/lib/shopify";
 import shop1 from "@/assets/shop-new-1.jpg";
 import shop2 from "@/assets/shop-new-2.jpg";
 import shop3 from "@/assets/shop-new-3.jpg";
@@ -22,8 +21,7 @@ const ProductDetail = () => {
   const [loading, setLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
   const [selectedImage, setSelectedImage] = useState(0);
-  const { addItem, isLoading: cartLoading } = useCartStore();
-  const [buyLoading, setBuyLoading] = useState(false);
+  const { addItem, isLoading: cartLoading, getCheckoutUrl } = useCartStore();
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -80,29 +78,18 @@ const ProductDetail = () => {
 
   const handleBuyNow = async () => {
     if (!variant) return;
-    setBuyLoading(true);
-    try {
-      const shopifyProduct: ShopifyProduct = { node: product };
-      const cartItem: CartItem = {
-        product: shopifyProduct,
-        variantId: variant.id,
-        variantTitle: variant.title,
-        price: variant.price,
-        quantity,
-        selectedOptions: variant.selectedOptions || [],
-        lineId: null,
-      };
-      const result = await createShopifyCart(cartItem);
-      if (result?.checkoutUrl) {
-        window.open(result.checkoutUrl, '_blank');
-      } else {
-        toast.error("Failed to create checkout. Please try again.");
-      }
-    } catch (error) {
-      console.error("Buy now failed:", error);
-      toast.error("Something went wrong. Please try again.");
-    } finally {
-      setBuyLoading(false);
+    const shopifyProduct: ShopifyProduct = { node: product };
+    await addItem({
+      product: shopifyProduct,
+      variantId: variant.id,
+      variantTitle: variant.title,
+      price: variant.price,
+      quantity,
+      selectedOptions: variant.selectedOptions || [],
+    });
+    const checkoutUrl = useCartStore.getState().getCheckoutUrl();
+    if (checkoutUrl) {
+      window.open(checkoutUrl, '_blank');
     }
   };
 
@@ -117,6 +104,7 @@ const ProductDetail = () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.7 }}
             >
+              {/* Main image with arrows */}
               <div className="relative aspect-square overflow-hidden mb-4 group">
                 {images[selectedImage] ? (
                   <motion.img
@@ -154,6 +142,7 @@ const ProductDetail = () => {
                 )}
               </div>
 
+              {/* Thumbnails */}
               {images.length > 1 && (
                 <div className="flex gap-3">
                   {images.map((img, i) => (
@@ -187,6 +176,7 @@ const ProductDetail = () => {
                 {parseFloat(price.amount).toLocaleString('en-IN')}
               </p>
 
+              {/* Description */}
               {product.description && (
                 <div className="mt-8 border-t border-cream/10 pt-8">
                   <p className="font-body text-cream/70 leading-relaxed text-sm">
@@ -195,6 +185,7 @@ const ProductDetail = () => {
                 </div>
               )}
 
+              {/* Quantity */}
               <div className="mt-8 flex items-center gap-6">
                 <span className="font-body text-sm text-cream/50 tracking-wide">Quantity</span>
                 <div className="flex items-center border border-cream/20">
@@ -216,6 +207,7 @@ const ProductDetail = () => {
                 </div>
               </div>
 
+              {/* Add to cart */}
               <motion.button
                 onClick={handleAddToCart}
                 disabled={cartLoading}
@@ -228,12 +220,12 @@ const ProductDetail = () => {
 
               <motion.button
                 onClick={handleBuyNow}
-                disabled={cartLoading || buyLoading}
+                disabled={cartLoading}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 className="mt-3 w-full py-4 bg-cream text-primary font-body text-sm tracking-widest font-medium transition-all duration-300 disabled:opacity-50"
               >
-                {buyLoading ? "Processing..." : "Pre-Order Now"}
+                {cartLoading ? "Processing..." : "Pre-Order Now"}
               </motion.button>
             </motion.div>
           </div>
