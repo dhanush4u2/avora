@@ -148,7 +148,7 @@ const CartDrawer = ({ open, onClose }: CartDrawerProps) => {
                   ) : (
                     <>
                       <ExternalLink className="w-4 h-4" />
-                      Pre-order now
+                      Pre-Order Now
                     </>
                   )}
                 </motion.button>

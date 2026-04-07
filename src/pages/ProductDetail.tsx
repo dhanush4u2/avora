@@ -219,7 +219,7 @@ const ProductDetail = () => {
                 whileTap={{ scale: 0.98 }}
                 className="mt-8 w-full py-4 border border-cream/40 font-body text-sm tracking-widest text-cream hover:border-cream transition-all duration-500 disabled:opacity-50"
               >
-                {cartLoading ? "Adding..." : "Add to cart"}
+                {cartLoading ? "Adding..." : "Add to Cart"}
               </motion.button>
 
               <motion.button
@@ -229,7 +229,7 @@ const ProductDetail = () => {
                 whileTap={{ scale: 0.98 }}
                 className="mt-3 w-full py-4 bg-cream text-primary font-body text-sm tracking-widest font-medium transition-all duration-300 disabled:opacity-50"
               >
-                {cartLoading ? "Processing..." : "Pre-order now"}
+                {cartLoading ? "Processing..." : "Pre-Order Now"}
               </motion.button>
             </motion.div>
           </div>
