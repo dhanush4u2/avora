@@ -10,9 +10,9 @@ import shop2 from "@/assets/shop-new-2.jpg";
 import shop3 from "@/assets/shop-new-3.jpg";
 
 const galleryImages = [
-  { src: shop3, alt: "Avora matcha tin front view" },
-  { src: shop2, alt: "Avora matcha tin angled view" },
   { src: shop1, alt: "Pouring matcha latte with Avora tin" },
+  { src: shop2, alt: "Avora matcha tin angled view" },
+  { src: shop3, alt: "Avora matcha tin front view" },
 ];
 
 const Shop = () => {
