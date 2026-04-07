@@ -93,7 +93,7 @@ const FaqSection = () => {
           className="text-center mb-16"
         >
           <h2 className="font-display text-4xl md:text-5xl text-cream font-semibold italic">
-            Frequently asked questions
+            Frequently Asked Questions
           </h2>
         </motion.div>
 
