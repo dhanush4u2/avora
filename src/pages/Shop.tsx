@@ -5,15 +5,14 @@ import { Loader2 } from "lucide-react";
 import { useCartStore, ShopifyProduct } from "@/stores/cartStore";
 import { storefrontApiRequest, STOREFRONT_PRODUCTS_QUERY } from "@/lib/shopify";
 import { toast } from "sonner";
-import { getCropSettings } from "@/hooks/useImageCropSettings";
 import shop1 from "@/assets/shop-new-1.jpg";
 import shop2 from "@/assets/shop-new-2.jpg";
 import shop3 from "@/assets/shop-new-3.jpg";
 
 const galleryImages = [
-  { src: shop1, alt: "Avora ceremonial matcha tin front view", cropKey: "shop-1" },
-  { src: shop2, alt: "Avora matcha tin angled view", cropKey: "shop-2" },
-  { src: shop3, alt: "Pouring matcha latte with Avora tin", cropKey: "shop-3" },
+  { src: shop1, alt: "Avora ceremonial matcha tin front view" },
+  { src: shop2, alt: "Avora matcha tin angled view" },
+  { src: shop3, alt: "Pouring matcha latte with Avora tin" },
 ];
 
 const Shop = () => {
@@ -74,21 +73,12 @@ const Shop = () => {
                 transition={{ duration: 0.6, delay: i * 0.1 }}
                 className={`overflow-hidden ${i === 0 ? "col-span-2 md:col-span-1 row-span-2" : ""}`}
               >
-              {(() => {
-                const crop = getCropSettings(img.cropKey);
-                return (
-                  <img
-                    src={img.src}
-                    alt={img.alt}
-                    loading="lazy"
-                    className="w-full h-full object-cover aspect-[3/4] transition-transform duration-700 bg-cream/5"
-                    style={{
-                      objectPosition: crop.objectPosition,
-                      transform: `scale(${crop.scale})`,
-                    }}
-                  />
-                );
-              })()}
+                <img
+                  src={img.src}
+                  alt={img.alt}
+                  loading="lazy"
+                  className="w-full h-full object-cover aspect-[3/4] transition-transform duration-700 bg-cream/5"
+                />
               </motion.div>
             ))}
           </div>

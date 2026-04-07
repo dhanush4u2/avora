@@ -1,19 +1,18 @@
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Minus, Plus, Loader2, ChevronLeft, ChevronRight, Settings } from "lucide-react";
+import { Minus, Plus, Loader2, ChevronLeft, ChevronRight } from "lucide-react";
 import { useCartStore, ShopifyProduct } from "@/stores/cartStore";
 import { storefrontApiRequest, STOREFRONT_PRODUCT_BY_HANDLE_QUERY } from "@/lib/shopify";
 import { toast } from "sonner";
-import { getCropSettings } from "@/hooks/useImageCropSettings";
 import shop1 from "@/assets/shop-new-1.jpg";
 import shop2 from "@/assets/shop-new-2.jpg";
 import shop3 from "@/assets/shop-new-3.jpg";
 
 const fallbackImages = [
-  { node: { url: shop1, altText: "Avora ceremonial matcha tin front view" }, cropKey: "shop-1" },
-  { node: { url: shop2, altText: "Avora matcha tin angled view" }, cropKey: "shop-2" },
-  { node: { url: shop3, altText: "Pouring matcha latte with Avora tin" }, cropKey: "shop-3" },
+  { node: { url: shop1, altText: "Avora ceremonial matcha tin front view" } },
+  { node: { url: shop2, altText: "Avora matcha tin angled view" } },
+  { node: { url: shop3, altText: "Pouring matcha latte with Avora tin" } },
 ];
 
 const ProductDetail = () => {
@@ -107,24 +106,17 @@ const ProductDetail = () => {
             >
               {/* Main image with arrows */}
               <div className="relative aspect-square overflow-hidden mb-4 group">
-                {images[selectedImage] ? (() => {
-                  const crop = getCropSettings(images[selectedImage].cropKey);
-                  return (
-                    <motion.img
-                      key={selectedImage}
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ duration: 0.3 }}
-                      src={images[selectedImage].node.url}
-                      alt={images[selectedImage].node.altText || product.title}
-                      className="w-full h-full object-cover bg-cream/5"
-                      style={{
-                        objectPosition: crop.objectPosition,
-                        transform: `scale(${crop.scale})`,
-                      }}
-                    />
-                  );
-                })() : (
+                {images[selectedImage] ? (
+                  <motion.img
+                    key={selectedImage}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.3 }}
+                    src={images[selectedImage].node.url}
+                    alt={images[selectedImage].node.altText || product.title}
+                    className="w-full h-full object-cover bg-cream/5"
+                  />
+                ) : (
                   <div className="w-full h-full bg-cream/5 flex items-center justify-center">
                     <span className="font-body text-cream/20">No image</span>
                   </div>
@@ -161,15 +153,7 @@ const ProductDetail = () => {
                         selectedImage === i ? "border-cream opacity-100" : "border-cream/20 opacity-60 hover:opacity-90 hover:border-cream/50"
                       }`}
                     >
-                      <img
-                        src={img.node.url}
-                        alt=""
-                        className="w-full h-full object-cover"
-                        style={{
-                          objectPosition: getCropSettings(img.cropKey).objectPosition,
-                          transform: `scale(${getCropSettings(img.cropKey).scale})`,
-                        }}
-                      />
+                      <img src={img.node.url} alt="" className="w-full h-full object-cover" />
                     </button>
                   ))}
                 </div>
