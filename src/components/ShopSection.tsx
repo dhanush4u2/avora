@@ -13,7 +13,7 @@ const ShopSection = () => {
     <section id="shop" className="bg-primary" ref={ref}>
       <div className="flex flex-col md:flex-row items-center py-12 md:py-16 md:pl-12 lg:pl-16">
         {/* Left: Text + button */}
-        <div className="w-full md:w-1/2 flex flex-col justify-center items-end text-right px-8 md:px-20 lg:px-32 py-16 md:py-20">
+        <div className="w-full md:w-[30%] flex flex-col justify-center items-end text-right px-8 md:px-10 lg:px-14 py-16 md:py-20">
           <TextReveal
             className="font-display text-4xl md:text-5xl lg:text-6xl text-cream font-light leading-tight"
             delay={0.2}
@@ -42,19 +42,18 @@ const ShopSection = () => {
         </div>
 
         {/* Right: Image flush to right edge with left gradient fade */}
-        <div className="relative w-full md:w-[55%]" style={{ marginLeft: 'auto' }}>
+        <div className="relative w-full md:w-[70%]" style={{ marginLeft: 'auto' }}>
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.9 }}
             className="w-full rounded-l-3xl overflow-hidden bg-primary"
-            style={{ aspectRatio: '4 / 3' }}
           >
             <img
               src={matchaLatte}
               alt="Avora matcha model"
               loading="lazy"
-              className="w-full h-full object-cover scale-110"
+              className="w-[120%] h-auto -ml-[10%] object-contain"
             />
           </motion.div>
           {/* Gradient fade on left edge */}
