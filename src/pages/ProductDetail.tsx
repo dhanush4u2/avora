@@ -229,7 +229,7 @@ const ProductDetail = () => {
                 whileTap={{ scale: 0.98 }}
                 className="mt-3 w-full py-4 bg-cream text-primary font-body text-sm tracking-widest font-medium transition-all duration-300 disabled:opacity-50"
               >
-                {cartLoading ? "Processing..." : "Pre-order now"}
+                {cartLoading ? "Processing..." : "Pre-Order Now"}
               </motion.button>
             </motion.div>
           </div>
