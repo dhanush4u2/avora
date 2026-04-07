@@ -18,7 +18,7 @@ const ShopSection = () => {
             className="font-display text-4xl md:text-5xl lg:text-6xl text-cream font-light leading-tight"
             delay={0.2}
           >
-            Shop
+            Shop Avora
           </TextReveal>
 
           <motion.div
