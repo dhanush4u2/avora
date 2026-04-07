@@ -23,7 +23,7 @@ interface CustomerDetails {
 interface CheckoutOptions {
   items: CartItem[];
   totalAmount: number;
-  customer: CustomerDetails;
+  customer?: CustomerDetails;
   onSuccess: (paymentId: string) => void;
   onFailure: (error: string) => void;
 }
@@ -96,11 +96,13 @@ export async function initiateRazorpayCheckout({ items, totalAmount, customer, o
       name: 'Avora Matcha',
       description: `Order of ${items.length} item${items.length > 1 ? 's' : ''}`,
       order_id: order.orderId,
-      prefill: {
-        name: customer.name,
-        email: customer.email,
-        contact: customer.phone,
-      },
+      ...(customer ? {
+        prefill: {
+          name: customer.name,
+          email: customer.email,
+          contact: customer.phone,
+        },
+      } : {}),
       theme: {
         color: '#2D3B2D',
       },
