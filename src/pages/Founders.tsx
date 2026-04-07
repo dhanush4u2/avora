@@ -60,7 +60,7 @@ const Founders = () => {
           <motion.p
             custom={0}
             variants={fadeUp}
-            className="font-body text-cream/80 text-lg md:text-xl leading-relaxed"
+            className="font-body text-cream/80 text-base md:text-lg leading-relaxed"
           >
             For many, matcha feels like a moment — a trend that travelled from
             Japan alongside Studio Ghibli films, anime, and a wave of cultural
@@ -78,7 +78,7 @@ const Founders = () => {
           <motion.p
             custom={2}
             variants={fadeUp}
-            className="font-body text-cream/80 text-lg md:text-xl leading-relaxed"
+            className="font-body text-cream/80 text-base md:text-lg leading-relaxed"
           >
             Shruti moves through life with the energy of a sprinter and the
             stamina of a marathon runner. She's the kind of person who can't sit
@@ -99,14 +99,14 @@ const Founders = () => {
           <motion.p
             custom={0}
             variants={fadeUp}
-            className="font-body text-cream/60 text-lg leading-relaxed"
+            className="font-body text-cream/60 text-base leading-relaxed"
           >
             Coffee made her jittery, followed by an inevitable crash.
           </motion.p>
           <motion.p
             custom={1}
             variants={fadeUp}
-            className="font-body text-cream/60 text-lg leading-relaxed"
+            className="font-body text-cream/60 text-base leading-relaxed"
           >
             Tea was calming, but too gentle.
           </motion.p>
@@ -128,7 +128,7 @@ const Founders = () => {
           <motion.p
             custom={0}
             variants={fadeUp}
-            className="font-body text-cream/80 text-lg md:text-xl leading-relaxed"
+            className="font-body text-cream/80 text-base md:text-lg leading-relaxed"
           >
             Matcha met her exactly where she was. A steady rise. Sustained
             energy. Focus without frenzy. Power without burnout. Cup after cup,
@@ -139,7 +139,7 @@ const Founders = () => {
           <motion.p
             custom={1}
             variants={fadeUp}
-            className="font-body text-cream/80 text-lg md:text-xl leading-relaxed"
+            className="font-body text-cream/80 text-base md:text-lg leading-relaxed"
           >
             As with everything Shruti believes in deeply, she couldn't keep this
             discovery to herself.
@@ -148,7 +148,7 @@ const Founders = () => {
           <motion.p
             custom={2}
             variants={fadeUp}
-            className="font-body text-cream/80 text-lg md:text-xl leading-relaxed"
+            className="font-body text-cream/80 text-base md:text-lg leading-relaxed"
           >
             She saw matcha not just as a drink, but as a quiet ally — one that
             could support a CEO powering through long days, a dancer moving
@@ -198,7 +198,7 @@ const Founders = () => {
           <motion.p
             custom={0}
             variants={fadeUp}
-            className="font-body text-cream/80 text-lg md:text-xl leading-relaxed"
+            className="font-body text-cream/80 text-base md:text-lg leading-relaxed"
           >
             Avora truly came alive when Shruti met a kindred spirit — Elishia. A
             marketer by day, a devoted matcha lover by heart, and an unwavering
@@ -219,7 +219,7 @@ const Founders = () => {
           <motion.p
             custom={2}
             variants={fadeUp}
-            className="font-body text-cream/80 text-lg md:text-xl leading-relaxed"
+            className="font-body text-cream/80 text-base md:text-lg leading-relaxed"
           >
             No labels. No archetypes. Just the best quality matcha, meant to help
             you feel your best, live fully, and show up as yourself — whatever
@@ -229,7 +229,7 @@ const Founders = () => {
           <motion.p
             custom={3}
             variants={fadeUp}
-            className="font-body text-cream/80 text-lg md:text-xl leading-relaxed"
+            className="font-body text-cream/80 text-base md:text-lg leading-relaxed"
           >
             We're so excited for you to try Avora — just really good matcha that gives you a high that lasts.
           </motion.p>
