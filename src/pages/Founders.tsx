@@ -28,7 +28,7 @@ const Founders = () => {
             transition={{ duration: 1, delay: 0.3 }}
             className="font-display text-5xl md:text-7xl text-cream font-light tracking-wide"
           >
-            Founders' note
+            Founders' Note
           </motion.h1>
         </div>
 
