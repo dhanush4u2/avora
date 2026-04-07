@@ -13,7 +13,7 @@ const ShopSection = () => {
     <section id="shop" className="bg-primary" ref={ref}>
       <div className="flex flex-col md:flex-row items-center py-12 md:py-16 md:pl-12 lg:pl-16 pr-0">
         {/* Left: Text + button */}
-        <div className="w-full md:w-[30%] flex flex-col justify-center items-end text-right px-8 md:px-10 lg:px-14 py-16 md:py-20">
+        <div className="w-full md:w-[20%] flex flex-col justify-center items-end text-right px-8 md:px-6 lg:px-10 py-16 md:py-20">
           <TextReveal
             className="font-display text-4xl md:text-5xl lg:text-6xl text-cream font-light leading-tight"
             delay={0.2}
@@ -42,7 +42,7 @@ const ShopSection = () => {
         </div>
 
         {/* Right: Image flush to right edge with left gradient fade */}
-        <div className="relative w-full md:w-[75%]" style={{ marginLeft: 'auto', marginRight: 0 }}>
+        <div className="relative w-full md:w-[80%]" style={{ marginLeft: 'auto', marginRight: 0 }}>
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
