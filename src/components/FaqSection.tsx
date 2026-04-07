@@ -92,12 +92,9 @@ const FaqSection = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="font-display text-4xl md:text-5xl text-cream font-semibold italic mb-3">
+          <h2 className="font-display text-4xl md:text-5xl text-cream font-semibold italic">
             Frequently asked questions
           </h2>
-          <p className="font-display text-cream/50 text-sm italic">
-            Based on our matcha and questions around it
-          </p>
         </motion.div>
 
         {inView && faqs.map((faq, i) => (
