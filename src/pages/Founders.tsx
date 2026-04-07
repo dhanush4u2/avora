@@ -173,7 +173,7 @@ const Founders = () => {
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 1 }}
-        className="w-full h-[50vh] md:h-[60vh] overflow-hidden"
+        className="w-full overflow-hidden flex justify-center"
       >
         <motion.img
           src={foundersMatcha}
@@ -183,7 +183,7 @@ const Founders = () => {
           height={1400}
           whileHover={{ scale: 1.03 }}
           transition={{ duration: 0.7 }}
-          className="w-full h-full object-cover"
+          className="max-w-full h-auto"
         />
       </motion.div>
 
