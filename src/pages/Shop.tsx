@@ -77,7 +77,7 @@ const Shop = () => {
                   src={img.src}
                   alt={img.alt}
                   loading="lazy"
-                  className="w-full h-full object-cover aspect-[3/4] hover:scale-105 transition-transform duration-700"
+                  className="w-full h-full object-contain aspect-[3/4] hover:scale-105 transition-transform duration-700 bg-cream/5"
                 />
               </motion.div>
             ))}

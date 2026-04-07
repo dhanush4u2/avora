@@ -114,7 +114,7 @@ const ProductDetail = () => {
                     transition={{ duration: 0.3 }}
                     src={images[selectedImage].node.url}
                     alt={images[selectedImage].node.altText || product.title}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-contain bg-cream/5"
                   />
                 ) : (
                   <div className="w-full h-full bg-cream/5 flex items-center justify-center">
@@ -153,7 +153,7 @@ const ProductDetail = () => {
                         selectedImage === i ? "border-cream opacity-100" : "border-cream/20 opacity-60 hover:opacity-90 hover:border-cream/50"
                       }`}
                     >
-                      <img src={img.node.url} alt="" className="w-full h-full object-cover" />
+                      <img src={img.node.url} alt="" className="w-full h-full object-contain" />
                     </button>
                   ))}
                 </div>
