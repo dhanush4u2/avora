@@ -135,7 +135,7 @@ const Shop = () => {
                         whileTap={{ scale: 0.98 }}
                         className="w-full py-3 border border-cream/40 font-body text-xs tracking-widest text-cream hover:border-cream transition-all duration-500 disabled:opacity-50"
                       >
-                        {cartLoading ? "Adding..." : "Add to cart"}
+                        {cartLoading ? "Adding..." : "Add to Cart"}
                       </motion.button>
                     </div>
                   </motion.div>
