@@ -50,7 +50,7 @@ const FoundersSection = () => {
               src={foundersImg}
               alt="Avora founder"
               loading="lazy"
-              className="block h-auto w-full object-contain md:ml-auto md:w-[104%] md:max-w-none lg:w-[106%]"
+              className="block h-auto w-full object-contain md:ml-auto md:w-[108%] md:max-w-none lg:w-[112%]"
             />
           </motion.div>
           {/* Gradient fade on left edge */}
