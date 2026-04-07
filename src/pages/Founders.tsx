@@ -231,8 +231,9 @@ const Founders = () => {
             variants={fadeUp}
             className="font-body text-cream/80 text-lg md:text-xl leading-relaxed"
           >
-            We're so excited for you to try Avora. Here's to better energy,
-            better rituals, and better days — one cup at a time.
+            We're so excited for you to try Avora.
+            <br />
+            Just really good matcha that gives you a high that lasts.
           </motion.p>
         </motion.div>
 
