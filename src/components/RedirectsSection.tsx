@@ -129,11 +129,6 @@ export default function RedirectsSection() {
                                 {rd.title}
                             </h3>
 
-                            {/* Body */}
-                            <p className="font-body text-base md:text-lg text-cream/70 leading-relaxed max-w-md pt-2">
-                                {rd.body}
-                            </p>
-
                             {/* CTA Button */}
                             <div className="pt-6">
                                 <Link
