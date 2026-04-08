@@ -1,6 +1,7 @@
 import { motion, type Easing } from "framer-motion";
 import { Link } from "react-router-dom";
 import foundersHero from "@/assets/founders-page.png";
+import foundersProduct from "@/assets/foundersProduct.jpg";
 import foundersMatcha from "@/assets/founders-matcha.jpg";
 
 const ease: Easing = [0.25, 0.1, 0.25, 1];
@@ -27,11 +28,12 @@ const Founders = () => {
           transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
           className="absolute inset-0 z-0"
         >
-          <div 
+          <div
             className="absolute inset-0 bg-cover bg-center"
             style={{
-              backgroundImage: `url(${foundersHero})`,
-              backgroundPosition: 'center 30%',
+              backgroundImage: `url(${foundersProduct})`,
+              backgroundPosition: 'center center',
+              backgroundSize: 'cover',
             }}
           />
           {/* Gradient Overlays for depth and readability */}
