@@ -28,9 +28,9 @@ const ShopSection = () => {
             />
           </motion.div>
           <div
-            className="absolute inset-y-0 right-0 w-32 pointer-events-none"
+            className="absolute inset-y-0 right-0 w-48 pointer-events-none"
             style={{
-              background: 'linear-gradient(to left, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.85) 25%, hsl(var(--primary) / 0.4) 55%, transparent 100%)',
+              background: 'linear-gradient(to left, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.95) 20%, hsl(var(--primary) / 0.7) 40%, hsl(var(--primary) / 0.3) 65%, transparent 100%)',
             }}
           />
           
