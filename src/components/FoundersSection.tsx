@@ -53,8 +53,6 @@ const FoundersSection = () => {
               className="block h-auto w-full object-contain md:ml-auto md:w-[104%] md:max-w-none md:-ml-[2%] lg:w-[106%] lg:-ml-[3%]"
             />
           </motion.div>
-          {/* Gradient fade on left edge */}
-          <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-primary to-transparent pointer-events-none" />
         </div>
       </div>
     </section>
