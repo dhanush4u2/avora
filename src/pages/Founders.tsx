@@ -46,42 +46,17 @@ const Founders = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Left: Text Content */}
             <div className="max-w-4xl">
-              {/* Eyebrow */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                className="mb-8"
-              >
-                <span className="inline-flex items-center gap-3 font-body text-xs md:text-sm tracking-[0.3em] text-cream/70 uppercase">
-                  <span className="w-12 h-px bg-cream/40" />
-                  Our Story
-                </span>
-              </motion.div>
-
               {/* Main Title */}
               <motion.h1
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                className="font-display text-5xl md:text-7xl lg:text-8xl text-cream font-light leading-[0.95] tracking-tight mb-8"
+                className="font-display text-5xl md:text-7xl lg:text-8xl text-cream font-light leading-[0.95] tracking-tight"
               >
                 Founders'
                 <br />
                 <span className="italic font-extralight">Note</span>
               </motion.h1>
-
-              {/* Subtitle */}
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.9, delay: 0.8, ease: [0.22, 1, 0.36, 1] }}
-                className="font-body text-base md:text-lg lg:text-xl text-cream/80 leading-relaxed max-w-xl"
-              >
-                Discover the journey behind Avora — from personal transformation 
-                to building a brand rooted in quality, tradition, and the belief 
-                that matcha is for everyone.
-              </motion.p>
 
               {/* Scroll Indicator */}
               <motion.div
