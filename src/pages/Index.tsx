@@ -1,7 +1,6 @@
 import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
-import ShopSection from "@/components/ShopSection";
-import FoundersSection from "@/components/FoundersSection";
+import RedirectsSection from "@/components/RedirectsSection";
 import MatchaGuideSection from "@/components/MatchaGuideSection";
 import FaqSection from "@/components/FaqSection";
 import StackedCard from "@/components/StackedCard";
@@ -13,16 +12,11 @@ const Index = () => {
       <StackedCard index={0}>
         <AboutSection />
       </StackedCard>
+      <RedirectsSection />
       <StackedCard index={1}>
-        <ShopSection />
-      </StackedCard>
-      <StackedCard index={2}>
-        <FoundersSection />
-      </StackedCard>
-      <StackedCard index={3}>
         <MatchaGuideSection />
       </StackedCard>
-      <StackedCard index={4}>
+      <StackedCard index={2}>
         <FaqSection />
       </StackedCard>
     </div>

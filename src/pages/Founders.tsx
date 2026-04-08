@@ -18,37 +18,145 @@ const Founders = () => {
   return (
     <div className="min-h-screen bg-primary">
 
-      {/* Hero: side-by-side layout */}
-      <div className="flex flex-col md:flex-row min-h-[80vh] md:min-h-screen">
-        {/* Left: Title & intro */}
-        <div className="w-full md:w-1/2 flex flex-col justify-center px-8 md:px-16 lg:px-24 py-16 md:py-20">
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.3 }}
-            className="font-display text-5xl md:text-7xl text-cream font-light tracking-wide"
-          >
-            Founders' Note
-          </motion.h1>
+      {/* Premium Hero Section with Background Image */}
+      <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        {/* Background Image with Parallax Effect */}
+        <motion.div
+          initial={{ scale: 1.1, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
+          className="absolute inset-0 z-0"
+        >
+          <div 
+            className="absolute inset-0 bg-cover bg-center"
+            style={{
+              backgroundImage: `url(${foundersHero})`,
+              backgroundPosition: 'center 30%',
+            }}
+          />
+          {/* Gradient Overlays for depth and readability */}
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/95 via-primary/60 to-primary/85" />
+          <div className="absolute inset-0 bg-gradient-to-b from-primary/30 via-transparent to-primary/90" />
+        </motion.div>
+
+        {/* Hero Content - Split Layout */}
+        <div className="relative z-10 container mx-auto px-6 md:px-12 lg:px-20 py-32 md:py-40">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            {/* Left: Text Content */}
+            <div className="max-w-4xl">
+              {/* Eyebrow */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                className="mb-8"
+              >
+                <span className="inline-flex items-center gap-3 font-body text-xs md:text-sm tracking-[0.3em] text-cream/70 uppercase">
+                  <span className="w-12 h-px bg-cream/40" />
+                  Our Story
+                </span>
+              </motion.div>
+
+              {/* Main Title */}
+              <motion.h1
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                className="font-display text-5xl md:text-7xl lg:text-8xl text-cream font-light leading-[0.95] tracking-tight mb-8"
+              >
+                Founders'
+                <br />
+                <span className="italic font-extralight">Note</span>
+              </motion.h1>
+
+              {/* Subtitle */}
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.9, delay: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                className="font-body text-base md:text-lg lg:text-xl text-cream/80 leading-relaxed max-w-xl"
+              >
+                Discover the journey behind Avora — from personal transformation 
+                to building a brand rooted in quality, tradition, and the belief 
+                that matcha is for everyone.
+              </motion.p>
+
+              {/* Scroll Indicator */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1, delay: 1.2 }}
+                className="mt-16 lg:mt-20 flex items-center gap-4"
+              >
+                <motion.div
+                  animate={{ y: [0, 8, 0] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                  className="flex flex-col items-center gap-2"
+                >
+                  <span className="font-body text-xs tracking-[0.2em] text-cream/60 uppercase">
+                    Scroll to explore
+                  </span>
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    className="text-cream/60"
+                  >
+                    <path
+                      d="M12 5v14M5 12l7 7 7-7"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </motion.div>
+              </motion.div>
+            </div>
+
+            {/* Right: Founder Portrait */}
+            <motion.div
+              initial={{ opacity: 0, x: 60, scale: 0.95 }}
+              animate={{ opacity: 1, x: 0, scale: 1 }}
+              transition={{ duration: 1.2, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              className="relative hidden lg:flex items-center justify-center"
+            >
+              {/* Portrait Container */}
+              <div className="relative group">
+                {/* Ambient Glow Effect */}
+                <div className="absolute inset-0 bg-cream/8 blur-3xl scale-110 group-hover:bg-cream/12 transition-all duration-700" />
+                
+                {/* Image Container with Drop Shadow */}
+                <div 
+                  className="relative overflow-hidden"
+                  style={{
+                    filter: 'drop-shadow(0 20px 50px rgba(0, 0, 0, 0.6)) drop-shadow(0 8px 20px rgba(0, 0, 0, 0.4))',
+                  }}
+                >
+                  {/* Portrait Image - Clean and Larger */}
+                  <motion.img
+                    src={foundersHero}
+                    alt="Founder - Shruti"
+                    className="relative w-full max-w-xl lg:max-w-2xl h-auto object-cover"
+                    style={{
+                      maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 80%, rgba(0,0,0,0.3) 95%, rgba(0,0,0,0) 100%)',
+                      WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 80%, rgba(0,0,0,0.3) 95%, rgba(0,0,0,0) 100%)',
+                    }}
+                    whileHover={{ scale: 1.02 }}
+                    transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                  />
+                </div>
+              </div>
+            </motion.div>
+          </div>
         </div>
 
-        {/* Right: Image */}
-        <motion.div
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.9 }}
-          className="relative w-full md:w-1/2 flex items-center justify-center overflow-hidden"
-        >
-          {/* Top gradient fade */}
-          <div className="absolute top-0 left-0 right-0 h-[3%] bg-gradient-to-b from-primary to-transparent z-10 pointer-events-none" />
-          <img
-            src={foundersHero}
-            alt="Avora founder Shruti"
-            className="max-w-full h-auto"
-            width={800}
-            height={1000}
-          />
-        </motion.div>
+        {/* Vignette Edge Effects */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-primary to-transparent" />
+          <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-primary to-transparent" />
+        </div>
       </div>
 
       {/* Story content */}
