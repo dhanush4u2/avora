@@ -71,7 +71,7 @@ const Founders = () => {
                   className="flex flex-col items-center gap-2"
                 >
                   <span className="font-body text-xs tracking-[0.2em] text-cream/60 uppercase">
-                    Scroll to explore
+                    Scroll to read
                   </span>
                   <svg
                     width="24"
