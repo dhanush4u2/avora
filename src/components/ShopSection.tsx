@@ -27,7 +27,8 @@ const ShopSection = () => {
               className="block h-auto w-full object-contain md:mr-auto md:w-[100%] md:max-w-none md:-ml-[6%] lg:w-[104%] lg:-ml-[8%]"
             />
           </motion.div>
-          
+          {/* Gradient fade on right edge */}
+          <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-primary to-transparent pointer-events-none" />
         </div>
 
         {/* Right: Text + button */}
