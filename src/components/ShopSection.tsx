@@ -19,7 +19,6 @@ const ShopSection = () => {
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.9 }}
             className="w-full overflow-hidden bg-primary"
-            style={{ maskImage: 'linear-gradient(to right, black 70%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to right, black 70%, transparent 100%)' }}
           >
             <img
               src={matchaLatte}
@@ -28,6 +27,7 @@ const ShopSection = () => {
               className="block h-auto w-full object-contain md:mr-auto md:w-[100%] md:max-w-none md:-ml-[6%] lg:w-[104%] lg:-ml-[8%]"
             />
           </motion.div>
+          <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-cream to-transparent pointer-events-none" />
         </div>
 
         {/* Right: Text + button */}
