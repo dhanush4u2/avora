@@ -28,7 +28,7 @@ const ShopSection = () => {
             />
           </motion.div>
           {/* Gradient fade on right edge */}
-          <div className="absolute inset-y-0 right-0 w-40 pointer-events-none" style={{ background: 'linear-gradient(to left, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.85) 25%, hsl(var(--primary) / 0.4) 55%, transparent 100%)' }} />
+          <div className="absolute inset-y-0 right-0 w-56 pointer-events-none" style={{ background: 'linear-gradient(to left, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.9) 30%, hsl(var(--primary) / 0.5) 55%, hsl(var(--primary) / 0.15) 75%, transparent 100%)' }} />
         </div>
 
         {/* Right: Text + button */}
