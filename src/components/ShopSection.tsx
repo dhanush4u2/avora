@@ -18,11 +18,7 @@ const ShopSection = () => {
             initial={{ opacity: 0, x: -50 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.9 }}
-            className="w-full overflow-hidden bg-primary"
-            style={{
-              maskImage: 'linear-gradient(to right, black 0%, black 80%, transparent 100%)',
-              WebkitMaskImage: 'linear-gradient(to right, black 0%, black 80%, transparent 100%)',
-            }}
+            className="w-full overflow-hidden bg-primary rounded-r-3xl"
           >
             <img
               src={matchaLatte}
