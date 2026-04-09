@@ -60,19 +60,9 @@ const RefundPolicy = () => {
             {/* No Returns */}
             <motion.div custom={1} variants={fade} className="border-t border-cream/10 pt-8">
               <h2 className="font-display text-2xl text-cream font-light mb-4">No returns on matcha powder</h2>
-              <p className="font-body text-cream/70 text-sm leading-relaxed mb-4">
-                Our ceremonial-grade matcha is sealed and packed fresh to preserve quality and purity. Because it's a consumable product, we do not accept returns once delivered — unless:
+              <p className="font-body text-cream/70 text-sm leading-relaxed">
+                Our ceremonial-grade matcha is sealed and packed fresh to preserve quality and purity. As a consumable product, we're unable to accept returns once it has been delivered, unless it arrives damaged.
               </p>
-              <ul className="space-y-2 ml-4">
-                <li className="font-body text-cream/70 text-sm flex items-start gap-2">
-                  <span className="text-cream/40 mt-1">•</span>
-                  Your order arrived damaged, or
-                </li>
-                <li className="font-body text-cream/70 text-sm flex items-start gap-2">
-                  <span className="text-cream/40 mt-1">•</span>
-                  You received the wrong product (we only have one, but still — accuracy matters)
-                </li>
-              </ul>
             </motion.div>
 
             {/* Refunds */}
