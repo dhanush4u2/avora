@@ -121,9 +121,19 @@ export default function RedirectsSection() {
             <div className="container mx-auto px-6 lg:px-12">
                 <div className="flex flex-col md:flex-row items-stretch gap-12 md:gap-20 lg:gap-24">
 
-                    {/* ── Left: Info + Navigation (30%) ── */}
-                    <div className="w-full md:w-[30%] flex flex-col justify-center order-2 md:order-1 relative z-10">
-                        <div ref={contentRef} className="space-y-6">
+                    {/* ── Left: Info + Navigation (45%) ── */}
+                    <div className="w-full md:w-[45%] flex flex-col justify-center order-2 md:order-1 relative z-20 -mt-4 md:mt-0 px-2 md:px-0">
+                        {/* Mobile Gradient Blur Backdrop */}
+                        <div 
+                            className="absolute -inset-x-4 -top-32 -bottom-20 md:hidden pointer-events-none backdrop-blur-[12px] z-0" 
+                            style={{ 
+                                maskImage: 'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,1) 40%)', 
+                                WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,1) 40%)' 
+                            }} 
+                        />
+                        <div className="absolute -inset-x-4 -top-32 -bottom-20 md:hidden pointer-events-none bg-gradient-to-b from-transparent via-primary/80 to-primary z-0" />
+                        
+                        <div ref={contentRef} className="space-y-6 relative z-10">
                             {/* Title */}
                             <h3 className="font-display text-5xl md:text-6xl lg:text-7xl text-cream font-light leading-[1.1] tracking-tight">
                                 {rd.title}
@@ -164,17 +174,16 @@ export default function RedirectsSection() {
                         </div>
                     </div>
 
-                    {/* ── Right: CardSwap (70%) ── */}
+                    {/* ── Right: CardSwap (55%) ── */}
                     <div 
-                        className="w-full md:w-[70%] relative order-1 md:order-2" 
+                        className="w-full md:w-[55%] relative order-1 md:order-2 z-10" 
                         style={{ 
-                            minHeight: isMobile ? '450px' : '650px',
-                            zIndex: 1
+                            minHeight: isMobile ? '360px' : '650px'
                         }}
                     >
                         <CardSwap
                             ref={cardSwapRef}
-                            width={isMobile ? 360 : 950}
+                            width={isMobile ? 560 : 800}
                             height={isMobile ? 420 : 600}
                             cardDistance={isMobile ? 20 : 30}
                             verticalDistance={isMobile ? 24 : 35}
@@ -221,7 +230,7 @@ export default function RedirectsSection() {
                 @media (max-width: 768px) {
                     #redirects .container > div {
                         flex-direction: column;
-                        gap: 3rem;
+                        gap: 0rem;
                     }
                 }
             `}</style>
