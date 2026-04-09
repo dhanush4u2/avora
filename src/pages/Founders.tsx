@@ -15,9 +15,30 @@ const fadeUp = {
   }),
 };
 
+// You can adjust this value to move the background image on mobile screens
+// (e.g., '10% 20%', '10% 30%', or pixels like '10% calc(50% + 80px)')
+// Changing the second value (Y-axis) towards 0% brings it down, towards 100% pushes it up.
+const mobileBgPosition = '20% 50%';
+
 const Founders = () => {
   return (
     <div className="min-h-screen bg-primary">
+      <style>{`
+        .hero-bg-mobile-shift {
+          background-position: ${mobileBgPosition};
+          top: 20vh; /* Pulls the image down physically */
+          -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 20%);
+          mask-image: linear-gradient(to bottom, transparent 0%, black 20%);
+        }
+        @media (min-width: 768px) {
+          .hero-bg-mobile-shift {
+            background-position: center center !important;
+            top: 0 !important;
+            -webkit-mask-image: none !important;
+            mask-image: none !important;
+          }
+        }
+      `}</style>
 
       {/* Premium Hero Section with Background Image */}
       <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -29,10 +50,9 @@ const Founders = () => {
           className="absolute inset-0 z-0"
         >
           <div
-            className="absolute inset-0 bg-cover bg-center"
+            className="absolute inset-0 bg-cover hero-bg-mobile-shift"
             style={{
               backgroundImage: `url(${foundersProduct})`,
-              backgroundPosition: 'center center',
               backgroundSize: 'cover',
             }}
           />
@@ -55,7 +75,7 @@ const Founders = () => {
               >
                 Founders'
                 <br />
-                <span className="italic font-extralight">Note</span>
+                <span className="font-extralight">Note</span>
               </motion.h1>
 
               {/* Scroll Indicator */}
