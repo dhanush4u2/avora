@@ -144,24 +144,6 @@ const RefundPolicy = () => {
               </p>
             </motion.div>
 
-            {/* Cancellation */}
-            <motion.div custom={5} variants={fade} className="border-t border-cream/10 pt-8">
-              <h2 className="font-display text-2xl text-cream font-light mb-4">Order cancellation policy</h2>
-              <p className="font-body text-cream/70 text-sm leading-relaxed mb-4">
-                Changed your mind? You have <span className="text-cream font-medium">1 hour</span> after placing your order to request a cancellation. After that window, your matcha may already be packed and prepared — and we won't be able to stop the process.
-              </p>
-              <p className="font-body text-cream/70 text-sm leading-relaxed mb-2">
-                To cancel within the allowed time, email us at{" "}
-                <a href="mailto:care@avoramatcha.com" className="text-cream underline underline-offset-4 hover:text-cream/80 transition-colors">
-                  care@avoramatcha.com
-                </a>{" "}
-                with the subject line:
-              </p>
-              <p className="font-body text-cream text-sm font-medium mt-2">
-                "Cancel Order #[YourOrderNumber]"
-              </p>
-            </motion.div>
-
             {/* Promise */}
             <motion.div custom={6} variants={fade} className="border-t border-cream/10 pt-8 pb-8">
               <h2 className="font-display text-2xl text-cream font-light mb-4">Our promise</h2>
