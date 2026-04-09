@@ -120,12 +120,6 @@ const ShippingPolicy = () => {
               </p>
             </motion.div>
 
-            <motion.div custom={6} variants={fade} className="border-t border-cream/10 pt-8 pb-8 text-center">
-              <p className="font-display text-cream text-xl font-light italic mb-2">
-                Experience the eternal high
-              </p>
-              <p className="font-body text-cream/60 text-sm">The Avora Team</p>
-            </motion.div>
           </motion.div>
         </div>
       </div>
