@@ -60,19 +60,9 @@ const RefundPolicy = () => {
             {/* No Returns */}
             <motion.div custom={1} variants={fade} className="border-t border-cream/10 pt-8">
               <h2 className="font-display text-2xl text-cream font-light mb-4">No returns on matcha powder</h2>
-              <p className="font-body text-cream/70 text-sm leading-relaxed mb-4">
-                Our ceremonial-grade matcha is sealed and packed fresh to preserve quality and purity. Because it's a consumable product, we do not accept returns once delivered — unless:
+              <p className="font-body text-cream/70 text-sm leading-relaxed">
+                Our ceremonial-grade matcha is sealed and packed fresh to preserve quality and purity. As a consumable product, we're unable to accept returns once it has been delivered, unless it arrives damaged.
               </p>
-              <ul className="space-y-2 ml-4">
-                <li className="font-body text-cream/70 text-sm flex items-start gap-2">
-                  <span className="text-cream/40 mt-1">•</span>
-                  Your order arrived damaged, or
-                </li>
-                <li className="font-body text-cream/70 text-sm flex items-start gap-2">
-                  <span className="text-cream/40 mt-1">•</span>
-                  You received the wrong product (we only have one, but still — accuracy matters)
-                </li>
-              </ul>
             </motion.div>
 
             {/* Refunds */}
@@ -140,25 +130,7 @@ const RefundPolicy = () => {
                 </li>
               </ul>
               <p className="font-body text-cream/50 text-sm italic mt-4">
-                Our team will take it from there — smooth, simple, no back-and-forth.
-              </p>
-            </motion.div>
-
-            {/* Cancellation */}
-            <motion.div custom={5} variants={fade} className="border-t border-cream/10 pt-8">
-              <h2 className="font-display text-2xl text-cream font-light mb-4">Order cancellation policy</h2>
-              <p className="font-body text-cream/70 text-sm leading-relaxed mb-4">
-                Changed your mind? You have <span className="text-cream font-medium">1 hour</span> after placing your order to request a cancellation. After that window, your matcha may already be packed and prepared — and we won't be able to stop the process.
-              </p>
-              <p className="font-body text-cream/70 text-sm leading-relaxed mb-2">
-                To cancel within the allowed time, email us at{" "}
-                <a href="mailto:care@avoramatcha.com" className="text-cream underline underline-offset-4 hover:text-cream/80 transition-colors">
-                  care@avoramatcha.com
-                </a>{" "}
-                with the subject line:
-              </p>
-              <p className="font-body text-cream text-sm font-medium mt-2">
-                "Cancel Order #[YourOrderNumber]"
+                Our team will take it from there.
               </p>
             </motion.div>
 
