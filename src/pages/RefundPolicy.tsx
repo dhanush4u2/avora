@@ -140,7 +140,7 @@ const RefundPolicy = () => {
                 </li>
               </ul>
               <p className="font-body text-cream/50 text-sm italic mt-4">
-                Our team will take it from there — smooth, simple, no back-and-forth.
+                Our team will take it from there.
               </p>
             </motion.div>
 
