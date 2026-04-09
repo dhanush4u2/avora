@@ -81,7 +81,7 @@ const TermsOfService = () => (
 
           <Section num="3" title="Pricing & availability" i={3}>
             <ul className="space-y-2 ml-4">
-              <Li>Prices listed on the website are in INR and inclusive/exclusive of taxes as specified</Li>
+              <Li>Prices listed on the website are in INR and inclusive of taxes as specified</Li>
               <Li>Prices may change without prior notice</Li>
               <Li>We reserve the right to limit or refuse orders at our discretion, including in cases of suspected misuse or fraud</Li>
             </ul>
