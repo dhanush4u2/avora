@@ -131,7 +131,7 @@ const PrivacyPolicy = () => {
               <ul className="space-y-2 ml-4">
                 <li className="font-body text-cream/70 text-sm flex items-start gap-2"><span className="text-cream/40 mt-1">•</span>Request access to the personal data we hold about you</li>
                 <li className="font-body text-cream/70 text-sm flex items-start gap-2"><span className="text-cream/40 mt-1">•</span>Ask for corrections or deletion of your information</li>
-                <li className="font-body text-cream/70 text-sm flex items-start gap-2"><span className="text-cream/40 mt-1">•</span>Opt out of promotional communications at any time via the "unsubscribe" link</li>
+                
               </ul>
               <p className="font-body text-cream/70 text-sm mt-4">
                 For any requests related to your data, contact us at{" "}
